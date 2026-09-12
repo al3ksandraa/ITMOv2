@@ -60,7 +60,7 @@ opencode --version
          "npm": "@ai-sdk/openai-compatible",
          "name": "VseLLM",
          "options": {
-            "baseURL": "https://api.vsellm.ru/v1",
+            "baseURL": "https://litellm.data-light.ru",
             "apiKey": "{env:VSELLM_API_KEY}"
          },
          "models": {
@@ -114,6 +114,7 @@ opencode run "Ответь одним словом: READY"
 opencode run \
   --agent plan \
   --file practices/practice_01/TRAINING_PR.diff \
+  -- \
   "Используй только приложенный diff. Не читай другие файлы репозитория. Посмотри PR и найди проблемы."
 ```
 
