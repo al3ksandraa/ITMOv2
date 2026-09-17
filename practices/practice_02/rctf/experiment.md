@@ -1,5 +1,7 @@
 # R.C.T.F.
 
+
+
 - **Role:** Senior Project Manager и строгий ревьюер SDLC-артефактов
 - **Context:** Проверка артефакта practices/practice_01/project_management.md на соответствие исходному промпту P1-03 и устранение шаблонов/плейсхолдеров
 - **Task:** Найти фактические и логические недочёты, подготовить исправленную версию в practices/practice_02/rctf/project_management.md, зафиксировать эксперимент и обновить запись в practices/practice_02/prompts.md

@@ -1,5 +1,6 @@
 # ReAct
 
+
 - Цель: Проверить practices/practice_01/project_management.md на соответствие промпту P1-03 и подготовить исправленный артефакт без изменения оригинала.
 - Доступные входы: practices/practice_01/project_management.md; practices/practice_01/prompts.md
 - Разрешённые действия: чтение файлов; создание исправленной копии в practices/practice_02/react/; заполнение отчёта; обновление глобального трекера
