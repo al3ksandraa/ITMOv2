@@ -1,0 +1,22 @@
+[
+  {
+    "id": "1791228477494-yhsxjf",
+    "title": "доделать дз",
+    "description": "практика и дз 4",
+    "priority": "normal",
+    "deadline": "2026-10-07T23:59:00.000Z",
+    "done": false,
+    "createdAt": "2026-10-05T19:27:57.494Z",
+    "updatedAt": "2026-10-05T19:27:57.494Z"
+  },
+  {
+    "id": "1791233260246-mmi8g6",
+    "title": "купить молоко",
+    "description": "",
+    "priority": "normal",
+    "deadline": null,
+    "done": false,
+    "createdAt": "2026-10-05T20:47:40.246Z",
+    "updatedAt": "2026-10-05T20:47:40.246Z"
+  }
+]
