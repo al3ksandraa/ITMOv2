@@ -15,6 +15,8 @@
     showDone: document.getElementById('show-done'),
     search: document.getElementById('search'),
     priorityFilter: document.getElementById('priority-filter'),
+    bulkComplete: document.getElementById('bulk-complete'),
+    bulkDelete: document.getElementById('bulk-delete'),
   };
 
   let state = {
@@ -92,9 +94,15 @@
       node.querySelector('.created').textContent = `Создано: ${new Date(t.createdAt).toLocaleString()}`;
       node.querySelector('.description').textContent = t.description || '';
 
-      const chk = node.querySelector('.done-toggle');
-      chk.checked = !!t.done;
-      chk.addEventListener('change', () => updateTask(t.id, { done: chk.checked }));
+      const doneToggle = node.querySelector('.done-toggle');
+      doneToggle.checked = !!t.done;
+      doneToggle.addEventListener('change', () => updateTask(t.id, { done: doneToggle.checked }));
+
+      // selection checkbox for bulk actions; keep selection in DOM only
+      const selectCb = node.querySelector('.select-task');
+      selectCb.addEventListener('change', () => {
+        // no-op: state is derived at action time by querying DOM
+      });
 
       node.querySelector('.delete').addEventListener('click', () => deleteTask(t.id));
       node.querySelector('.edit').addEventListener('click', () => editTask(t));
@@ -175,6 +183,26 @@
   el.showDone.addEventListener('click', () => { state.filter = 'done'; render(); });
   el.search.addEventListener('input', () => { state.search = el.search.value.trim(); render(); });
   el.priorityFilter.addEventListener('change', () => { state.priority = el.priorityFilter.value; render(); });
+
+  // Bulk actions use existing API endpoints sequentially per selected task
+  el.bulkComplete.addEventListener('click', async () => {
+    const ids = Array.from(el.list.querySelectorAll('li.task'))
+      .filter((li) => li.querySelector('.select-task')?.checked)
+      .map((li) => li.dataset.id);
+    for (const id of ids) {
+      // set done=true; ignore failures silently to continue batch
+      try { await updateTask(id, { done: true }); } catch { /* ignore */ }
+    }
+  });
+
+  el.bulkDelete.addEventListener('click', async () => {
+    const selected = Array.from(el.list.querySelectorAll('li.task'))
+      .filter((li) => li.querySelector('.select-task')?.checked);
+    const ids = selected.map((li) => li.dataset.id);
+    for (const id of ids) {
+      try { await deleteTask(id); } catch { /* ignore */ }
+    }
+  });
 
   fetchTasks().catch((e) => console.error(e));
 })();
