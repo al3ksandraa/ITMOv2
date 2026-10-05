@@ -173,7 +173,7 @@
   el.showAll.addEventListener('click', () => { state.filter = 'all'; render(); });
   el.showActive.addEventListener('click', () => { state.filter = 'active'; render(); });
   el.showDone.addEventListener('click', () => { state.filter = 'done'; render(); });
-  el.search.addEventListener('input', () => { state.search = el.search.value; render(); });
+  el.search.addEventListener('input', () => { state.search = el.search.value.trim(); render(); });
   el.priorityFilter.addEventListener('change', () => { state.priority = el.priorityFilter.value; render(); });
 
   fetchTasks().catch((e) => console.error(e));

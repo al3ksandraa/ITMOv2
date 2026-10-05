@@ -120,5 +120,6 @@
 - `practices/practice_04/task_planner/server.js` — сервер и API.
 - `practices/practice_04/task_planner/public/` — фронтенд (UI).
 - `practices/practice_04/task_planner/data/tasks.json` — данные (создаётся автоматически при запуске).
+- `practices/practice_04/task_planner/docs/style-guide.md` — правила для фичи поиска/фильтрации (прочитай перед изменениями фронтенда).
 
 Следуй этому документу. Любые изменения контракта или runner требуют явного поручения.
