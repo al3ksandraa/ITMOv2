@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Планировщик задач</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- hook test: trivial edit to trigger check-after-edit plugin -->
+    <header>
+      <h1>Планировщик задач</h1>
+    </header>
+    <main>
+      <section class="panel">
+        <form id="task-form">
+          <div class="row">
+            <label>Название
+              <input type="text" id="title" required maxlength="200" placeholder="Например: Сдать отчёт" />
+            </label>
+          </div>
+          <div class="row">
+            <label>Описание
+              <textarea id="description" rows="3" placeholder="Краткие детали"></textarea>
+            </label>
+          </div>
+          <div class="row grid">
+            <label>Дедлайн
+              <input type="datetime-local" id="deadline" />
+            </label>
+            <label>Приоритет
+              <select id="priority">
+                <option value="low">Низкий</option>
+                <option value="normal" selected>Обычный</option>
+                <option value="high">Высокий</option>
+              </select>
+            </label>
+          </div>
+          <div class="row actions">
+            <button type="submit">Добавить задачу</button>
+            <button type="button" id="sort-deadline">Сортировать по дедлайну</button>
+            <button type="button" id="show-all">Все</button>
+            <button type="button" id="show-active">Активные</button>
+            <button type="button" id="show-done">Выполненные</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="row grid">
+          <label>Поиск
+            <input type="text" id="search" placeholder="Поиск по названию и описанию" />
+          </label>
+          <label>Приоритет
+            <select id="priority-filter">
+              <option value="all" selected>Все</option>
+              <option value="low">Низкий</option>
+              <option value="normal">Обычный</option>
+              <option value="high">Высокий</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="row actions">
+          <button type="button" id="bulk-complete">Отметить выполненными</button>
+          <button type="button" id="bulk-delete" class="danger">Удалить выбранные</button>
+        </div>
+        <ul id="task-list"></ul>
+      </section>
+    </main>
+
+    <template id="task-item-template">
+      <li class="task">
+        <div class="left">
+          <!-- selection checkbox for bulk actions -->
+          <input type="checkbox" class="select-task" />
+          <input type="checkbox" class="done-toggle" />
+        </div>
+        <div class="content">
+          <div class="title-row">
+            <span class="title"></span>
+            <span class="priority-badge"></span>
+          </div>
+          <div class="meta">
+            <span class="deadline"></span>
+            <span class="created"></span>
+          </div>
+          <div class="description"></div>
+        </div>
+        <div class="right">
+          <button class="edit">Изменить</button>
+          <button class="delete danger">Удалить</button>
+        </div>
+      </li>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+  </html>
