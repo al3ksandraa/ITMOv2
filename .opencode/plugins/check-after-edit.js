@@ -1,49 +1,71 @@
-// check-after-edit plugin: runs project runner after edits and stores result
-// Hooks into tool.execute.after for the 'edit' tool
+// Example OpenCode 2 plugin: run project checks after edits
+// Registers a post-execution hook and runs a trusted runner (scripts/check.sh)
+// Assumptions:
+// - OpenCode loads ESM plugins and calls default export with a context object `ctx`
+// - The hook fires after tools (e.g. apply_patch) complete in the session
+// - We keep it conservative: only trigger after apply_patch to avoid noise
 
-export default (async ({ project, directory }) => {
-  const path = await import('node:path');
-  const fs = await import('node:fs');
-  const { execSync } = await import('node:child_process');
+import { spawn } from 'node:child_process';
 
-  const root = (project && project.root) || directory || process.cwd();
-  const outFile = path.join(root, '.opencode', 'check-after-edit.last.json');
-
-  function writeResult(obj) {
+export default async function setup(ctx) {
+  // Register hook that runs after a tool execution inside the agent session
+  ctx.tool.hook('execute.after', async (event) => {
     try {
-      const dir = path.dirname(outFile);
-      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-      fs.writeFileSync(outFile, JSON.stringify(obj, null, 2) + '\n', 'utf8');
-    } catch (_) {
-      // ignore file write errors
-    }
-  }
+      // Only react to file edits applied via apply_patch (adjust if you want broader coverage)
+      if (!event || event.tool !== 'apply_patch') return;
 
-  return {
-    async "tool.execute.after"(input, output) {
-      try {
-        // Only after successful edits
-        if (input?.tool !== 'edit') return;
-        if (output?.error) return;
+      const cwd = (ctx && ctx.workspace && ctx.workspace.root) || process.cwd();
+      const startedAt = Date.now();
 
-        const startedAt = new Date().toISOString();
-        let stdout = '';
-        try {
-          stdout = execSync('sh scripts/check.sh', {
-            cwd: root,
-            stdio: ['ignore', 'pipe', 'pipe'],
-            encoding: 'utf-8',
-          });
-          console.log('[check-after-edit] PASS');
-          writeResult({ status: 'PASS', startedAt, finishedAt: new Date().toISOString(), stdout });
-        } catch (e) {
-          const errOut = (e && (e.stdout || e.stderr || e.message)) || String(e);
-          console.log('[check-after-edit] FAIL');
-          writeResult({ status: 'FAIL', startedAt, finishedAt: new Date().toISOString(), stdout: errOut });
-        }
-      } catch (_) {
-        // never throw from plugin hook
+      // Prefer a trusted runner if your OpenCode exposes it; fallback to local spawn
+      let code = 0;
+      let stdout = '';
+      let stderr = '';
+
+      if (ctx.runner && typeof ctx.runner.run === 'function') {
+        // Trusted runner path (adjust id/name to your environment)
+        const res = await ctx.runner.run({
+          id: 'project-check',
+          command: 'sh',
+          args: ['scripts/check.sh'],
+          cwd,
+          trust: true,
+          timeoutMs: 180000,
+        });
+        code = res.code;
+        stdout = res.stdout || '';
+        stderr = res.stderr || '';
+      } else {
+        // Fallback: spawn shell directly
+        const child = spawn('sh', ['scripts/check.sh'], { cwd, stdio: ['ignore', 'pipe', 'pipe'] });
+        child.stdout.on('data', (d) => { stdout += d.toString(); });
+        child.stderr.on('data', (d) => { stderr += d.toString(); });
+        code = await new Promise((resolve) => child.on('close', resolve));
       }
-    },
-  };
-});
+
+      const durationMs = Date.now() - startedAt;
+      const status = code === 0 ? 'PASS' : 'FAIL';
+      const summary = { ok: code === 0, code, status, durationMs };
+
+      // Report back into the agent UI if available; fall back to console
+      const body = (stdout || stderr || '').slice(-4000);
+      if (ctx.notify) {
+        await ctx.notify({ title: `check.sh ${status}`, body, level: code === 0 ? 'info' : 'error' }).catch(() => {});
+      } else if (ctx.message) {
+        await ctx.message({ type: 'notice', title: `check.sh ${status}`, body }).catch(() => {});
+      } else {
+        // eslint-disable-next-line no-console
+        console.log('[plugin] check-after-edit:', summary);
+      }
+
+      return summary;
+    } catch (e) {
+      const msg = e && e.message ? e.message : String(e);
+      if (ctx && ctx.message) {
+        await ctx.message({ type: 'error', title: 'check-after-edit hook error', body: msg }).catch(() => {});
+      }
+      // eslint-disable-next-line no-console
+      console.error('[plugin] check-after-edit error:', e);
+    }
+  });
+}
