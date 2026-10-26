@@ -184,6 +184,20 @@
   el.search.addEventListener('input', () => { state.search = el.search.value.trim(); render(); });
   el.priorityFilter.addEventListener('change', () => { state.priority = el.priorityFilter.value; render(); });
 
+  // Reset filters: local only, preserve current sort
+  const resetBtn = document.getElementById('reset-filters');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      // Clear search and priority to defaults; set status to all; keep sort as-is
+      state.search = '';
+      el.search.value = '';
+      state.priority = 'all';
+      el.priorityFilter.value = 'all';
+      state.filter = 'all';
+      render();
+    });
+  }
+
   // Bulk actions use existing API endpoints sequentially per selected task
   el.bulkComplete.addEventListener('click', async () => {
     const ids = Array.from(el.list.querySelectorAll('li.task'))

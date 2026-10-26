@@ -1,7 +1,11 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/usr/bin/env sh
+# Strict mode: portable across POSIX shells; enable pipefail if supported (bash/zsh)
+set -eu
+if (set -o pipefail >/dev/null 2>&1); then
+  set -o pipefail
+fi
 
-ROOT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
+ROOT_DIR=$(CDPATH= cd "$(dirname "$0")/.." && pwd)
 UI_TEST="$ROOT_DIR/tests/check_ui_search_filter.py"
 UI_TEST_BULK="$ROOT_DIR/tests/check_ui_bulk_actions.py"
 
