@@ -59,6 +59,14 @@
               <option value="high">Высокий</option>
             </select>
           </label>
+          <label>Срок
+            <select id="deadline-filter">
+              <option value="all" selected>Все</option>
+              <option value="overdue">Просроченные</option>
+              <option value="today">Сегодня</option>
+              <option value="no-deadline">Без дедлайна</option>
+            </select>
+          </label>
         </div>
         <div class="row actions">
           <button type="button" id="reset-filters">Сбросить фильтры</button>
@@ -71,6 +79,7 @@
           <button type="button" id="bulk-delete" class="danger">Удалить выбранные</button>
         </div>
         <ul id="task-list"></ul>
+        <div id="empty-state" role="status" hidden>Нет задач по выбранным критериям</div>
       </section>
     </main>
 
@@ -99,6 +108,7 @@
       </li>
     </template>
 
+    <script src="filter.js"></script>
     <script src="app.js"></script>
   </body>
   </html>

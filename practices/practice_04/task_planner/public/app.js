@@ -15,23 +15,27 @@
     showDone: document.getElementById('show-done'),
     search: document.getElementById('search'),
     priorityFilter: document.getElementById('priority-filter'),
+    deadlineFilter: document.getElementById('deadline-filter'),
     bulkComplete: document.getElementById('bulk-complete'),
     bulkDelete: document.getElementById('bulk-delete'),
+    emptyState: document.getElementById('empty-state'),
   };
 
   let state = {
     tasks: [],
+    loaded: false,
     filter: 'all', // all | active | done
     sort: 'none', // none | deadline
     search: '',
     priority: 'all',
+    deadline: 'all',
   };
 
   function toIsoFromLocal(datetimeLocalValue) {
     if (!datetimeLocalValue) return null;
     const dt = new Date(datetimeLocalValue);
     if (isNaN(dt)) return null;
-    return new Date(dt.getTime() - dt.getTimezoneOffset() * 60000).toISOString();
+    return dt.toISOString();
   }
 
   function toLocalInputValue(iso) {
@@ -51,23 +55,14 @@
     const res = await fetch(API);
     if (!res.ok) throw new Error('Failed to load');
     state.tasks = await res.json();
+    state.loaded = true;
     render();
   }
 
   function render() {
     el.list.innerHTML = '';
-    let tasks = [...state.tasks];
-    if (state.filter === 'active') tasks = tasks.filter((t) => !t.done);
-    if (state.filter === 'done') tasks = tasks.filter((t) => t.done);
-    if (state.search.trim()) {
-      const q = state.search.toLowerCase();
-      tasks = tasks.filter((t) =>
-        (t.title || '').toLowerCase().includes(q) || (t.description || '').toLowerCase().includes(q)
-      );
-    }
-    if (state.priority !== 'all') {
-      tasks = tasks.filter((t) => (t.priority || 'normal') === state.priority);
-    }
+    const now = new Date();
+    const tasks = window.TaskFilter.filterTasks(state.tasks, state, now);
     if (state.sort === 'deadline') {
       tasks.sort((a, b) => {
         const da = a.deadline ? Date.parse(a.deadline) : Infinity;
@@ -75,13 +70,13 @@
         return da - db;
       });
     }
-    const now = Date.now();
+    if (el.emptyState) el.emptyState.hidden = !state.loaded || tasks.length !== 0;
     for (const t of tasks) {
       const node = el.tpl.content.firstElementChild.cloneNode(true);
       node.dataset.id = t.id;
       if (t.done) node.classList.add('done');
       const deadlineTs = t.deadline ? Date.parse(t.deadline) : null;
-      if (!t.done && deadlineTs && deadlineTs < now) node.classList.add('overdue');
+      if (!t.done && deadlineTs && deadlineTs < now.getTime()) node.classList.add('overdue');
 
       node.querySelector('.title').textContent = t.title;
       const badge = node.querySelector('.priority-badge');
@@ -183,6 +178,9 @@
   el.showDone.addEventListener('click', () => { state.filter = 'done'; render(); });
   el.search.addEventListener('input', () => { state.search = el.search.value.trim(); render(); });
   el.priorityFilter.addEventListener('change', () => { state.priority = el.priorityFilter.value; render(); });
+  if (el.deadlineFilter) {
+    el.deadlineFilter.addEventListener('change', () => { state.deadline = el.deadlineFilter.value; render(); });
+  }
 
   // Reset filters: local only, preserve current sort
   const resetBtn = document.getElementById('reset-filters');
@@ -194,6 +192,10 @@
       state.priority = 'all';
       el.priorityFilter.value = 'all';
       state.filter = 'all';
+      state.deadline = 'all';
+      if (el.deadlineFilter) el.deadlineFilter.value = 'all';
+      // clear selections
+      el.list.querySelectorAll('.select-task').forEach(cb => { cb.checked = false; });
       render();
     });
   }
