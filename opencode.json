@@ -27,9 +27,9 @@
   "mcp": {
     "playwright": {
       "type": "local",
-      "command": ["npx", "-y", "@playwright/mcp"],
+      "command": ["npx", "-y", "@playwright/mcp", "--isolated"],
       "enabled": true,
-      "environment": { "BROWSER": "chromium" }
+      "environment": { "BROWSER": "chromium", "PLAYWRIGHT_MCP_ISOLATED": "1" }
     },
     "servers": {
       "context7": {

@@ -1,5 +1,10 @@
 {
-  "dependencies": {
-    "@playwright/test": "^1.63.0"
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "playwright": "^1.64.1"
+  },
+  "scripts": {
+    "test:deadline": "node --test tests/task_deadline_filter.test.cjs",
+    "test:e2e": "node tests/task_deadline_filter.e2e.cjs"
   }
 }
