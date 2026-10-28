@@ -1,0 +1,271 @@
+{
+  "id": "V-11",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 6190,
+    "pid": 12408,
+    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-4s6l3mo_"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: alice",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:6190",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"alice\", \"password\": \"learn-alice\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:25 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"85eff94bc78647128ec90b0e4ad074cc\"}",
+        "json": {
+          "token": "85eff94bc78647128ec90b0e4ad074cc"
+        }
+      }
+    },
+    {
+      "label": "malformed JSON",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:6190",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "1"
+        },
+        "body_text": "{"
+      },
+      "response": {
+        "status": 500,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:25 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "115"
+        },
+        "body_text": "{\"error\": \"Expecting property name enclosed in double quotes: line 1 column 2 (char 1)\", \"type\": \"JSONDecodeError\"}",
+        "json": {
+          "error": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)",
+          "type": "JSONDecodeError"
+        }
+      }
+    },
+    {
+      "label": "wrong top-level type",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:6190",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "2"
+        },
+        "body_text": "[]"
+      },
+      "response": {
+        "status": 500,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:25 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "75"
+        },
+        "body_text": "{\"error\": \"'list' object has no attribute 'get'\", \"type\": \"AttributeError\"}",
+        "json": {
+          "error": "'list' object has no attribute 'get'",
+          "type": "AttributeError"
+        }
+      }
+    },
+    {
+      "label": "missing product",
+      "request": {
+        "method": "POST",
+        "target": "/orders",
+        "headers": {
+          "Host": "127.0.0.1:6190",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "85eff94bc78647128ec90b0e4ad074cc",
+          "Content-Type": "application/json",
+          "Content-Length": "2"
+        },
+        "body_text": "{}"
+      },
+      "response": {
+        "status": 500,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:25 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "42"
+        },
+        "body_text": "{\"error\": \"'product'\", \"type\": \"KeyError\"}",
+        "json": {
+          "error": "'product'",
+          "type": "KeyError"
+        }
+      }
+    },
+    {
+      "label": "missing review text",
+      "request": {
+        "method": "POST",
+        "target": "/reviews",
+        "headers": {
+          "Host": "127.0.0.1:6190",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "85eff94bc78647128ec90b0e4ad074cc",
+          "Content-Type": "application/json",
+          "Content-Length": "20"
+        },
+        "body_text": "{\"product\": \"chair\"}"
+      },
+      "response": {
+        "status": 500,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:25 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "39"
+        },
+        "body_text": "{\"error\": \"'text'\", \"type\": \"KeyError\"}",
+        "json": {
+          "error": "'text'",
+          "type": "KeyError"
+        }
+      }
+    },
+    {
+      "label": "missing tool",
+      "request": {
+        "method": "POST",
+        "target": "/assistant/execute",
+        "headers": {
+          "Host": "127.0.0.1:6190",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "85eff94bc78647128ec90b0e4ad074cc",
+          "Content-Type": "application/json",
+          "Content-Length": "16"
+        },
+        "body_text": "{\"decision\": {}}"
+      },
+      "response": {
+        "status": 500,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:25 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "39"
+        },
+        "body_text": "{\"error\": \"'tool'\", \"type\": \"KeyError\"}",
+        "json": {
+          "error": "'tool'",
+          "type": "KeyError"
+        }
+      }
+    },
+    {
+      "label": "internal path disclosure",
+      "request": {
+        "method": "GET",
+        "target": "/files?user=alice&path=missing.txt",
+        "headers": {
+          "Host": "127.0.0.1:6190",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "85eff94bc78647128ec90b0e4ad074cc"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 500,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:25 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "190"
+        },
+        "body_text": "{\"error\": \"[Errno 2] No such file or directory: 'C:\\\\\\\\Users\\\\\\\\ASUS\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\itmo-practice-06-4s6l3mo_\\\\\\\\files\\\\\\\\alice\\\\\\\\missing.txt'\", \"type\": \"FileNotFoundError\"}",
+        "json": {
+          "error": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\ASUS\\\\AppData\\\\Local\\\\Temp\\\\itmo-practice-06-4s6l3mo_\\\\files\\\\alice\\\\missing.txt'",
+          "type": "FileNotFoundError"
+        }
+      }
+    },
+    {
+      "label": "SQLite diagnostic",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=bad+SQL",
+        "headers": {
+          "Host": "127.0.0.1:6190",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "85eff94bc78647128ec90b0e4ad074cc"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 500,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:25 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "67"
+        },
+        "body_text": "{\"error\": \"near \\\"SQL\\\": syntax error\", \"type\": \"OperationalError\"}",
+        "json": {
+          "error": "near \"SQL\": syntax error",
+          "type": "OperationalError"
+        }
+      }
+    }
+  ],
+  "confirmed": true,
+  "effect": {
+    "statuses": [
+      500,
+      500,
+      500,
+      500,
+      500,
+      500,
+      500
+    ],
+    "physical_path_disclosed": true,
+    "exception_types": [
+      "JSONDecodeError",
+      "AttributeError",
+      "KeyError",
+      "KeyError",
+      "KeyError",
+      "FileNotFoundError",
+      "OperationalError"
+    ]
+  },
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

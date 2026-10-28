@@ -1,0 +1,264 @@
+{
+  "id": "V-11",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 3143,
+    "pid": 18364,
+    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-dje2avzp"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: alice",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:3143",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"alice\", \"password\": \"learn-alice\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"1880418e387947c6bd762e6bf1b621db\"}",
+        "json": {
+          "token": "1880418e387947c6bd762e6bf1b621db"
+        }
+      }
+    },
+    {
+      "label": "malformed JSON",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:3143",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "1"
+        },
+        "body_text": "{"
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "28"
+        },
+        "body_text": "{\"error\": \"invalid request\"}",
+        "json": {
+          "error": "invalid request"
+        }
+      }
+    },
+    {
+      "label": "wrong top-level type",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:3143",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "2"
+        },
+        "body_text": "[]"
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "32"
+        },
+        "body_text": "{\"error\": \"invalid JSON object\"}",
+        "json": {
+          "error": "invalid JSON object"
+        }
+      }
+    },
+    {
+      "label": "missing product",
+      "request": {
+        "method": "POST",
+        "target": "/orders",
+        "headers": {
+          "Host": "127.0.0.1:3143",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "1880418e387947c6bd762e6bf1b621db",
+          "Content-Type": "application/json",
+          "Content-Length": "2"
+        },
+        "body_text": "{}"
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "32"
+        },
+        "body_text": "{\"error\": \"product is required\"}",
+        "json": {
+          "error": "product is required"
+        }
+      }
+    },
+    {
+      "label": "missing review text",
+      "request": {
+        "method": "POST",
+        "target": "/reviews",
+        "headers": {
+          "Host": "127.0.0.1:3143",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "1880418e387947c6bd762e6bf1b621db",
+          "Content-Type": "application/json",
+          "Content-Length": "20"
+        },
+        "body_text": "{\"product\": \"chair\"}"
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "42"
+        },
+        "body_text": "{\"error\": \"product and text are required\"}",
+        "json": {
+          "error": "product and text are required"
+        }
+      }
+    },
+    {
+      "label": "missing tool",
+      "request": {
+        "method": "POST",
+        "target": "/assistant/execute",
+        "headers": {
+          "Host": "127.0.0.1:3143",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "1880418e387947c6bd762e6bf1b621db",
+          "Content-Type": "application/json",
+          "Content-Length": "16"
+        },
+        "body_text": "{\"decision\": {}}"
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "29"
+        },
+        "body_text": "{\"error\": \"tool is required\"}",
+        "json": {
+          "error": "tool is required"
+        }
+      }
+    },
+    {
+      "label": "internal path disclosure",
+      "request": {
+        "method": "GET",
+        "target": "/files?user=alice&path=missing.txt",
+        "headers": {
+          "Host": "127.0.0.1:3143",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "1880418e387947c6bd762e6bf1b621db"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 404,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "27"
+        },
+        "body_text": "{\"error\": \"file not found\"}",
+        "json": {
+          "error": "file not found"
+        }
+      }
+    },
+    {
+      "label": "SQLite diagnostic",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=bad+SQL",
+        "headers": {
+          "Host": "127.0.0.1:3143",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "1880418e387947c6bd762e6bf1b621db"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "31"
+        },
+        "body_text": "{\"error\": \"invalid profile id\"}",
+        "json": {
+          "error": "invalid profile id"
+        }
+      }
+    }
+  ],
+  "confirmed": false,
+  "effect": {
+    "statuses": [
+      400,
+      400,
+      400,
+      400,
+      400,
+      404,
+      400
+    ],
+    "physical_path_disclosed": false,
+    "exception_types": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ]
+  },
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

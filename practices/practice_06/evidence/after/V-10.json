@@ -1,0 +1,162 @@
+{
+  "id": "V-10",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 3138,
+    "pid": 6116,
+    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-bpl_v3kt"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: alice",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:3138",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"alice\", \"password\": \"learn-alice\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"ddc5d549834b44e99947caf1dcdbcd44\"}",
+        "json": {
+          "token": "ddc5d549834b44e99947caf1dcdbcd44"
+        }
+      }
+    },
+    {
+      "label": "Alice deletes the disposable fixture root",
+      "request": {
+        "method": "POST",
+        "target": "/assistant/execute",
+        "headers": {
+          "Host": "127.0.0.1:3138",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "ddc5d549834b44e99947caf1dcdbcd44",
+          "Content-Type": "application/json",
+          "Content-Length": "65"
+        },
+        "body_text": "{\"decision\": {\"tool\": \"delete_tree\", \"arguments\": {\"path\": \".\"}}}"
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "31"
+        },
+        "body_text": "{\"error\": \"tool not permitted\"}",
+        "json": {
+          "error": "tool not permitted"
+        }
+      }
+    },
+    {
+      "label": "verify receipt is gone",
+      "request": {
+        "method": "GET",
+        "target": "/files?user=bob&path=receipt.txt",
+        "headers": {
+          "Host": "127.0.0.1:3138",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "ddc5d549834b44e99947caf1dcdbcd44"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "22"
+        },
+        "body_text": "{\"error\": \"forbidden\"}",
+        "json": {
+          "error": "forbidden"
+        }
+      }
+    },
+    {
+      "label": "process survives while files are gone",
+      "request": {
+        "method": "GET",
+        "target": "/health",
+        "headers": {
+          "Host": "127.0.0.1:3138",
+          "Accept-Encoding": "identity",
+          "Connection": "close"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "16"
+        },
+        "body_text": "{\"status\": \"ok\"}",
+        "json": {
+          "status": "ok"
+        }
+      }
+    }
+  ],
+  "confirmed": false,
+  "files_before": {
+    "files/alice/receipt.txt": {
+      "sha256": "4360848423026c4e0828bf702a5be04f59a6daee8f0d8aa0df0828b95eaeffcf",
+      "text": "TEST_ALICE receipt: chair, 5000 RUB"
+    },
+    "files/bob/receipt.txt": {
+      "sha256": "6c9c66d78c0d3263f0aed16857b7440514ee27dd2e08f41c7afd1bf3932b3533",
+      "text": "TEST_BOB receipt: lamp, 1500 RUB"
+    },
+    "private/operator-note.txt": {
+      "sha256": "2df9501ffde18f94054d087d49cf3793696a9528418222ae7dd8a63a7af27ef6",
+      "text": "TEST_ONLY_OPERATOR_SECRET"
+    }
+  },
+  "files_after": {
+    "files/alice/receipt.txt": {
+      "sha256": "4360848423026c4e0828bf702a5be04f59a6daee8f0d8aa0df0828b95eaeffcf",
+      "text": "TEST_ALICE receipt: chair, 5000 RUB"
+    },
+    "files/bob/receipt.txt": {
+      "sha256": "6c9c66d78c0d3263f0aed16857b7440514ee27dd2e08f41c7afd1bf3932b3533",
+      "text": "TEST_BOB receipt: lamp, 1500 RUB"
+    },
+    "private/operator-note.txt": {
+      "sha256": "2df9501ffde18f94054d087d49cf3793696a9528418222ae7dd8a63a7af27ef6",
+      "text": "TEST_ONLY_OPERATOR_SECRET"
+    }
+  },
+  "effect": {
+    "fixture_root_exists": true,
+    "receipt_status": 403,
+    "health_status": 200
+  },
+  "llm_used": false,
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "id": "OBS-02-audit",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 3174,
+    "pid": 17144,
+    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-uvn6l8xy"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: alice",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:3174",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"alice\", \"password\": \"learn-alice\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"62c3e674c12742a78d3aaeac28c7af2e\"}",
+        "json": {
+          "token": "62c3e674c12742a78d3aaeac28c7af2e"
+        }
+      }
+    },
+    {
+      "label": "denied admin action",
+      "request": {
+        "method": "GET",
+        "target": "/admin/export",
+        "headers": {
+          "Host": "127.0.0.1:3174",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "62c3e674c12742a78d3aaeac28c7af2e"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "23"
+        },
+        "body_text": "{\"error\": \"staff only\"}",
+        "json": {
+          "error": "staff only"
+        }
+      }
+    },
+    {
+      "label": "same client with forged role",
+      "request": {
+        "method": "GET",
+        "target": "/admin/export",
+        "headers": {
+          "Host": "127.0.0.1:3174",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "62c3e674c12742a78d3aaeac28c7af2e",
+          "X-Role": "staff"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "23"
+        },
+        "body_text": "{\"error\": \"staff only\"}",
+        "json": {
+          "error": "staff only"
+        }
+      }
+    },
+    {
+      "label": "",
+      "request": {
+        "method": "GET",
+        "target": "/debug/logs",
+        "headers": {
+          "Host": "127.0.0.1:3174",
+          "Accept-Encoding": "identity",
+          "Connection": "close"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 401,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "27"
+        },
+        "body_text": "{\"error\": \"login required\"}",
+        "json": {
+          "error": "login required"
+        }
+      }
+    }
+  ],
+  "confirmed": false,
+  "status": "scenario_stopped_by_expected_denial",
+  "error": "KeyError: 0",
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

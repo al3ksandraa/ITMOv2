@@ -1,0 +1,234 @@
+{
+  "id": "V-01",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 13566,
+    "pid": 17068,
+    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-_md99iwa"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: alice",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:13566",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"alice\", \"password\": \"learn-alice\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"ce94780b9a9e4f30987660679e0ba297\"}",
+        "json": {
+          "token": "ce94780b9a9e4f30987660679e0ba297"
+        }
+      }
+    },
+    {
+      "label": "control: own profile",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=1",
+        "headers": {
+          "Host": "127.0.0.1:13566",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "ce94780b9a9e4f30987660679e0ba297"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "96"
+        },
+        "body_text": "[{\"id\": 1, \"name\": \"TEST_ALICE\", \"email\": \"alice@example.invalid\", \"address\": \"TEST_ADDRESS_A\"}]",
+        "json": [
+          {
+            "id": 1,
+            "name": "TEST_ALICE",
+            "email": "alice@example.invalid",
+            "address": "TEST_ADDRESS_A"
+          }
+        ]
+      }
+    },
+    {
+      "label": "anonymous reads Bob",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=2",
+        "headers": {
+          "Host": "127.0.0.1:13566",
+          "Accept-Encoding": "identity",
+          "Connection": "close"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 401,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "27"
+        },
+        "body_text": "{\"error\": \"login required\"}",
+        "json": {
+          "error": "login required"
+        }
+      }
+    },
+    {
+      "label": "invalid token",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=2",
+        "headers": {
+          "Host": "127.0.0.1:13566",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "invalid"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 401,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "27"
+        },
+        "body_text": "{\"error\": \"login required\"}",
+        "json": {
+          "error": "login required"
+        }
+      }
+    },
+    {
+      "label": "Alice reads Bob",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=2",
+        "headers": {
+          "Host": "127.0.0.1:13566",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "ce94780b9a9e4f30987660679e0ba297"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "22"
+        },
+        "body_text": "{\"error\": \"forbidden\"}",
+        "json": {
+          "error": "forbidden"
+        }
+      }
+    },
+    {
+      "label": "Alice lists orders",
+      "request": {
+        "method": "GET",
+        "target": "/orders",
+        "headers": {
+          "Host": "127.0.0.1:13566",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "ce94780b9a9e4f30987660679e0ba297"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "60"
+        },
+        "body_text": "[{\"id\": 1, \"owner\": 1, \"product\": \"chair\", \"price\": 5000.0}]",
+        "json": [
+          {
+            "id": 1,
+            "owner": 1,
+            "product": "chair",
+            "price": 5000.0
+          }
+        ]
+      }
+    },
+    {
+      "label": "Alice searches Bob",
+      "request": {
+        "method": "GET",
+        "target": "/search?q=TEST_BOB",
+        "headers": {
+          "Host": "127.0.0.1:13566",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "ce94780b9a9e4f30987660679e0ba297"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "23"
+        },
+        "body_text": "{\"error\": \"staff only\"}",
+        "json": {
+          "error": "staff only"
+        }
+      }
+    }
+  ],
+  "confirmed": false,
+  "effect": {
+    "control": [
+      {
+        "id": 1,
+        "name": "TEST_ALICE",
+        "email": "alice@example.invalid",
+        "address": "TEST_ADDRESS_A"
+      }
+    ],
+    "foreign_profile": {
+      "error": "forbidden"
+    },
+    "foreign_orders": [],
+    "search": {
+      "error": "staff only"
+    }
+  },
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

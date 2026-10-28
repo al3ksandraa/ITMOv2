@@ -1,0 +1,261 @@
+{
+  "id": "V-03",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 9027,
+    "pid": 13292,
+    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-xqylfopi"
+  },
+  "requests": [
+    {
+      "label": "control: no role header",
+      "request": {
+        "method": "GET",
+        "target": "/admin/export",
+        "headers": {
+          "Host": "127.0.0.1:9027",
+          "Accept-Encoding": "identity",
+          "Connection": "close"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:22 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "23"
+        },
+        "body_text": "{\"error\": \"staff only\"}",
+        "json": {
+          "error": "staff only"
+        }
+      }
+    },
+    {
+      "label": "anonymous role spoof",
+      "request": {
+        "method": "GET",
+        "target": "/admin/export",
+        "headers": {
+          "Host": "127.0.0.1:9027",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Role": "staff"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:22 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "188"
+        },
+        "body_text": "[{\"id\": 1, \"name\": \"TEST_ALICE\", \"email\": \"alice@example.invalid\", \"address\": \"TEST_ADDRESS_A\"}, {\"id\": 2, \"name\": \"TEST_BOB\", \"email\": \"bob@example.invalid\", \"address\": \"TEST_ADDRESS_B\"}]",
+        "json": [
+          {
+            "id": 1,
+            "name": "TEST_ALICE",
+            "email": "alice@example.invalid",
+            "address": "TEST_ADDRESS_A"
+          },
+          {
+            "id": 2,
+            "name": "TEST_BOB",
+            "email": "bob@example.invalid",
+            "address": "TEST_ADDRESS_B"
+          }
+        ]
+      }
+    },
+    {
+      "label": "legitimate login: alice",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:9027",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"alice\", \"password\": \"learn-alice\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:22 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"61244e701947480fb2ded24be210d8f3\"}",
+        "json": {
+          "token": "61244e701947480fb2ded24be210d8f3"
+        }
+      }
+    },
+    {
+      "label": "client role spoof",
+      "request": {
+        "method": "GET",
+        "target": "/admin/export",
+        "headers": {
+          "Host": "127.0.0.1:9027",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "61244e701947480fb2ded24be210d8f3",
+          "X-Role": "staff"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:22 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "188"
+        },
+        "body_text": "[{\"id\": 1, \"name\": \"TEST_ALICE\", \"email\": \"alice@example.invalid\", \"address\": \"TEST_ADDRESS_A\"}, {\"id\": 2, \"name\": \"TEST_BOB\", \"email\": \"bob@example.invalid\", \"address\": \"TEST_ADDRESS_B\"}]",
+        "json": [
+          {
+            "id": 1,
+            "name": "TEST_ALICE",
+            "email": "alice@example.invalid",
+            "address": "TEST_ADDRESS_A"
+          },
+          {
+            "id": 2,
+            "name": "TEST_BOB",
+            "email": "bob@example.invalid",
+            "address": "TEST_ADDRESS_B"
+          }
+        ]
+      }
+    },
+    {
+      "label": "legitimate login: staff",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:9027",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"staff\", \"password\": \"learn-staff\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:22 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"d7255687e1754de8864a0e01934fa944\"}",
+        "json": {
+          "token": "d7255687e1754de8864a0e01934fa944"
+        }
+      }
+    },
+    {
+      "label": "",
+      "request": {
+        "method": "GET",
+        "target": "/admin/export",
+        "headers": {
+          "Host": "127.0.0.1:9027",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "d7255687e1754de8864a0e01934fa944",
+          "X-Role": "staff"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:22 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "188"
+        },
+        "body_text": "[{\"id\": 1, \"name\": \"TEST_ALICE\", \"email\": \"alice@example.invalid\", \"address\": \"TEST_ADDRESS_A\"}, {\"id\": 2, \"name\": \"TEST_BOB\", \"email\": \"bob@example.invalid\", \"address\": \"TEST_ADDRESS_B\"}]",
+        "json": [
+          {
+            "id": 1,
+            "name": "TEST_ALICE",
+            "email": "alice@example.invalid",
+            "address": "TEST_ADDRESS_A"
+          },
+          {
+            "id": 2,
+            "name": "TEST_BOB",
+            "email": "bob@example.invalid",
+            "address": "TEST_ADDRESS_B"
+          }
+        ]
+      }
+    },
+    {
+      "label": "valid staff session only",
+      "request": {
+        "method": "GET",
+        "target": "/admin/export",
+        "headers": {
+          "Host": "127.0.0.1:9027",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "d7255687e1754de8864a0e01934fa944"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:22 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "23"
+        },
+        "body_text": "{\"error\": \"staff only\"}",
+        "json": {
+          "error": "staff only"
+        }
+      }
+    }
+  ],
+  "confirmed": true,
+  "effect": {
+    "exported_profiles": [
+      {
+        "id": 1,
+        "name": "TEST_ALICE",
+        "email": "alice@example.invalid",
+        "address": "TEST_ADDRESS_A"
+      },
+      {
+        "id": 2,
+        "name": "TEST_BOB",
+        "email": "bob@example.invalid",
+        "address": "TEST_ADDRESS_B"
+      }
+    ],
+    "staff_control_status": 200,
+    "staff_without_role_header_status": 403
+  },
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

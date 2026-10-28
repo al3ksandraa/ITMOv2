@@ -1,0 +1,106 @@
+{
+  "id": "V-07",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 3121,
+    "pid": 17264,
+    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-rurxt7ji"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: bob",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:3121",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "44"
+        },
+        "body_text": "{\"username\": \"bob\", \"password\": \"learn-bob\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:31 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"8ec76c40b820426ba24a989528a977a1\"}",
+        "json": {
+          "token": "8ec76c40b820426ba24a989528a977a1"
+        }
+      }
+    },
+    {
+      "label": "victim uses token",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=2",
+        "headers": {
+          "Host": "127.0.0.1:3121",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "8ec76c40b820426ba24a989528a977a1"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:31 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "92"
+        },
+        "body_text": "[{\"id\": 2, \"name\": \"TEST_BOB\", \"email\": \"bob@example.invalid\", \"address\": \"TEST_ADDRESS_B\"}]",
+        "json": [
+          {
+            "id": 2,
+            "name": "TEST_BOB",
+            "email": "bob@example.invalid",
+            "address": "TEST_ADDRESS_B"
+          }
+        ]
+      }
+    },
+    {
+      "label": "anonymous reads victim requests",
+      "request": {
+        "method": "GET",
+        "target": "/debug/logs",
+        "headers": {
+          "Host": "127.0.0.1:3121",
+          "Accept-Encoding": "identity",
+          "Connection": "close"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 401,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:31 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "27"
+        },
+        "body_text": "{\"error\": \"login required\"}",
+        "json": {
+          "error": "login required"
+        }
+      }
+    }
+  ],
+  "confirmed": false,
+  "status": "scenario_stopped_by_expected_denial",
+  "error": "TypeError: string indices must be integers, not 'str'",
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

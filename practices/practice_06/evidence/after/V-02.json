@@ -1,0 +1,188 @@
+{
+  "id": "V-02",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 13574,
+    "pid": 4336,
+    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-0vax3kag"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: alice",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:13574",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"alice\", \"password\": \"learn-alice\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"21a145e8dc2b4236a81bd5366dcbadd7\"}",
+        "json": {
+          "token": "21a145e8dc2b4236a81bd5366dcbadd7"
+        }
+      }
+    },
+    {
+      "label": "",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=1",
+        "headers": {
+          "Host": "127.0.0.1:13574",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "21a145e8dc2b4236a81bd5366dcbadd7"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "96"
+        },
+        "body_text": "[{\"id\": 1, \"name\": \"TEST_ALICE\", \"email\": \"alice@example.invalid\", \"address\": \"TEST_ADDRESS_A\"}]",
+        "json": [
+          {
+            "id": 1,
+            "name": "TEST_ALICE",
+            "email": "alice@example.invalid",
+            "address": "TEST_ADDRESS_A"
+          }
+        ]
+      }
+    },
+    {
+      "label": "SQLi profile",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=1+OR+1%3D1",
+        "headers": {
+          "Host": "127.0.0.1:13574",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "21a145e8dc2b4236a81bd5366dcbadd7"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "31"
+        },
+        "body_text": "{\"error\": \"invalid profile id\"}",
+        "json": {
+          "error": "invalid profile id"
+        }
+      }
+    },
+    {
+      "label": "",
+      "request": {
+        "method": "GET",
+        "target": "/search?q=NO_SUCH_NAME",
+        "headers": {
+          "Host": "127.0.0.1:13574",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "21a145e8dc2b4236a81bd5366dcbadd7"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "23"
+        },
+        "body_text": "{\"error\": \"staff only\"}",
+        "json": {
+          "error": "staff only"
+        }
+      }
+    },
+    {
+      "label": "SQLi search",
+      "request": {
+        "method": "GET",
+        "target": "/search?q=%27+OR+1%3D1+--+",
+        "headers": {
+          "Host": "127.0.0.1:13574",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "21a145e8dc2b4236a81bd5366dcbadd7"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "23"
+        },
+        "body_text": "{\"error\": \"staff only\"}",
+        "json": {
+          "error": "staff only"
+        }
+      }
+    },
+    {
+      "label": "SQLi order context",
+      "request": {
+        "method": "GET",
+        "target": "/assistant/context?order_id=1+OR+1%3D1",
+        "headers": {
+          "Host": "127.0.0.1:13574",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "21a145e8dc2b4236a81bd5366dcbadd7"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "29"
+        },
+        "body_text": "{\"error\": \"invalid order id\"}",
+        "json": {
+          "error": "invalid order id"
+        }
+      }
+    }
+  ],
+  "confirmed": false,
+  "status": "scenario_stopped_by_expected_denial",
+  "error": "KeyError: 'prompt'",
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

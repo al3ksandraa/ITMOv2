@@ -1,0 +1,161 @@
+{
+  "id": "V-05",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 13598,
+    "pid": 13888,
+    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-phyx0rms"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: alice",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:13598",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"alice\", \"password\": \"learn-alice\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"4c9eaf37985c4b22850255eee2219a45\"}",
+        "json": {
+          "token": "4c9eaf37985c4b22850255eee2219a45"
+        }
+      }
+    },
+    {
+      "label": "own receipt control",
+      "request": {
+        "method": "GET",
+        "target": "/files?user=alice&path=receipt.txt",
+        "headers": {
+          "Host": "127.0.0.1:13598",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "4c9eaf37985c4b22850255eee2219a45"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "50"
+        },
+        "body_text": "{\"content\": \"TEST_ALICE receipt: chair, 5000 RUB\"}",
+        "json": {
+          "content": "TEST_ALICE receipt: chair, 5000 RUB"
+        }
+      }
+    },
+    {
+      "label": "anonymous Bob receipt",
+      "request": {
+        "method": "GET",
+        "target": "/files?user=bob&path=receipt.txt",
+        "headers": {
+          "Host": "127.0.0.1:13598",
+          "Accept-Encoding": "identity",
+          "Connection": "close"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 401,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "27"
+        },
+        "body_text": "{\"error\": \"login required\"}",
+        "json": {
+          "error": "login required"
+        }
+      }
+    },
+    {
+      "label": "Alice reads Bob receipt",
+      "request": {
+        "method": "GET",
+        "target": "/files?user=bob&path=receipt.txt",
+        "headers": {
+          "Host": "127.0.0.1:13598",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "4c9eaf37985c4b22850255eee2219a45"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "22"
+        },
+        "body_text": "{\"error\": \"forbidden\"}",
+        "json": {
+          "error": "forbidden"
+        }
+      }
+    },
+    {
+      "label": "traversal within sandbox",
+      "request": {
+        "method": "GET",
+        "target": "/files?user=alice&path=..%2F..%2Fprivate%2Foperator-note.txt",
+        "headers": {
+          "Host": "127.0.0.1:13598",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "4c9eaf37985c4b22850255eee2219a45"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 404,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "27"
+        },
+        "body_text": "{\"error\": \"file not found\"}",
+        "json": {
+          "error": "file not found"
+        }
+      }
+    }
+  ],
+  "confirmed": false,
+  "effect": {
+    "foreign_receipt": {
+      "error": "forbidden"
+    },
+    "operator_note": {
+      "error": "file not found"
+    }
+  },
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}
