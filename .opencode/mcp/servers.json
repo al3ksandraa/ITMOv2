@@ -1,0 +1,11 @@
+{
+  "servers": [
+    {
+      "name": "tasks-lint-fix",
+      "command": "node",
+      "args": [
+        ".opencode/mcp/tasks-lint-fix/server.js"
+      ]
+    }
+  ]
+}

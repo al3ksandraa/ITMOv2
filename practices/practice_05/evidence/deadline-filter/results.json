@@ -1,0 +1,276 @@
+{
+  "startedAt": "2026-10-27T13:08:20.670Z",
+  "finishedAt": "2026-10-27T13:08:52.215Z",
+  "command": "node tests/task_deadline_filter.e2e.cjs",
+  "platform": "win32",
+  "node": "v24.21.0",
+  "playwright": "1.64.1",
+  "browser": "156.0.8078.48",
+  "fixedNow": "2026-10-26T09:00:00.000Z",
+  "isolatedData": true,
+  "userDataUnchanged": true,
+  "results": [
+    {
+      "name": "01-initial-load",
+      "expectation": "Real page loads tasks without JavaScript errors; all four options are available.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "titles": [
+          "tomorrow",
+          "yesterday-active",
+          "yesterday-done",
+          "today-future",
+          "today-done",
+          "today-past",
+          "without-deadline",
+          "start-of-day",
+          "end-of-day",
+          "exact-now"
+        ],
+        "emptyStateVisible": false,
+        "apiRequests": []
+      }
+    },
+    {
+      "name": "02-overdue",
+      "expectation": "Only unfinished tasks strictly before now, including earlier today; exact-now excluded.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "titles": [
+          "yesterday-active",
+          "today-past",
+          "start-of-day"
+        ],
+        "apiRequests": []
+      }
+    },
+    {
+      "name": "03-today-moscow",
+      "expectation": "Local start inclusive, next midnight exclusive; completed tasks included.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "titles": [
+          "today-future",
+          "today-done",
+          "today-past",
+          "start-of-day",
+          "end-of-day",
+          "exact-now"
+        ],
+        "apiRequests": [],
+        "screenshot": "03-today-moscow.png"
+      }
+    },
+    {
+      "name": "04-without-deadline",
+      "expectation": "Only deadline === null; all restores original order.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "titles": [
+          "tomorrow",
+          "yesterday-active",
+          "yesterday-done",
+          "today-future",
+          "today-done",
+          "today-past",
+          "without-deadline",
+          "start-of-day",
+          "end-of-day",
+          "exact-now"
+        ],
+        "apiRequests": []
+      }
+    },
+    {
+      "name": "05-filter-intersections",
+      "expectation": "Deadline AND description search AND priority AND status.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "titles": [
+          "today-done"
+        ],
+        "apiRequests": []
+      }
+    },
+    {
+      "name": "06-empty-result",
+      "expectation": "Done AND overdue is empty; message shown after list and hidden when results return.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "titles": [],
+        "apiRequests": []
+      }
+    },
+    {
+      "name": "07-reset-and-sort",
+      "expectation": "Reset restores all filters, clears selection, preserves sorted full list, no API calls.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "titles": [
+          "start-of-day",
+          "today-done",
+          "today-past",
+          "exact-now",
+          "today-future",
+          "end-of-day"
+        ],
+        "apiRequests": [],
+        "screenshot": "07-reset-and-sort.png"
+      }
+    },
+    {
+      "name": "08-today-new-york",
+      "expectation": "Same UTC fixtures classify by New York local day, not UTC or Moscow.",
+      "status": "PASS",
+      "timezone": "America/New_York",
+      "facts": {
+        "titles": [
+          "tomorrow",
+          "today-future",
+          "today-done",
+          "today-past",
+          "end-of-day",
+          "exact-now"
+        ],
+        "apiRequests": [],
+        "screenshot": "08-today-new-york.png"
+      }
+    },
+    {
+      "name": "09-clock-refresh",
+      "expectation": "Each render uses a fresh now; an exact-now task becomes overdue after time advances.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "titles": [
+          "tomorrow"
+        ],
+        "apiRequests": []
+      }
+    },
+    {
+      "name": "10-invalid-deadline",
+      "expectation": "Invalid non-null deadline matches all, but neither today, overdue nor no-deadline.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "invalidExcludedFrom": [
+          "today",
+          "overdue",
+          "no-deadline"
+        ],
+        "apiRequests": [
+          "GET /api/tasks"
+        ]
+      }
+    },
+    {
+      "name": "11-crud-local-time",
+      "expectation": "UI create/edit/delete preserves entered local deadline as the correct UTC instant.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "createdDeadline": "2026-10-26T09:30:00.000Z",
+        "editedDeadline": "2026-10-26T10:45:00.000Z",
+        "deleted": true,
+        "apiRequests": [
+          "POST /api/tasks",
+          "PUT /api/tasks/1793106522636-p24if2",
+          "DELETE /api/tasks/1793106522636-p24if2"
+        ]
+      }
+    },
+    {
+      "name": "12-complete-and-bulk",
+      "expectation": "Completion rerenders overdue; bulk completion and deletion use the existing sequential API.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "singleComplete": true,
+        "bulkComplete": 2,
+        "bulkDelete": 2,
+        "apiRequests": [
+          "GET /api/tasks",
+          "PUT /api/tasks/1793106524218-elvfl0",
+          "PUT /api/tasks/1793106524218-elvfl0",
+          "PUT /api/tasks/1793106524223-jwbtqw",
+          "DELETE /api/tasks/1793106524218-elvfl0",
+          "DELETE /api/tasks/1793106524223-jwbtqw"
+        ]
+      }
+    },
+    {
+      "name": "13-loading-state",
+      "expectation": "Empty message stays hidden during initial loading and user filter changes.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "hiddenWhileLoading": true,
+        "apiRequests": [
+          "GET /api/tasks"
+        ]
+      }
+    },
+    {
+      "name": "14-load-error",
+      "expectation": "Failed initial GET is not displayed as an empty successful result, including after filter/reset.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "hiddenAfterLoadFailure": true,
+        "apiRequests": [
+          "GET /api/tasks"
+        ]
+      }
+    },
+    {
+      "name": "16-keyboard-filter",
+      "expectation": "The labelled deadline control is reachable by Tab; arrow/Home/End keys filter tasks without losing focus or calling the API.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "titles": [
+          "tomorrow",
+          "yesterday-active",
+          "yesterday-done",
+          "today-future",
+          "today-done",
+          "today-past",
+          "without-deadline",
+          "start-of-day",
+          "end-of-day",
+          "exact-now"
+        ],
+        "accessibleName": "Срок",
+        "keyboardModes": [
+          "overdue",
+          "today",
+          "no-deadline",
+          "all"
+        ],
+        "focusPreserved": true,
+        "tabToResetAndBack": true,
+        "apiRequests": [],
+        "screenshot": "16-keyboard-filter.png"
+      }
+    },
+    {
+      "name": "15-empty-storage",
+      "expectation": "An empty successful API response displays the empty message; repeated reset remains safe.",
+      "status": "PASS",
+      "timezone": "Europe/Moscow",
+      "facts": {
+        "titles": [],
+        "successfulEmptyLoad": true,
+        "apiRequests": []
+      }
+    }
+  ]
+}

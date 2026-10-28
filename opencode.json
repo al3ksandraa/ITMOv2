@@ -1,6 +1,11 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "build",
+  "skills": {
+    "paths": [
+      ".opencode/skills"
+    ]
+  },
   "provider": {
     "vsellm": {
       "npm": "@ai-sdk/openai-compatible",
@@ -16,6 +21,22 @@
         "anthropic/claude-sonnet-4": {
           "name": "anthropic/claude-sonnet-4"
         }
+      }
+    }
+  },
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "-y", "@playwright/mcp"],
+      "enabled": true,
+      "environment": { "BROWSER": "chromium" }
+    },
+    "servers": {
+      "context7": {
+        "type": "remote",
+        "url": "https://mcp.context7.com/mcp",
+        "disabled": false,
+        "codemode": false
       }
     }
   }
