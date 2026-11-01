@@ -2,9 +2,9 @@
   "id": "V-11",
   "server": {
     "host": "127.0.0.1",
-    "port": 3143,
-    "pid": 18364,
-    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-dje2avzp"
+    "port": 42725,
+    "pid": 14862,
+    "sandbox_root": "/tmp/itmo-practice-06-qoi9aga8"
   },
   "requests": [
     {
@@ -13,7 +13,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:3143",
+          "Host": "127.0.0.1:42725",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -24,14 +24,42 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "45"
         },
-        "body_text": "{\"token\": \"1880418e387947c6bd762e6bf1b621db\"}",
+        "body_text": "{\"token\": \"0adadb39290448ee87d4cce4defea13c\"}",
         "json": {
-          "token": "1880418e387947c6bd762e6bf1b621db"
+          "token": "0adadb39290448ee87d4cce4defea13c"
+        }
+      }
+    },
+    {
+      "label": "legitimate login: staff",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:42725",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"staff\", \"password\": \"learn-staff\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"eb6570ef2a974d8e881aa5c0c3d244e7\"}",
+        "json": {
+          "token": "eb6570ef2a974d8e881aa5c0c3d244e7"
         }
       }
     },
@@ -41,7 +69,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:3143",
+          "Host": "127.0.0.1:42725",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -52,8 +80,8 @@
       "response": {
         "status": 400,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "28"
         },
@@ -69,7 +97,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:3143",
+          "Host": "127.0.0.1:42725",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -80,8 +108,8 @@
       "response": {
         "status": 400,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "32"
         },
@@ -97,10 +125,10 @@
         "method": "POST",
         "target": "/orders",
         "headers": {
-          "Host": "127.0.0.1:3143",
+          "Host": "127.0.0.1:42725",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "1880418e387947c6bd762e6bf1b621db",
+          "X-Token": "0adadb39290448ee87d4cce4defea13c",
           "Content-Type": "application/json",
           "Content-Length": "2"
         },
@@ -109,8 +137,8 @@
       "response": {
         "status": 400,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "32"
         },
@@ -126,10 +154,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:3143",
+          "Host": "127.0.0.1:42725",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "1880418e387947c6bd762e6bf1b621db",
+          "X-Token": "0adadb39290448ee87d4cce4defea13c",
           "Content-Type": "application/json",
           "Content-Length": "20"
         },
@@ -138,8 +166,8 @@
       "response": {
         "status": 400,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "42"
         },
@@ -155,10 +183,10 @@
         "method": "POST",
         "target": "/assistant/execute",
         "headers": {
-          "Host": "127.0.0.1:3143",
+          "Host": "127.0.0.1:42725",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "1880418e387947c6bd762e6bf1b621db",
+          "X-Token": "0adadb39290448ee87d4cce4defea13c",
           "Content-Type": "application/json",
           "Content-Length": "16"
         },
@@ -167,8 +195,8 @@
       "response": {
         "status": 400,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "29"
         },
@@ -184,18 +212,18 @@
         "method": "GET",
         "target": "/files?user=alice&path=missing.txt",
         "headers": {
-          "Host": "127.0.0.1:3143",
+          "Host": "127.0.0.1:42725",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "1880418e387947c6bd762e6bf1b621db"
+          "X-Token": "0adadb39290448ee87d4cce4defea13c"
         },
         "body_text": null
       },
       "response": {
         "status": 404,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -211,18 +239,18 @@
         "method": "GET",
         "target": "/profile?id=bad+SQL",
         "headers": {
-          "Host": "127.0.0.1:3143",
+          "Host": "127.0.0.1:42725",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "1880418e387947c6bd762e6bf1b621db"
+          "X-Token": "0adadb39290448ee87d4cce4defea13c"
         },
         "body_text": null
       },
       "response": {
         "status": 400,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "31"
         },
@@ -231,9 +259,75 @@
           "error": "invalid profile id"
         }
       }
+    },
+    {
+      "label": "profile ID exceeds SQLite range",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=9223372036854775808",
+        "headers": {
+          "Host": "127.0.0.1:42725",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "eb6570ef2a974d8e881aa5c0c3d244e7"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "31"
+        },
+        "body_text": "{\"error\": \"invalid profile id\"}",
+        "json": {
+          "error": "invalid profile id"
+        }
+      }
+    },
+    {
+      "label": "order ID exceeds SQLite range",
+      "request": {
+        "method": "GET",
+        "target": "/assistant/context?order_id=9223372036854775808",
+        "headers": {
+          "Host": "127.0.0.1:42725",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "0adadb39290448ee87d4cce4defea13c"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 400,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "29"
+        },
+        "body_text": "{\"error\": \"invalid order id\"}",
+        "json": {
+          "error": "invalid order id"
+        }
+      }
     }
   ],
   "confirmed": false,
+  "probes": {
+    "invalid_input_0_server_error": false,
+    "invalid_input_1_server_error": false,
+    "invalid_input_2_server_error": false,
+    "invalid_input_3_server_error": false,
+    "invalid_input_4_server_error": false,
+    "invalid_input_5_server_error": false,
+    "invalid_input_6_server_error": false,
+    "invalid_input_7_server_error": false,
+    "invalid_input_8_server_error": false,
+    "physical_path_disclosed": false
+  },
   "effect": {
     "statuses": [
       400,
@@ -242,10 +336,14 @@
       400,
       400,
       404,
+      400,
+      400,
       400
     ],
     "physical_path_disclosed": false,
     "exception_types": [
+      null,
+      null,
       null,
       null,
       null,

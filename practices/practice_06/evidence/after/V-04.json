@@ -2,9 +2,9 @@
   "id": "V-04",
   "server": {
     "host": "127.0.0.1",
-    "port": 13590,
-    "pid": 9012,
-    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-74arf52k"
+    "port": 41475,
+    "pid": 14607,
+    "sandbox_root": "/tmp/itmo-practice-06-e3q5n510"
   },
   "requests": [
     {
@@ -13,7 +13,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:13590",
+          "Host": "127.0.0.1:41475",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -24,14 +24,14 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:05 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "45"
         },
-        "body_text": "{\"token\": \"988452e5ac4748fa8bff698b9c5225e2\"}",
+        "body_text": "{\"token\": \"680e2af2c977437ebcf91fd241bd7463\"}",
         "json": {
-          "token": "988452e5ac4748fa8bff698b9c5225e2"
+          "token": "680e2af2c977437ebcf91fd241bd7463"
         }
       }
     },
@@ -41,10 +41,10 @@
         "method": "POST",
         "target": "/orders",
         "headers": {
-          "Host": "127.0.0.1:13590",
+          "Host": "127.0.0.1:41475",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "988452e5ac4748fa8bff698b9c5225e2",
+          "X-Token": "680e2af2c977437ebcf91fd241bd7463",
           "Content-Type": "application/json",
           "Content-Length": "32"
         },
@@ -53,8 +53,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:05 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "56"
         },
@@ -73,10 +73,10 @@
         "method": "POST",
         "target": "/orders",
         "headers": {
-          "Host": "127.0.0.1:13590",
+          "Host": "127.0.0.1:41475",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "988452e5ac4748fa8bff698b9c5225e2",
+          "X-Token": "680e2af2c977437ebcf91fd241bd7463",
           "Content-Type": "application/json",
           "Content-Length": "32"
         },
@@ -85,8 +85,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:05 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "56"
         },
@@ -105,10 +105,10 @@
         "method": "POST",
         "target": "/orders",
         "headers": {
-          "Host": "127.0.0.1:13590",
+          "Host": "127.0.0.1:41475",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "988452e5ac4748fa8bff698b9c5225e2",
+          "X-Token": "680e2af2c977437ebcf91fd241bd7463",
           "Content-Type": "application/json",
           "Content-Length": "33"
         },
@@ -117,8 +117,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:05 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "56"
         },
@@ -137,10 +137,10 @@
         "method": "POST",
         "target": "/orders",
         "headers": {
-          "Host": "127.0.0.1:13590",
+          "Host": "127.0.0.1:41475",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "988452e5ac4748fa8bff698b9c5225e2",
+          "X-Token": "680e2af2c977437ebcf91fd241bd7463",
           "Content-Type": "application/json",
           "Content-Length": "37"
         },
@@ -149,8 +149,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:05 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "56"
         },
@@ -169,10 +169,10 @@
         "method": "POST",
         "target": "/orders",
         "headers": {
-          "Host": "127.0.0.1:13590",
+          "Host": "127.0.0.1:41475",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "988452e5ac4748fa8bff698b9c5225e2",
+          "X-Token": "680e2af2c977437ebcf91fd241bd7463",
           "Content-Type": "application/json",
           "Content-Length": "35"
         },
@@ -181,8 +181,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:05 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "56"
         },
@@ -201,18 +201,18 @@
         "method": "GET",
         "target": "/orders",
         "headers": {
-          "Host": "127.0.0.1:13590",
+          "Host": "127.0.0.1:41475",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "988452e5ac4748fa8bff698b9c5225e2"
+          "X-Token": "680e2af2c977437ebcf91fd241bd7463"
         },
         "body_text": null
       },
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:05 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "360"
         },
@@ -259,6 +259,12 @@
     }
   ],
   "confirmed": false,
+  "probes": {
+    "price_0": false,
+    "price_1": false,
+    "price_2": false,
+    "price_3": false
+  },
   "effect": {
     "control_order": {
       "id": 3,

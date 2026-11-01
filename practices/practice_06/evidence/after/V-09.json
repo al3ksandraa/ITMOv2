@@ -2,9 +2,9 @@
   "id": "V-09",
   "server": {
     "host": "127.0.0.1",
-    "port": 3130,
-    "pid": 15016,
-    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-dbsd_r47"
+    "port": 38723,
+    "pid": 14842,
+    "sandbox_root": "/tmp/itmo-practice-06-vf97yjbg"
   },
   "requests": [
     {
@@ -13,7 +13,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:3130",
+          "Host": "127.0.0.1:38723",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -24,14 +24,14 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "45"
         },
-        "body_text": "{\"token\": \"e0e11dc2434b4fc8aacc2095f65ad879\"}",
+        "body_text": "{\"token\": \"fac1e1bcea1d43ed8202f97e48f461f7\"}",
         "json": {
-          "token": "e0e11dc2434b4fc8aacc2095f65ad879"
+          "token": "fac1e1bcea1d43ed8202f97e48f461f7"
         }
       }
     },
@@ -41,7 +41,7 @@
         "method": "POST",
         "target": "/assistant/execute",
         "headers": {
-          "Host": "127.0.0.1:3130",
+          "Host": "127.0.0.1:38723",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -52,8 +52,8 @@
       "response": {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -69,7 +69,7 @@
         "method": "POST",
         "target": "/assistant/execute",
         "headers": {
-          "Host": "127.0.0.1:3130",
+          "Host": "127.0.0.1:38723",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -80,8 +80,8 @@
       "response": {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -97,7 +97,7 @@
         "method": "POST",
         "target": "/assistant/execute",
         "headers": {
-          "Host": "127.0.0.1:3130",
+          "Host": "127.0.0.1:38723",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -108,8 +108,8 @@
       "response": {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -125,10 +125,10 @@
         "method": "POST",
         "target": "/assistant/execute",
         "headers": {
-          "Host": "127.0.0.1:3130",
+          "Host": "127.0.0.1:38723",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "e0e11dc2434b4fc8aacc2095f65ad879",
+          "X-Token": "fac1e1bcea1d43ed8202f97e48f461f7",
           "Content-Type": "application/json",
           "Content-Length": "83"
         },
@@ -137,8 +137,8 @@
       "response": {
         "status": 403,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "22"
         },
@@ -154,10 +154,10 @@
         "method": "POST",
         "target": "/assistant/execute",
         "headers": {
-          "Host": "127.0.0.1:3130",
+          "Host": "127.0.0.1:38723",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "e0e11dc2434b4fc8aacc2095f65ad879",
+          "X-Token": "fac1e1bcea1d43ed8202f97e48f461f7",
           "Content-Type": "application/json",
           "Content-Length": "87"
         },
@@ -166,8 +166,8 @@
       "response": {
         "status": 403,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "22"
         },
@@ -183,10 +183,10 @@
         "method": "POST",
         "target": "/assistant/execute",
         "headers": {
-          "Host": "127.0.0.1:3130",
+          "Host": "127.0.0.1:38723",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "e0e11dc2434b4fc8aacc2095f65ad879",
+          "X-Token": "fac1e1bcea1d43ed8202f97e48f461f7",
           "Content-Type": "application/json",
           "Content-Length": "58"
         },
@@ -195,8 +195,8 @@
       "response": {
         "status": 403,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "23"
         },
@@ -208,13 +208,21 @@
     }
   ],
   "confirmed": false,
+  "probes": {
+    "tool_call_0": false,
+    "tool_call_1": false,
+    "tool_call_2": false,
+    "tool_call_3": false,
+    "tool_call_4": false,
+    "tool_call_5": false
+  },
   "effect": {
     "direct_tool_responses": [
       {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -226,8 +234,8 @@
       {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -239,8 +247,8 @@
       {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -252,8 +260,8 @@
       {
         "status": 403,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "22"
         },
@@ -265,8 +273,8 @@
       {
         "status": 403,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "22"
         },
@@ -278,8 +286,8 @@
       {
         "status": 403,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "23"
         },

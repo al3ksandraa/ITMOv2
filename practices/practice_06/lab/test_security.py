@@ -5,11 +5,14 @@ a fresh subprocess on loopback; no existing service or external host is used.
 """
 
 import json
+import http.client
+import threading
 import unittest
+from http.server import ThreadingHTTPServer
 from urllib.parse import urlencode
 
 from audit_support import LocalShop
-from service import Shop
+from service import Shop, make_handler
 
 
 class SecurityHttpTest(unittest.TestCase):
@@ -57,11 +60,13 @@ class SecurityHttpTest(unittest.TestCase):
             self.denied(response)
 
     def test_v02_search_input_is_literal(self):
-        response = self.shop.call("GET", "/search?" + urlencode({"q": "' OR 1=1 -- "}), headers=self.auth)
-        if response["status"] == 200:
-            self.assertEqual(response["json"], [], response)
-        else:
-            self.denied(response)
+        staff = self.shop.login("staff")
+        normal = self.shop.call("GET", "/search?q=TEST_ALICE", headers=staff)
+        self.assertEqual(normal["status"], 200)
+        self.assertEqual([row["id"] for row in normal["json"]], [1])
+        response = self.shop.call("GET", "/search?" + urlencode({"q": "' OR 1=1 -- "}), headers=staff)
+        self.assertEqual(response["status"], 200, response)
+        self.assertEqual(response["json"], [], response)
 
     def test_v02_context_id_cannot_select_other_orders(self):
         response = self.shop.call("GET", "/assistant/context?" + urlencode({"order_id": "1 OR 1=1"}), headers=self.auth)
@@ -189,6 +194,74 @@ class SecurityHttpTest(unittest.TestCase):
         response = self.shop.call("POST", "/assistant/execute", {"decision": {}}, self.auth)
         self.assertIn(response["status"], (400, 422), response)
 
+    def test_v11_invalid_unicode_review_cannot_poison_shared_views(self):
+        staff = self.shop.login("staff")
+        for text in ("\ud800", "\udfff"):
+            with self.subTest(text=repr(text)):
+                raw = json.dumps({"product": "chair", "text": text}).encode("ascii")
+                response = self.shop.call("POST", "/reviews", headers=self.auth, raw=raw)
+                self.assertEqual(response["status"], 400, response)
+                for target, headers in (("/reviews/view", {}), ("/assistant/context?order_id=1", self.auth),
+                                        ("/debug/logs", staff)):
+                    self.assertEqual(self.shop.call("GET", target, headers=headers)["status"], 200)
+
+    def test_v11_invalid_unicode_anonymous_input_cannot_poison_logs(self):
+        staff = self.shop.login("staff")
+        for body in ({"username": "\ud800", "password": "wrong"},
+                     {"username": "unknown", "extra": [{"text": "\udfff"}]},
+                     {"username": "unknown", "\ud800": "invalid key"}):
+            with self.subTest(body=repr(body)):
+                response = self.shop.call("POST", "/login", raw=json.dumps(body).encode("ascii"))
+                self.assertEqual(response["status"], 400, response)
+                logs = self.shop.call("GET", "/debug/logs", headers=staff)
+                self.assertEqual(logs["status"], 200)
+                self.assertNotIn("\\ud800", json.dumps(logs["json"]))
+                self.assertNotIn("\\udfff", json.dumps(logs["json"]))
+
+    def test_v11_valid_unicode_and_escaped_emoji_are_preserved(self):
+        text = "Receipt \U0001f600 \u0447\u0435\u043a"
+        response = self.shop.call("POST", "/reviews", headers=self.auth,
+                                  raw=json.dumps({"product": "chair", "text": text}).encode("ascii"))
+        self.assertEqual(response["status"], 201)
+        response = self.shop.call("GET", "/reviews/view")
+        self.assertEqual(response["status"], 200)
+        self.assertIn(text, response["body_text"])
+
+    def test_v11_nonfinite_json_numbers_cannot_poison_logs(self):
+        staff = self.shop.login("staff")
+        for number in (b"NaN", b"Infinity", b"-Infinity", b"1e400"):
+            with self.subTest(number=number):
+                raw = b'{"username":"unknown","extra":' + number + b'}'
+                response = self.shop.call("POST", "/login", raw=raw)
+                self.assertEqual(response["status"], 400, response)
+                logs = self.shop.call("GET", "/debug/logs", headers=staff)
+                self.assertEqual(logs["status"], 200)
+                json.loads(logs["body_text"], parse_constant=lambda value: self.fail("Non-finite number in response"))
+
+    def test_v11_profile_id_outside_database_range_is_client_error(self):
+        staff = self.shop.login("staff")
+        for identifier in (str(2**63), str(-(2**63) - 1), "9" * 5000):
+            with self.subTest(identifier=identifier[:30]):
+                response = self.shop.call("GET", "/profile?" + urlencode({"id": identifier}), headers=staff)
+                self.assertEqual(response["status"], 400, response)
+
+    def test_v11_order_id_outside_database_range_is_client_error(self):
+        for identifier in (str(2**63), str(-(2**63) - 1), "9" * 5000):
+            with self.subTest(identifier=identifier[:30]):
+                response = self.shop.call("GET", "/assistant/context?" + urlencode({"order_id": identifier}),
+                                          headers=self.auth)
+                self.assertEqual(response["status"], 400, response)
+
+    def test_v08_context_describes_only_authorized_actions(self):
+        response = self.shop.call("GET", "/assistant/context?order_id=1", headers=self.auth)
+        self.assertEqual(response["status"], 200)
+        prompt = response["json"]["prompt"]
+        self.assertIn('"path": "files/alice/receipt.txt"', prompt)
+        self.assertNotIn("files/bob/receipt.txt", prompt)
+        self.assertNotIn("export_profiles", prompt)
+        self.assertNotIn("delete_tree", prompt)
+        self.assertNotIn(self.auth["X-Token"], prompt)
+
     def test_v11_missing_file_does_not_disclose_internal_path(self):
         response = self.shop.call("GET", "/files?user=alice&path=missing.txt", headers=self.auth)
         self.assertNotIn(self.shop.root.name, response["body_text"])
@@ -240,6 +313,41 @@ class SecurityLoggingTest(unittest.TestCase):
         logs = json.dumps(getattr(shop, "logs", []))
         self.assertNotIn("learn-alice", logs)
         self.assertNotIn(login["token"], logs)
+
+
+class SecuritySerializationTest(unittest.TestCase):
+    def test_v11_response_encoding_failures_return_safe_http_errors(self):
+        shop = Shop()
+        server = ThreadingHTTPServer(("127.0.0.1", 0), make_handler(shop))
+        server.daemon_threads = True
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+        original = shop.dispatch
+        try:
+            for broken_result in ("\ud800", {"bad": "\udfff"}, {"bad": {1, 2}}, {"bad": float("nan")}, {"bad": float("inf")}):
+                shop.dispatch = lambda *args: (200, broken_result)
+                connection = http.client.HTTPConnection(*server.server_address, timeout=5)
+                try:
+                    connection.request("GET", "/health")
+                    response = connection.getresponse()
+                    self.assertEqual(response.status, 500)
+                    self.assertEqual(json.loads(response.read()), {"error": "internal server error"})
+                finally:
+                    connection.close()
+            shop.dispatch = original
+            connection = http.client.HTTPConnection(*server.server_address, timeout=5)
+            try:
+                connection.request("GET", "/health")
+                response = connection.getresponse()
+                self.assertEqual(response.status, 200)
+                self.assertEqual(json.loads(response.read()), {"status": "ok"})
+            finally:
+                connection.close()
+        finally:
+            server.shutdown()
+            thread.join(timeout=5)
+            server.server_close()
+            shop.close()
 
 
 if __name__ == "__main__":

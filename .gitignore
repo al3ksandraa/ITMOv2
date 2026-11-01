@@ -84,6 +84,7 @@ coverage.xml
 
 # Django stuff:
 *.log
+!practices/practice_06/evidence/**/*.log
 local_settings.py
 db.sqlite3
 
@@ -175,3 +176,6 @@ student_solutions/
 !.vscode/
 .opencode.backup-20261026141623
 node_modules/
+
+# Temporary OpenCode attachments; completed judge runs retain materials.zip.
+practices/practice_06/evidence/**/materials/

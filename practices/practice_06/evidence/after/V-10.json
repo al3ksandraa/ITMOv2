@@ -2,9 +2,9 @@
   "id": "V-10",
   "server": {
     "host": "127.0.0.1",
-    "port": 3138,
-    "pid": 6116,
-    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-bpl_v3kt"
+    "port": 42497,
+    "pid": 14852,
+    "sandbox_root": "/tmp/itmo-practice-06-geg_2o_n"
   },
   "requests": [
     {
@@ -13,7 +13,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:3138",
+          "Host": "127.0.0.1:42497",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -24,14 +24,14 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "45"
         },
-        "body_text": "{\"token\": \"ddc5d549834b44e99947caf1dcdbcd44\"}",
+        "body_text": "{\"token\": \"e9e976f99d0b4ad49788893b8336dc6f\"}",
         "json": {
-          "token": "ddc5d549834b44e99947caf1dcdbcd44"
+          "token": "e9e976f99d0b4ad49788893b8336dc6f"
         }
       }
     },
@@ -41,10 +41,10 @@
         "method": "POST",
         "target": "/assistant/execute",
         "headers": {
-          "Host": "127.0.0.1:3138",
+          "Host": "127.0.0.1:42497",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "ddc5d549834b44e99947caf1dcdbcd44",
+          "X-Token": "e9e976f99d0b4ad49788893b8336dc6f",
           "Content-Type": "application/json",
           "Content-Length": "65"
         },
@@ -53,8 +53,8 @@
       "response": {
         "status": 403,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "31"
         },
@@ -70,18 +70,18 @@
         "method": "GET",
         "target": "/files?user=bob&path=receipt.txt",
         "headers": {
-          "Host": "127.0.0.1:3138",
+          "Host": "127.0.0.1:42497",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "ddc5d549834b44e99947caf1dcdbcd44"
+          "X-Token": "e9e976f99d0b4ad49788893b8336dc6f"
         },
         "body_text": null
       },
       "response": {
         "status": 403,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "22"
         },
@@ -97,7 +97,7 @@
         "method": "GET",
         "target": "/health",
         "headers": {
-          "Host": "127.0.0.1:3138",
+          "Host": "127.0.0.1:42497",
           "Accept-Encoding": "identity",
           "Connection": "close"
         },
@@ -106,8 +106,8 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:32 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "16"
         },
@@ -119,6 +119,10 @@
     }
   ],
   "confirmed": false,
+  "probes": {
+    "deletion_accepted": false,
+    "fixture_files_changed": false
+  },
   "files_before": {
     "files/alice/receipt.txt": {
       "sha256": "4360848423026c4e0828bf702a5be04f59a6daee8f0d8aa0df0828b95eaeffcf",

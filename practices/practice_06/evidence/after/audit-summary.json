@@ -1,13 +1,13 @@
 {
-  "started_at_moscow": "2026-10-28T14:54:27.677256+03:00",
+  "started_at_moscow": "2026-11-02T02:18:04.595180+03:00",
   "command": [
     "audit_before.py",
     "--output",
-    "..\\evidence\\after"
+    "../evidence/after"
   ],
-  "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+  "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
   "source_sha256": {
-    "service.py": "17207ec18cabc3de28cfa4e6f677d81ff4f536325b5d63f7df86c0e2c6f829d8",
+    "service.py": "068774100d9633bc2acff10f358b00716d6fa59acce537b662b07c196a7bb890",
     "sandbox.py": "221135fb67bc72c90e8d533409f89e8282004313656fa9ae838d04f575a1ac4a"
   },
   "transport": "http.client direct loopback; no proxy",
@@ -22,7 +22,7 @@
     {
       "id": "V-02",
       "confirmed": false,
-      "status": "scenario_stopped_by_expected_denial",
+      "status": null,
       "evidence": "V-02.json"
     },
     {
@@ -52,7 +52,7 @@
     {
       "id": "V-07",
       "confirmed": false,
-      "status": "scenario_stopped_by_expected_denial",
+      "status": "log_disclosure_blocked",
       "evidence": "V-07.json"
     },
     {
@@ -93,8 +93,8 @@
     },
     {
       "id": "OBS-02-audit",
-      "confirmed": false,
-      "status": "scenario_stopped_by_expected_denial",
+      "confirmed": null,
+      "status": "audit_metadata_observed",
       "evidence": "OBS-02-audit.json"
     },
     {
@@ -121,6 +121,6 @@
     "POST /orders",
     "POST /reviews"
   ],
-  "finished_at_moscow": "2026-10-28T14:54:34.591702+03:00",
+  "finished_at_moscow": "2026-11-02T02:18:10.352883+03:00",
   "source_unchanged": true
 }

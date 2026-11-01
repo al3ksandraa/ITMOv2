@@ -2,9 +2,9 @@
   "id": "OBS-01-resources",
   "server": {
     "host": "127.0.0.1",
-    "port": 3157,
-    "pid": 14896,
-    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-prqwstoh"
+    "port": 45269,
+    "pid": 14883,
+    "sandbox_root": "/tmp/itmo-practice-06-b2cxyf1u"
   },
   "requests": [
     {
@@ -13,7 +13,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -24,41 +24,116 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "45"
         },
-        "body_text": "{\"token\": \"d44889d8c977434eb041a914dd07b710\"}",
+        "body_text": "{\"token\": \"cb0c62290432447f9205e4dca8bfffa2\"}",
         "json": {
-          "token": "d44889d8c977434eb041a914dd07b710"
+          "token": "cb0c62290432447f9205e4dca8bfffa2"
         }
       }
     },
     {
-      "label": "",
+      "label": "legitimate login: staff",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:45269",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"staff\", \"password\": \"learn-staff\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"41bafbabc6a44baf846f511dcd642a38\"}",
+        "json": {
+          "token": "41bafbabc6a44baf846f511dcd642a38"
+        }
+      }
+    },
+    {
+      "label": "staff inspects stored log entries",
       "request": {
         "method": "GET",
         "target": "/debug/logs",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
-          "Connection": "close"
+          "Connection": "close",
+          "X-Token": "41bafbabc6a44baf846f511dcd642a38"
         },
         "body_text": null
       },
       "response": {
-        "status": 401,
+        "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
-          "Content-Length": "27"
+          "Content-Length": "764"
         },
-        "body_text": "{\"error\": \"login required\"}",
-        "json": {
-          "error": "login required"
-        }
+        "body_text": "[{\"method\": \"POST\", \"target\": \"/login\", \"body\": {\"username\": \"alice\", \"password\": \"[redacted]\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"Content-Length\": \"48\"}, \"actor\": null, \"role\": null}, {\"method\": \"POST\", \"target\": \"/login\", \"body\": {\"username\": \"staff\", \"password\": \"[redacted]\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"Content-Length\": \"48\"}, \"actor\": null, \"role\": null}, {\"method\": \"GET\", \"target\": \"/debug/logs\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\"}, \"actor\": 0, \"role\": \"staff\"}]",
+        "json": [
+          {
+            "method": "POST",
+            "target": "/login",
+            "body": {
+              "username": "alice",
+              "password": "[redacted]"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "Content-Type": "application/json",
+              "Content-Length": "48"
+            },
+            "actor": null,
+            "role": null
+          },
+          {
+            "method": "POST",
+            "target": "/login",
+            "body": {
+              "username": "staff",
+              "password": "[redacted]"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "Content-Type": "application/json",
+              "Content-Length": "48"
+            },
+            "actor": null,
+            "role": null
+          },
+          {
+            "method": "GET",
+            "target": "/debug/logs",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]"
+            },
+            "actor": 0,
+            "role": "staff"
+          }
+        ]
       }
     },
     {
@@ -67,10 +142,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "d44889d8c977434eb041a914dd07b710",
+          "X-Token": "cb0c62290432447f9205e4dca8bfffa2",
           "Content-Type": "application/json",
           "Content-Length": "1072"
         },
@@ -79,8 +154,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "15"
         },
@@ -96,10 +171,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "d44889d8c977434eb041a914dd07b710",
+          "X-Token": "cb0c62290432447f9205e4dca8bfffa2",
           "Content-Type": "application/json",
           "Content-Length": "1072"
         },
@@ -108,8 +183,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "15"
         },
@@ -125,10 +200,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "d44889d8c977434eb041a914dd07b710",
+          "X-Token": "cb0c62290432447f9205e4dca8bfffa2",
           "Content-Type": "application/json",
           "Content-Length": "1072"
         },
@@ -137,8 +212,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "15"
         },
@@ -154,10 +229,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "d44889d8c977434eb041a914dd07b710",
+          "X-Token": "cb0c62290432447f9205e4dca8bfffa2",
           "Content-Type": "application/json",
           "Content-Length": "1072"
         },
@@ -166,8 +241,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "15"
         },
@@ -183,10 +258,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "d44889d8c977434eb041a914dd07b710",
+          "X-Token": "cb0c62290432447f9205e4dca8bfffa2",
           "Content-Type": "application/json",
           "Content-Length": "1072"
         },
@@ -195,8 +270,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "15"
         },
@@ -212,10 +287,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "d44889d8c977434eb041a914dd07b710",
+          "X-Token": "cb0c62290432447f9205e4dca8bfffa2",
           "Content-Type": "application/json",
           "Content-Length": "1072"
         },
@@ -224,8 +299,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "15"
         },
@@ -241,10 +316,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "d44889d8c977434eb041a914dd07b710",
+          "X-Token": "cb0c62290432447f9205e4dca8bfffa2",
           "Content-Type": "application/json",
           "Content-Length": "1072"
         },
@@ -253,8 +328,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "15"
         },
@@ -270,10 +345,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "d44889d8c977434eb041a914dd07b710",
+          "X-Token": "cb0c62290432447f9205e4dca8bfffa2",
           "Content-Type": "application/json",
           "Content-Length": "1072"
         },
@@ -282,8 +357,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "15"
         },
@@ -299,10 +374,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "d44889d8c977434eb041a914dd07b710",
+          "X-Token": "cb0c62290432447f9205e4dca8bfffa2",
           "Content-Type": "application/json",
           "Content-Length": "1072"
         },
@@ -311,8 +386,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "15"
         },
@@ -328,10 +403,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "d44889d8c977434eb041a914dd07b710",
+          "X-Token": "cb0c62290432447f9205e4dca8bfffa2",
           "Content-Type": "application/json",
           "Content-Length": "1072"
         },
@@ -340,8 +415,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "15"
         },
@@ -357,10 +432,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "d44889d8c977434eb041a914dd07b710",
+          "X-Token": "cb0c62290432447f9205e4dca8bfffa2",
           "Content-Type": "application/json",
           "Content-Length": "1073"
         },
@@ -369,8 +444,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "15"
         },
@@ -386,10 +461,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "d44889d8c977434eb041a914dd07b710",
+          "X-Token": "cb0c62290432447f9205e4dca8bfffa2",
           "Content-Type": "application/json",
           "Content-Length": "1073"
         },
@@ -398,8 +473,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "15"
         },
@@ -415,7 +490,7 @@
         "method": "GET",
         "target": "/reviews/view",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
           "Connection": "close"
         },
@@ -424,8 +499,8 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "text/html; charset=utf-8",
           "Content-Length": "12592"
         },
@@ -434,29 +509,317 @@
       }
     },
     {
-      "label": "",
+      "label": "staff inspects stored log entries",
       "request": {
         "method": "GET",
         "target": "/debug/logs",
         "headers": {
-          "Host": "127.0.0.1:3157",
+          "Host": "127.0.0.1:45269",
           "Accept-Encoding": "identity",
-          "Connection": "close"
+          "Connection": "close",
+          "X-Token": "41bafbabc6a44baf846f511dcd642a38"
         },
         "body_text": null
       },
       "response": {
-        "status": 401,
+        "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:33 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:09 GMT",
           "Content-Type": "application/json; charset=utf-8",
-          "Content-Length": "27"
+          "Content-Length": "17195"
         },
-        "body_text": "{\"error\": \"login required\"}",
-        "json": {
-          "error": "login required"
-        }
+        "body_text": "[{\"method\": \"POST\", \"target\": \"/login\", \"body\": {\"username\": \"alice\", \"password\": \"[redacted]\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"Content-Length\": \"48\"}, \"actor\": null, \"role\": null}, {\"method\": \"POST\", \"target\": \"/login\", \"body\": {\"username\": \"staff\", \"password\": \"[redacted]\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"Content-Length\": \"48\"}, \"actor\": null, \"role\": null}, {\"method\": \"GET\", \"target\": \"/debug/logs\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\"}, \"actor\": 0, \"role\": \"staff\"}, {\"method\": \"POST\", \"target\": \"/reviews\", \"body\": {\"product\": \"chair\", \"text\": \"AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\", \"Content-Type\": \"application/json\", \"Content-Length\": \"1072\"}, \"actor\": 1, \"role\": \"customer\"}, {\"method\": \"POST\", \"target\": \"/reviews\", \"body\": {\"product\": \"chair\", \"text\": \"AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\", \"Content-Type\": \"application/json\", \"Content-Length\": \"1072\"}, \"actor\": 1, \"role\": \"customer\"}, {\"method\": \"POST\", \"target\": \"/reviews\", \"body\": {\"product\": \"chair\", \"text\": \"AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx2\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\", \"Content-Type\": \"application/json\", \"Content-Length\": \"1072\"}, \"actor\": 1, \"role\": \"customer\"}, {\"method\": \"POST\", \"target\": \"/reviews\", \"body\": {\"product\": \"chair\", \"text\": \"AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx3\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\", \"Content-Type\": \"application/json\", \"Content-Length\": \"1072\"}, \"actor\": 1, \"role\": \"customer\"}, {\"method\": \"POST\", \"target\": \"/reviews\", \"body\": {\"product\": \"chair\", \"text\": \"AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx4\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\", \"Content-Type\": \"application/json\", \"Content-Length\": \"1072\"}, \"actor\": 1, \"role\": \"customer\"}, {\"method\": \"POST\", \"target\": \"/reviews\", \"body\": {\"product\": \"chair\", \"text\": \"AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx5\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\", \"Content-Type\": \"application/json\", \"Content-Length\": \"1072\"}, \"actor\": 1, \"role\": \"customer\"}, {\"method\": \"POST\", \"target\": \"/reviews\", \"body\": {\"product\": \"chair\", \"text\": \"AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx6\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\", \"Content-Type\": \"application/json\", \"Content-Length\": \"1072\"}, \"actor\": 1, \"role\": \"customer\"}, {\"method\": \"POST\", \"target\": \"/reviews\", \"body\": {\"product\": \"chair\", \"text\": \"AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx7\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\", \"Content-Type\": \"application/json\", \"Content-Length\": \"1072\"}, \"actor\": 1, \"role\": \"customer\"}, {\"method\": \"POST\", \"target\": \"/reviews\", \"body\": {\"product\": \"chair\", \"text\": \"AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx8\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\", \"Content-Type\": \"application/json\", \"Content-Length\": \"1072\"}, \"actor\": 1, \"role\": \"customer\"}, {\"method\": \"POST\", \"target\": \"/reviews\", \"body\": {\"product\": \"chair\", \"text\": \"AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\", \"Content-Type\": \"application/json\", \"Content-Length\": \"1072\"}, \"actor\": 1, \"role\": \"customer\"}, {\"method\": \"POST\", \"target\": \"/reviews\", \"body\": {\"product\": \"chair\", \"text\": \"AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx10\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\", \"Content-Type\": \"application/json\", \"Content-Length\": \"1073\"}, \"actor\": 1, \"role\": \"customer\"}, {\"method\": \"POST\", \"target\": \"/reviews\", \"body\": {\"product\": \"chair\", \"text\": \"AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx11\"}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\", \"Content-Type\": \"application/json\", \"Content-Length\": \"1073\"}, \"actor\": 1, \"role\": \"customer\"}, {\"method\": \"GET\", \"target\": \"/reviews/view\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\"}, \"actor\": null, \"role\": null}, {\"method\": \"GET\", \"target\": \"/debug/logs\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:45269\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\"}, \"actor\": 0, \"role\": \"staff\"}]",
+        "json": [
+          {
+            "method": "POST",
+            "target": "/login",
+            "body": {
+              "username": "alice",
+              "password": "[redacted]"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "Content-Type": "application/json",
+              "Content-Length": "48"
+            },
+            "actor": null,
+            "role": null
+          },
+          {
+            "method": "POST",
+            "target": "/login",
+            "body": {
+              "username": "staff",
+              "password": "[redacted]"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "Content-Type": "application/json",
+              "Content-Length": "48"
+            },
+            "actor": null,
+            "role": null
+          },
+          {
+            "method": "GET",
+            "target": "/debug/logs",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]"
+            },
+            "actor": 0,
+            "role": "staff"
+          },
+          {
+            "method": "POST",
+            "target": "/reviews",
+            "body": {
+              "product": "chair",
+              "text": "AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx0"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]",
+              "Content-Type": "application/json",
+              "Content-Length": "1072"
+            },
+            "actor": 1,
+            "role": "customer"
+          },
+          {
+            "method": "POST",
+            "target": "/reviews",
+            "body": {
+              "product": "chair",
+              "text": "AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx1"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]",
+              "Content-Type": "application/json",
+              "Content-Length": "1072"
+            },
+            "actor": 1,
+            "role": "customer"
+          },
+          {
+            "method": "POST",
+            "target": "/reviews",
+            "body": {
+              "product": "chair",
+              "text": "AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx2"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]",
+              "Content-Type": "application/json",
+              "Content-Length": "1072"
+            },
+            "actor": 1,
+            "role": "customer"
+          },
+          {
+            "method": "POST",
+            "target": "/reviews",
+            "body": {
+              "product": "chair",
+              "text": "AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx3"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]",
+              "Content-Type": "application/json",
+              "Content-Length": "1072"
+            },
+            "actor": 1,
+            "role": "customer"
+          },
+          {
+            "method": "POST",
+            "target": "/reviews",
+            "body": {
+              "product": "chair",
+              "text": "AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx4"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]",
+              "Content-Type": "application/json",
+              "Content-Length": "1072"
+            },
+            "actor": 1,
+            "role": "customer"
+          },
+          {
+            "method": "POST",
+            "target": "/reviews",
+            "body": {
+              "product": "chair",
+              "text": "AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx5"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]",
+              "Content-Type": "application/json",
+              "Content-Length": "1072"
+            },
+            "actor": 1,
+            "role": "customer"
+          },
+          {
+            "method": "POST",
+            "target": "/reviews",
+            "body": {
+              "product": "chair",
+              "text": "AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx6"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]",
+              "Content-Type": "application/json",
+              "Content-Length": "1072"
+            },
+            "actor": 1,
+            "role": "customer"
+          },
+          {
+            "method": "POST",
+            "target": "/reviews",
+            "body": {
+              "product": "chair",
+              "text": "AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx7"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]",
+              "Content-Type": "application/json",
+              "Content-Length": "1072"
+            },
+            "actor": 1,
+            "role": "customer"
+          },
+          {
+            "method": "POST",
+            "target": "/reviews",
+            "body": {
+              "product": "chair",
+              "text": "AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx8"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]",
+              "Content-Type": "application/json",
+              "Content-Length": "1072"
+            },
+            "actor": 1,
+            "role": "customer"
+          },
+          {
+            "method": "POST",
+            "target": "/reviews",
+            "body": {
+              "product": "chair",
+              "text": "AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx9"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]",
+              "Content-Type": "application/json",
+              "Content-Length": "1072"
+            },
+            "actor": 1,
+            "role": "customer"
+          },
+          {
+            "method": "POST",
+            "target": "/reviews",
+            "body": {
+              "product": "chair",
+              "text": "AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx10"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]",
+              "Content-Type": "application/json",
+              "Content-Length": "1073"
+            },
+            "actor": 1,
+            "role": "customer"
+          },
+          {
+            "method": "POST",
+            "target": "/reviews",
+            "body": {
+              "product": "chair",
+              "text": "AUDIT_RESOURCE_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx11"
+            },
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]",
+              "Content-Type": "application/json",
+              "Content-Length": "1073"
+            },
+            "actor": 1,
+            "role": "customer"
+          },
+          {
+            "method": "GET",
+            "target": "/reviews/view",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close"
+            },
+            "actor": null,
+            "role": null
+          },
+          {
+            "method": "GET",
+            "target": "/debug/logs",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:45269",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]"
+            },
+            "actor": 0,
+            "role": "staff"
+          }
+        ]
       }
     }
   ],
@@ -464,8 +827,8 @@
   "effect": {
     "review_posts": 12,
     "stored_review_markers": 12,
-    "log_entries_before": 1,
-    "log_entries_after": 1
+    "log_entries_before": 3,
+    "log_entries_after": 17
   },
   "limitation": "Small bounded probe, no exhaustion, no slow connections or load attack.",
   "server_shutdown": {

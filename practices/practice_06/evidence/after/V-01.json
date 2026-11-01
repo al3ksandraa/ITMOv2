@@ -2,9 +2,9 @@
   "id": "V-01",
   "server": {
     "host": "127.0.0.1",
-    "port": 13566,
-    "pid": 17068,
-    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-_md99iwa"
+    "port": 35095,
+    "pid": 14577,
+    "sandbox_root": "/tmp/itmo-practice-06-g12m1ldb"
   },
   "requests": [
     {
@@ -13,7 +13,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:13566",
+          "Host": "127.0.0.1:35095",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -24,14 +24,14 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:04 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "45"
         },
-        "body_text": "{\"token\": \"ce94780b9a9e4f30987660679e0ba297\"}",
+        "body_text": "{\"token\": \"4d3d0622173a43bda9607165961a50e5\"}",
         "json": {
-          "token": "ce94780b9a9e4f30987660679e0ba297"
+          "token": "4d3d0622173a43bda9607165961a50e5"
         }
       }
     },
@@ -41,18 +41,18 @@
         "method": "GET",
         "target": "/profile?id=1",
         "headers": {
-          "Host": "127.0.0.1:13566",
+          "Host": "127.0.0.1:35095",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "ce94780b9a9e4f30987660679e0ba297"
+          "X-Token": "4d3d0622173a43bda9607165961a50e5"
         },
         "body_text": null
       },
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:04 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "96"
         },
@@ -73,7 +73,7 @@
         "method": "GET",
         "target": "/profile?id=2",
         "headers": {
-          "Host": "127.0.0.1:13566",
+          "Host": "127.0.0.1:35095",
           "Accept-Encoding": "identity",
           "Connection": "close"
         },
@@ -82,8 +82,8 @@
       "response": {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:04 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -99,7 +99,7 @@
         "method": "GET",
         "target": "/profile?id=2",
         "headers": {
-          "Host": "127.0.0.1:13566",
+          "Host": "127.0.0.1:35095",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "X-Token": "invalid"
@@ -109,8 +109,8 @@
       "response": {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:04 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -126,18 +126,18 @@
         "method": "GET",
         "target": "/profile?id=2",
         "headers": {
-          "Host": "127.0.0.1:13566",
+          "Host": "127.0.0.1:35095",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "ce94780b9a9e4f30987660679e0ba297"
+          "X-Token": "4d3d0622173a43bda9607165961a50e5"
         },
         "body_text": null
       },
       "response": {
         "status": 403,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:04 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "22"
         },
@@ -153,18 +153,18 @@
         "method": "GET",
         "target": "/orders",
         "headers": {
-          "Host": "127.0.0.1:13566",
+          "Host": "127.0.0.1:35095",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "ce94780b9a9e4f30987660679e0ba297"
+          "X-Token": "4d3d0622173a43bda9607165961a50e5"
         },
         "body_text": null
       },
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:04 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "60"
         },
@@ -185,18 +185,18 @@
         "method": "GET",
         "target": "/search?q=TEST_BOB",
         "headers": {
-          "Host": "127.0.0.1:13566",
+          "Host": "127.0.0.1:35095",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "ce94780b9a9e4f30987660679e0ba297"
+          "X-Token": "4d3d0622173a43bda9607165961a50e5"
         },
         "body_text": null
       },
       "response": {
         "status": 403,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:04 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "23"
         },
@@ -208,6 +208,13 @@
     }
   ],
   "confirmed": false,
+  "probes": {
+    "anonymous_profile": false,
+    "invalid_token_profile": false,
+    "foreign_profile": false,
+    "foreign_orders": false,
+    "foreign_search": false
+  },
   "effect": {
     "control": [
       {

@@ -2,9 +2,9 @@
   "id": "V-03",
   "server": {
     "host": "127.0.0.1",
-    "port": 13582,
-    "pid": 19356,
-    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-4n26jnug"
+    "port": 43791,
+    "pid": 14597,
+    "sandbox_root": "/tmp/itmo-practice-06-1hod9kx4"
   },
   "requests": [
     {
@@ -13,7 +13,7 @@
         "method": "GET",
         "target": "/admin/export",
         "headers": {
-          "Host": "127.0.0.1:13582",
+          "Host": "127.0.0.1:43791",
           "Accept-Encoding": "identity",
           "Connection": "close"
         },
@@ -22,8 +22,8 @@
       "response": {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:05 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -39,7 +39,7 @@
         "method": "GET",
         "target": "/admin/export",
         "headers": {
-          "Host": "127.0.0.1:13582",
+          "Host": "127.0.0.1:43791",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "X-Role": "staff"
@@ -49,8 +49,8 @@
       "response": {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:05 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -66,7 +66,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:13582",
+          "Host": "127.0.0.1:43791",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -77,14 +77,14 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:05 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "45"
         },
-        "body_text": "{\"token\": \"7a83002843d54bb282b1c91d1075df7c\"}",
+        "body_text": "{\"token\": \"06bb763f28a4465cb55cfe16e0e04519\"}",
         "json": {
-          "token": "7a83002843d54bb282b1c91d1075df7c"
+          "token": "06bb763f28a4465cb55cfe16e0e04519"
         }
       }
     },
@@ -94,10 +94,10 @@
         "method": "GET",
         "target": "/admin/export",
         "headers": {
-          "Host": "127.0.0.1:13582",
+          "Host": "127.0.0.1:43791",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "7a83002843d54bb282b1c91d1075df7c",
+          "X-Token": "06bb763f28a4465cb55cfe16e0e04519",
           "X-Role": "staff"
         },
         "body_text": null
@@ -105,8 +105,8 @@
       "response": {
         "status": 403,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:05 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "23"
         },
@@ -122,7 +122,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:13582",
+          "Host": "127.0.0.1:43791",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -133,14 +133,14 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:05 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "45"
         },
-        "body_text": "{\"token\": \"3dc721dce5ff4966b7d9e649b2e23260\"}",
+        "body_text": "{\"token\": \"05cd048adbdf45e386a0a02ca0a7e018\"}",
         "json": {
-          "token": "3dc721dce5ff4966b7d9e649b2e23260"
+          "token": "05cd048adbdf45e386a0a02ca0a7e018"
         }
       }
     },
@@ -150,10 +150,10 @@
         "method": "GET",
         "target": "/admin/export",
         "headers": {
-          "Host": "127.0.0.1:13582",
+          "Host": "127.0.0.1:43791",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "3dc721dce5ff4966b7d9e649b2e23260",
+          "X-Token": "05cd048adbdf45e386a0a02ca0a7e018",
           "X-Role": "staff"
         },
         "body_text": null
@@ -161,8 +161,8 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:05 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "188"
         },
@@ -189,18 +189,18 @@
         "method": "GET",
         "target": "/admin/export",
         "headers": {
-          "Host": "127.0.0.1:13582",
+          "Host": "127.0.0.1:43791",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "3dc721dce5ff4966b7d9e649b2e23260"
+          "X-Token": "05cd048adbdf45e386a0a02ca0a7e018"
         },
         "body_text": null
       },
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:28 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:05 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "188"
         },
@@ -223,6 +223,10 @@
     }
   ],
   "confirmed": false,
+  "probes": {
+    "anonymous_role_spoof": false,
+    "customer_role_spoof": false
+  },
   "effect": {
     "exported_profiles": {
       "error": "login required"

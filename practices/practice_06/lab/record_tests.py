@@ -20,7 +20,7 @@ def identifiers(suite):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=Path(__file__).resolve().parent.parent / "evidence" / "before")
+    parser.add_argument("--output", type=Path, default=Path(__file__).resolve().parent.parent / "evidence" / "after")
     args = parser.parse_args()
     lab = Path(__file__).resolve().parent
     os.chdir(lab)
@@ -32,10 +32,13 @@ def main():
     loader = unittest.defaultTestLoader
     baseline = loader.loadTestsFromNames(["test_http", "test_service"])
     security = loader.loadTestsFromName("test_security")
-    groups = {"baseline": list(identifiers(baseline)), "security": list(identifiers(security))}
+    runners = loader.loadTestsFromName("test_prompt_injection_opencode")
+    audit = loader.loadTestsFromName("test_audit")
+    groups = {"baseline": list(identifiers(baseline)), "security": list(identifiers(security)),
+              "opencode": list(identifiers(runners)), "audit": list(identifiers(audit))}
     started = datetime.now(clock).isoformat()
     with (out / "tests.log").open("w", encoding="utf-8") as log:
-        result = unittest.TextTestRunner(stream=log, verbosity=2).run(unittest.TestSuite([baseline, security]))
+        result = unittest.TextTestRunner(stream=log, verbosity=2).run(unittest.TestSuite([baseline, security, runners, audit]))
     failed = {test.id() for test, _ in result.failures}
     errors = {test.id() for test, _ in result.errors}
     skipped = {test.id() for test, _ in result.skipped}

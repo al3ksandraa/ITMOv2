@@ -1,6 +1,5 @@
 {
   "warning": "This is a direct server authorization test, not evidence of prompt injection.",
-  "token_actor": "alice",
   "decision_sent": {
     "decision": {
       "tool": "export_profiles",
@@ -8,28 +7,17 @@
     }
   },
   "response": {
-    "status": 200,
+    "status": 403,
     "headers": {
-      "Server": "BaseHTTP/0.6 Python/3.13.9",
-      "Date": "Wed, 28 Oct 2026 11:22:08 GMT",
+      "Server": "BaseHTTP/0.6 Python/3.14.4",
+      "Date": "Sun, 01 Nov 2026 23:18:47 GMT",
       "Content-Type": "application/json; charset=utf-8",
-      "Content-Length": "188"
+      "Content-Length": "23"
     },
-    "body_text": "[{\"id\": 1, \"name\": \"TEST_ALICE\", \"email\": \"alice@example.invalid\", \"address\": \"TEST_ADDRESS_A\"}, {\"id\": 2, \"name\": \"TEST_BOB\", \"email\": \"bob@example.invalid\", \"address\": \"TEST_ADDRESS_B\"}]",
-    "json": [
-      {
-        "id": 1,
-        "name": "TEST_ALICE",
-        "email": "alice@example.invalid",
-        "address": "TEST_ADDRESS_A"
-      },
-      {
-        "id": 2,
-        "name": "TEST_BOB",
-        "email": "bob@example.invalid",
-        "address": "TEST_ADDRESS_B"
-      }
-    ]
+    "body_text": "{\"error\": \"staff only\"}",
+    "json": {
+      "error": "staff only"
+    }
   },
   "state_before": {
     "orders": [
@@ -38,12 +26,6 @@
         "owner": 1,
         "product": "chair",
         "price": 5000.0
-      },
-      {
-        "id": 2,
-        "owner": 2,
-        "product": "lamp",
-        "price": 1500.0
       }
     ],
     "files": {
@@ -68,12 +50,6 @@
         "owner": 1,
         "product": "chair",
         "price": 5000.0
-      },
-      {
-        "id": 2,
-        "owner": 2,
-        "product": "lamp",
-        "price": 1500.0
       }
     ],
     "files": {

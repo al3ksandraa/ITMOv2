@@ -1,0 +1,538 @@
+{
+  "started_at_moscow": "2026-11-02T02:18:53.252720+03:00",
+  "finished_at_moscow": "2026-11-02T02:18:53.630872+03:00",
+  "source_sha256": {
+    "service.py": "068774100d9633bc2acff10f358b00716d6fa59acce537b662b07c196a7bb890",
+    "sandbox.py": "221135fb67bc72c90e8d533409f89e8282004313656fa9ae838d04f575a1ac4a"
+  },
+  "case_count": 41,
+  "passed": true,
+  "cases": [
+    {
+      "method": "POST",
+      "target": "/login",
+      "body_text": "null",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/login",
+      "body_text": "[]",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/login",
+      "body_text": "0",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/login",
+      "body_text": "true",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/login",
+      "body_text": "\"text\"",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/login",
+      "body_text": "{}",
+      "status": 401,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/login",
+      "body_text": "{",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/orders",
+      "body_text": "null",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/orders",
+      "body_text": "[]",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/orders",
+      "body_text": "0",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/orders",
+      "body_text": "true",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/orders",
+      "body_text": "\"text\"",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/orders",
+      "body_text": "{}",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/orders",
+      "body_text": "{",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/reviews",
+      "body_text": "null",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/reviews",
+      "body_text": "[]",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/reviews",
+      "body_text": "0",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/reviews",
+      "body_text": "true",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/reviews",
+      "body_text": "\"text\"",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/reviews",
+      "body_text": "{}",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/reviews",
+      "body_text": "{",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/assistant/execute",
+      "body_text": "null",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/assistant/execute",
+      "body_text": "[]",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/assistant/execute",
+      "body_text": "0",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/assistant/execute",
+      "body_text": "true",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/assistant/execute",
+      "body_text": "\"text\"",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/assistant/execute",
+      "body_text": "{}",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/assistant/execute",
+      "body_text": "{",
+      "status": 400,
+      "expected_statuses": [
+        400,
+        401
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/login",
+      "body_text": "{\"username\":\"unknown\",\"extra\":NaN}",
+      "status": 400,
+      "expected_statuses": [
+        400
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/login",
+      "body_text": "{\"username\":\"unknown\",\"extra\":Infinity}",
+      "status": 400,
+      "expected_statuses": [
+        400
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/login",
+      "body_text": "{\"username\":\"unknown\",\"extra\":-Infinity}",
+      "status": 400,
+      "expected_statuses": [
+        400
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/login",
+      "body_text": "{\"username\":\"unknown\",\"extra\":1e400}",
+      "status": 400,
+      "expected_statuses": [
+        400
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/login",
+      "body_text": "{\"username\": \"\\ud800\"}",
+      "status": 400,
+      "expected_statuses": [
+        400
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/login",
+      "body_text": "{\"username\": \"unknown\", \"extra\": [{\"\\udfff\": \"x\"}]}",
+      "status": 400,
+      "expected_statuses": [
+        400
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/reviews",
+      "body_text": "{\"product\": \"chair\", \"text\": \"\\udfff\"}",
+      "status": 400,
+      "expected_statuses": [
+        400
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/assistant/execute",
+      "body_text": "{\"decision\": null}",
+      "status": 400,
+      "expected_statuses": [
+        400
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/assistant/execute",
+      "body_text": "{\"decision\": []}",
+      "status": 400,
+      "expected_statuses": [
+        400
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/assistant/execute",
+      "body_text": "{\"decision\": {\"tool\": false}}",
+      "status": 400,
+      "expected_statuses": [
+        400
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/assistant/execute",
+      "body_text": "{\"decision\": {\"tool\": \"read_file\", \"arguments\": []}}",
+      "status": 400,
+      "expected_statuses": [
+        400
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/assistant/execute",
+      "body_text": "{\"decision\": {\"tool\": \"refuse\", \"arguments\": {\"reason\": null}}}",
+      "status": 400,
+      "expected_statuses": [
+        400
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    },
+    {
+      "method": "POST",
+      "target": "/login",
+      "body_text": "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[0]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]",
+      "status": 400,
+      "expected_statuses": [
+        400
+      ],
+      "health_status": 200,
+      "logs_status": 200,
+      "passed": true
+    }
+  ],
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

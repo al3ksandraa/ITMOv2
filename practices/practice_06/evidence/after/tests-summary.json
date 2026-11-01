@@ -1,15 +1,15 @@
 {
-  "started_at_moscow": "2026-10-28T15:14:33.583542+03:00",
-  "finished_at_moscow": "2026-10-28T15:14:50.960709+03:00",
-  "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+  "started_at_moscow": "2026-11-02T02:18:52.512292+03:00",
+  "finished_at_moscow": "2026-11-02T02:19:10.307354+03:00",
+  "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
   "command": [
     "record_tests.py",
     "--output",
-    "..\\evidence\\after"
+    "/mnt/d/Documents/Vibecoding/ITMOv2/practices/practice_06/evidence/after"
   ],
-  "working_directory": "D:\\Documents\\Vibecoding\\ITMOv2\\practices\\practice_06\\lab",
+  "working_directory": "/mnt/d/Documents/Vibecoding/ITMOv2/practices/practice_06/lab",
   "NO_PROXY": "127.0.0.1,localhost",
-  "tests_run": 60,
+  "tests_run": 93,
   "failures": 0,
   "errors": 0,
   "skipped": 0,
@@ -24,8 +24,22 @@
       "skipped": 0
     },
     "security": {
-      "tests": 44,
-      "passed": 44,
+      "tests": 52,
+      "passed": 52,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "opencode": {
+      "tests": 19,
+      "passed": 19,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "audit": {
+      "tests": 6,
+      "passed": 6,
       "failures": 0,
       "errors": 0,
       "skipped": 0
@@ -34,7 +48,7 @@
   "failed_test_ids": [],
   "error_test_ids": [],
   "source_sha256": {
-    "service.py": "ad006c3f47a745c0eab0f0725ad31af99430a50ffa27c993ce62997ca38a4ec5",
+    "service.py": "068774100d9633bc2acff10f358b00716d6fa59acce537b662b07c196a7bb890",
     "sandbox.py": "221135fb67bc72c90e8d533409f89e8282004313656fa9ae838d04f575a1ac4a"
   }
 }

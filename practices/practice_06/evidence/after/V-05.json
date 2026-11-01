@@ -2,9 +2,9 @@
   "id": "V-05",
   "server": {
     "host": "127.0.0.1",
-    "port": 13598,
-    "pid": 13888,
-    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-phyx0rms"
+    "port": 41739,
+    "pid": 14617,
+    "sandbox_root": "/tmp/itmo-practice-06-5kemrf9o"
   },
   "requests": [
     {
@@ -13,7 +13,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:13598",
+          "Host": "127.0.0.1:41739",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -24,14 +24,14 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "45"
         },
-        "body_text": "{\"token\": \"4c9eaf37985c4b22850255eee2219a45\"}",
+        "body_text": "{\"token\": \"3a49fd74243b43c08a1e951915cf266e\"}",
         "json": {
-          "token": "4c9eaf37985c4b22850255eee2219a45"
+          "token": "3a49fd74243b43c08a1e951915cf266e"
         }
       }
     },
@@ -41,18 +41,18 @@
         "method": "GET",
         "target": "/files?user=alice&path=receipt.txt",
         "headers": {
-          "Host": "127.0.0.1:13598",
+          "Host": "127.0.0.1:41739",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "4c9eaf37985c4b22850255eee2219a45"
+          "X-Token": "3a49fd74243b43c08a1e951915cf266e"
         },
         "body_text": null
       },
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "50"
         },
@@ -68,7 +68,7 @@
         "method": "GET",
         "target": "/files?user=bob&path=receipt.txt",
         "headers": {
-          "Host": "127.0.0.1:13598",
+          "Host": "127.0.0.1:41739",
           "Accept-Encoding": "identity",
           "Connection": "close"
         },
@@ -77,8 +77,8 @@
       "response": {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -94,18 +94,18 @@
         "method": "GET",
         "target": "/files?user=bob&path=receipt.txt",
         "headers": {
-          "Host": "127.0.0.1:13598",
+          "Host": "127.0.0.1:41739",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "4c9eaf37985c4b22850255eee2219a45"
+          "X-Token": "3a49fd74243b43c08a1e951915cf266e"
         },
         "body_text": null
       },
       "response": {
         "status": 403,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "22"
         },
@@ -121,18 +121,18 @@
         "method": "GET",
         "target": "/files?user=alice&path=..%2F..%2Fprivate%2Foperator-note.txt",
         "headers": {
-          "Host": "127.0.0.1:13598",
+          "Host": "127.0.0.1:41739",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "4c9eaf37985c4b22850255eee2219a45"
+          "X-Token": "3a49fd74243b43c08a1e951915cf266e"
         },
         "body_text": null
       },
       "response": {
         "status": 404,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -144,6 +144,11 @@
     }
   ],
   "confirmed": false,
+  "probes": {
+    "anonymous_receipt": false,
+    "foreign_receipt": false,
+    "operator_note": false
+  },
   "effect": {
     "foreign_receipt": {
       "error": "forbidden"

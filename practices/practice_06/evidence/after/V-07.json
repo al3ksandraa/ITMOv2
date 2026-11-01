@@ -2,9 +2,9 @@
   "id": "V-07",
   "server": {
     "host": "127.0.0.1",
-    "port": 3121,
-    "pid": 17264,
-    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-rurxt7ji"
+    "port": 38097,
+    "pid": 14826,
+    "sandbox_root": "/tmp/itmo-practice-06-6msu5mz4"
   },
   "requests": [
     {
@@ -13,7 +13,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:3121",
+          "Host": "127.0.0.1:38097",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -24,14 +24,14 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:31 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "45"
         },
-        "body_text": "{\"token\": \"8ec76c40b820426ba24a989528a977a1\"}",
+        "body_text": "{\"token\": \"7a163fcad9714118bcec4a39ff5395e4\"}",
         "json": {
-          "token": "8ec76c40b820426ba24a989528a977a1"
+          "token": "7a163fcad9714118bcec4a39ff5395e4"
         }
       }
     },
@@ -41,18 +41,18 @@
         "method": "GET",
         "target": "/profile?id=2",
         "headers": {
-          "Host": "127.0.0.1:3121",
+          "Host": "127.0.0.1:38097",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "8ec76c40b820426ba24a989528a977a1"
+          "X-Token": "7a163fcad9714118bcec4a39ff5395e4"
         },
         "body_text": null
       },
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:31 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "92"
         },
@@ -73,7 +73,7 @@
         "method": "GET",
         "target": "/debug/logs",
         "headers": {
-          "Host": "127.0.0.1:3121",
+          "Host": "127.0.0.1:38097",
           "Accept-Encoding": "identity",
           "Connection": "close"
         },
@@ -82,8 +82,8 @@
       "response": {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:31 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -92,11 +92,176 @@
           "error": "login required"
         }
       }
+    },
+    {
+      "label": "legitimate login: staff",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:38097",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"staff\", \"password\": \"learn-staff\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"0cd3d9a1e36a4c678caae9877015b359\"}",
+        "json": {
+          "token": "0cd3d9a1e36a4c678caae9877015b359"
+        }
+      }
+    },
+    {
+      "label": "staff inspects stored log entries",
+      "request": {
+        "method": "GET",
+        "target": "/debug/logs",
+        "headers": {
+          "Host": "127.0.0.1:38097",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "0cd3d9a1e36a4c678caae9877015b359"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "1150"
+        },
+        "body_text": "[{\"method\": \"POST\", \"target\": \"/login\", \"body\": {\"username\": \"bob\", \"password\": \"[redacted]\"}, \"headers\": {\"Host\": \"127.0.0.1:38097\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"Content-Length\": \"44\"}, \"actor\": null, \"role\": null}, {\"method\": \"GET\", \"target\": \"/profile?id=2\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:38097\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\"}, \"actor\": 2, \"role\": \"customer\"}, {\"method\": \"GET\", \"target\": \"/debug/logs\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:38097\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\"}, \"actor\": null, \"role\": null}, {\"method\": \"POST\", \"target\": \"/login\", \"body\": {\"username\": \"staff\", \"password\": \"[redacted]\"}, \"headers\": {\"Host\": \"127.0.0.1:38097\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"Content-Length\": \"48\"}, \"actor\": null, \"role\": null}, {\"method\": \"GET\", \"target\": \"/debug/logs\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:38097\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\"}, \"actor\": 0, \"role\": \"staff\"}]",
+        "json": [
+          {
+            "method": "POST",
+            "target": "/login",
+            "body": {
+              "username": "bob",
+              "password": "[redacted]"
+            },
+            "headers": {
+              "Host": "127.0.0.1:38097",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "Content-Type": "application/json",
+              "Content-Length": "44"
+            },
+            "actor": null,
+            "role": null
+          },
+          {
+            "method": "GET",
+            "target": "/profile?id=2",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:38097",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]"
+            },
+            "actor": 2,
+            "role": "customer"
+          },
+          {
+            "method": "GET",
+            "target": "/debug/logs",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:38097",
+              "Accept-Encoding": "identity",
+              "Connection": "close"
+            },
+            "actor": null,
+            "role": null
+          },
+          {
+            "method": "POST",
+            "target": "/login",
+            "body": {
+              "username": "staff",
+              "password": "[redacted]"
+            },
+            "headers": {
+              "Host": "127.0.0.1:38097",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "Content-Type": "application/json",
+              "Content-Length": "48"
+            },
+            "actor": null,
+            "role": null
+          },
+          {
+            "method": "GET",
+            "target": "/debug/logs",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:38097",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]"
+            },
+            "actor": 0,
+            "role": "staff"
+          }
+        ]
+      }
+    },
+    {
+      "label": "customer cannot read logs",
+      "request": {
+        "method": "GET",
+        "target": "/debug/logs",
+        "headers": {
+          "Host": "127.0.0.1:38097",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "7a163fcad9714118bcec4a39ff5395e4"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:08 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "23"
+        },
+        "body_text": "{\"error\": \"staff only\"}",
+        "json": {
+          "error": "staff only"
+        }
+      }
     }
   ],
   "confirmed": false,
-  "status": "scenario_stopped_by_expected_denial",
-  "error": "TypeError: string indices must be integers, not 'str'",
+  "probes": {
+    "customer_log_access": false,
+    "password_persisted": false,
+    "token_persisted": false
+  },
+  "status": "log_disclosure_blocked",
+  "effect": {
+    "anonymous_status": 401,
+    "customer_status": 403,
+    "staff_log_entries": 5,
+    "password_stored": false,
+    "token_stored": false,
+    "impersonation_attempted": false
+  },
   "server_shutdown": {
     "exit_code": 0,
     "stderr": "",

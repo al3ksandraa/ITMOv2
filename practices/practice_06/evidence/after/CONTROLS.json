@@ -2,9 +2,9 @@
   "id": "CONTROLS",
   "server": {
     "host": "127.0.0.1",
-    "port": 3179,
-    "pid": 1632,
-    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-lek6fqut"
+    "port": 38879,
+    "pid": 14912,
+    "sandbox_root": "/tmp/itmo-practice-06-phlo_grv"
   },
   "requests": [
     {
@@ -13,7 +13,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:3179",
+          "Host": "127.0.0.1:38879",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -24,14 +24,14 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "45"
         },
-        "body_text": "{\"token\": \"5dd4541af785499cab277208718df5af\"}",
+        "body_text": "{\"token\": \"2587adf5bda4499c94d0dfc162918aac\"}",
         "json": {
-          "token": "5dd4541af785499cab277208718df5af"
+          "token": "2587adf5bda4499c94d0dfc162918aac"
         }
       }
     },
@@ -41,7 +41,7 @@
         "method": "GET",
         "target": "/health",
         "headers": {
-          "Host": "127.0.0.1:3179",
+          "Host": "127.0.0.1:38879",
           "Accept-Encoding": "identity",
           "Connection": "close"
         },
@@ -50,8 +50,8 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "16"
         },
@@ -67,7 +67,7 @@
         "method": "GET",
         "target": "/products",
         "headers": {
-          "Host": "127.0.0.1:3179",
+          "Host": "127.0.0.1:38879",
           "Accept-Encoding": "identity",
           "Connection": "close"
         },
@@ -76,8 +76,8 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "29"
         },
@@ -94,7 +94,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:3179",
+          "Host": "127.0.0.1:38879",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -105,8 +105,8 @@
       "response": {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "32"
         },
@@ -122,7 +122,7 @@
         "method": "POST",
         "target": "/orders",
         "headers": {
-          "Host": "127.0.0.1:3179",
+          "Host": "127.0.0.1:38879",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -133,8 +133,8 @@
       "response": {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -150,7 +150,7 @@
         "method": "POST",
         "target": "/orders",
         "headers": {
-          "Host": "127.0.0.1:3179",
+          "Host": "127.0.0.1:38879",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "X-Token": "invalid",
@@ -162,8 +162,8 @@
       "response": {
         "status": 401,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "27"
         },
@@ -179,10 +179,10 @@
         "method": "POST",
         "target": "/orders",
         "headers": {
-          "Host": "127.0.0.1:3179",
+          "Host": "127.0.0.1:38879",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "5dd4541af785499cab277208718df5af",
+          "X-Token": "2587adf5bda4499c94d0dfc162918aac",
           "Content-Type": "application/json",
           "Content-Length": "22"
         },
@@ -191,8 +191,8 @@
       "response": {
         "status": 400,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "28"
         },
@@ -208,10 +208,10 @@
         "method": "POST",
         "target": "/assistant/execute",
         "headers": {
-          "Host": "127.0.0.1:3179",
+          "Host": "127.0.0.1:38879",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "5dd4541af785499cab277208718df5af",
+          "X-Token": "2587adf5bda4499c94d0dfc162918aac",
           "Content-Type": "application/json",
           "Content-Length": "65"
         },
@@ -220,14 +220,15 @@
       "response": {
         "status": 400,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
           "Content-Type": "application/json; charset=utf-8",
-          "Content-Length": "25"
+          "Content-Length": "38"
         },
-        "body_text": "{\"error\": \"unknown tool\"}",
+        "body_text": "{\"error\": \"refused\", \"reason\": \"test\"}",
         "json": {
-          "error": "unknown tool"
+          "error": "refused",
+          "reason": "test"
         }
       }
     },
@@ -237,10 +238,10 @@
         "method": "POST",
         "target": "/assistant/execute",
         "headers": {
-          "Host": "127.0.0.1:3179",
+          "Host": "127.0.0.1:38879",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "5dd4541af785499cab277208718df5af",
+          "X-Token": "2587adf5bda4499c94d0dfc162918aac",
           "Content-Type": "application/json",
           "Content-Length": "53"
         },
@@ -249,8 +250,8 @@
       "response": {
         "status": 400,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "25"
         },
@@ -266,10 +267,10 @@
         "method": "POST",
         "target": "/assistant/execute",
         "headers": {
-          "Host": "127.0.0.1:3179",
+          "Host": "127.0.0.1:38879",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "5dd4541af785499cab277208718df5af",
+          "X-Token": "2587adf5bda4499c94d0dfc162918aac",
           "Content-Type": "application/json",
           "Content-Length": "74"
         },
@@ -278,8 +279,8 @@
       "response": {
         "status": 403,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "31"
         },
@@ -295,10 +296,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:3179",
+          "Host": "127.0.0.1:38879",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "5dd4541af785499cab277208718df5af",
+          "X-Token": "2587adf5bda4499c94d0dfc162918aac",
           "Content-Type": "application/json",
           "Content-Length": "65537"
         },
@@ -307,13 +308,13 @@
       "response": {
         "status": 413,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
           "Connection": "close",
           "Content-Type": "text/html;charset=utf-8",
-          "Content-Length": "329"
+          "Content-Length": "454"
         },
-        "body_text": "<!DOCTYPE HTML>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <title>Error response</title>\n    </head>\n    <body>\n        <h1>Error response</h1>\n        <p>Error code: 413</p>\n        <p>Message: Content Too Large.</p>\n        <p>Error code explanation: 413 - Content is too large.</p>\n    </body>\n</html>\n",
+        "body_text": "<!DOCTYPE HTML>\n<html lang=\"en\">\n    <head>\n        <meta charset=\"utf-8\">\n        <style type=\"text/css\">\n            :root {\n                color-scheme: light dark;\n            }\n        </style>\n        <title>Error response</title>\n    </head>\n    <body>\n        <h1>Error response</h1>\n        <p>Error code: 413</p>\n        <p>Message: Content Too Large.</p>\n        <p>Error code explanation: 413 - Content is too large.</p>\n    </body>\n</html>\n",
         "json": null
       }
     },
@@ -323,7 +324,7 @@
         "method": "GET",
         "target": "/missing",
         "headers": {
-          "Host": "127.0.0.1:3179",
+          "Host": "127.0.0.1:38879",
           "Accept-Encoding": "identity",
           "Connection": "close"
         },
@@ -332,8 +333,8 @@
       "response": {
         "status": 404,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:34 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "22"
         },

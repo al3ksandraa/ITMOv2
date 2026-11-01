@@ -2,9 +2,9 @@
   "id": "V-06",
   "server": {
     "host": "127.0.0.1",
-    "port": 13604,
-    "pid": 11408,
-    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-c65fugn8"
+    "port": 43277,
+    "pid": 14625,
+    "sandbox_root": "/tmp/itmo-practice-06-awag1zf6"
   },
   "requests": [
     {
@@ -13,7 +13,7 @@
         "method": "POST",
         "target": "/login",
         "headers": {
-          "Host": "127.0.0.1:13604",
+          "Host": "127.0.0.1:43277",
           "Accept-Encoding": "identity",
           "Connection": "close",
           "Content-Type": "application/json",
@@ -24,14 +24,14 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:29 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "45"
         },
-        "body_text": "{\"token\": \"8e9da15908d141ae8ba89857bb0d50fb\"}",
+        "body_text": "{\"token\": \"04160752ba974bfcba0ccdc20cfa4db8\"}",
         "json": {
-          "token": "8e9da15908d141ae8ba89857bb0d50fb"
+          "token": "04160752ba974bfcba0ccdc20cfa4db8"
         }
       }
     },
@@ -41,10 +41,10 @@
         "method": "POST",
         "target": "/reviews",
         "headers": {
-          "Host": "127.0.0.1:13604",
+          "Host": "127.0.0.1:43277",
           "Accept-Encoding": "identity",
           "Connection": "close",
-          "X-Token": "8e9da15908d141ae8ba89857bb0d50fb",
+          "X-Token": "04160752ba974bfcba0ccdc20cfa4db8",
           "Content-Type": "application/json",
           "Content-Length": "143"
         },
@@ -53,8 +53,8 @@
       "response": {
         "status": 201,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:30 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
           "Content-Type": "application/json; charset=utf-8",
           "Content-Length": "15"
         },
@@ -70,7 +70,7 @@
         "method": "GET",
         "target": "/reviews/view",
         "headers": {
-          "Host": "127.0.0.1:13604",
+          "Host": "127.0.0.1:43277",
           "Accept-Encoding": "identity",
           "Connection": "close"
         },
@@ -79,8 +79,8 @@
       "response": {
         "status": 200,
         "headers": {
-          "Server": "BaseHTTP/0.6 Python/3.13.9",
-          "Date": "Wed, 28 Oct 2026 11:54:30 GMT",
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
           "Content-Type": "text/html; charset=utf-8",
           "Content-Length": "184"
         },
@@ -90,11 +90,14 @@
     }
   ],
   "confirmed": false,
+  "html_injection": false,
+  "browser_checked": true,
+  "node": "/home/asus/.nvm/versions/node/v20.20.2/bin/node",
   "effect": {
-    "browser": "156.0.8078.48",
-    "executablePath": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    "browser": "153.0.8010.12",
+    "executablePath": "/home/asus/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
     "status": 200,
-    "url": "http://127.0.0.1:13604/reviews/view",
+    "url": "http://127.0.0.1:43277/reviews/view",
     "blockedRequests": [],
     "marker": null,
     "html": "<html><head></head><body><p>&lt;p id=\"audit-marker\"&gt;V-06 local marker&lt;/p&gt;&lt;script&gt;document.documentElement.dataset.auditXss=\"V-06\"&lt;/script&gt;</p></body></html>",
