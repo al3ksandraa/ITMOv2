@@ -1,0 +1,112 @@
+{
+  "id": "V-06",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 43277,
+    "pid": 14625,
+    "sandbox_root": "/tmp/itmo-practice-06-awag1zf6"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: alice",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:43277",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"alice\", \"password\": \"learn-alice\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"04160752ba974bfcba0ccdc20cfa4db8\"}",
+        "json": {
+          "token": "04160752ba974bfcba0ccdc20cfa4db8"
+        }
+      }
+    },
+    {
+      "label": "store harmless script marker",
+      "request": {
+        "method": "POST",
+        "target": "/reviews",
+        "headers": {
+          "Host": "127.0.0.1:43277",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "04160752ba974bfcba0ccdc20cfa4db8",
+          "Content-Type": "application/json",
+          "Content-Length": "143"
+        },
+        "body_text": "{\"product\": \"chair\", \"text\": \"<p id=\\\"audit-marker\\\">V-06 local marker</p><script>document.documentElement.dataset.auditXss=\\\"V-06\\\"</script>\"}"
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "15"
+        },
+        "body_text": "{\"saved\": true}",
+        "json": {
+          "saved": true
+        }
+      }
+    },
+    {
+      "label": "HTML with stored marker",
+      "request": {
+        "method": "GET",
+        "target": "/reviews/view",
+        "headers": {
+          "Host": "127.0.0.1:43277",
+          "Accept-Encoding": "identity",
+          "Connection": "close"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
+          "Content-Type": "text/html; charset=utf-8",
+          "Content-Length": "184"
+        },
+        "body_text": "<html><body><p>&lt;p id=&quot;audit-marker&quot;&gt;V-06 local marker&lt;/p&gt;&lt;script&gt;document.documentElement.dataset.auditXss=&quot;V-06&quot;&lt;/script&gt;</p></body></html>",
+        "json": null
+      }
+    }
+  ],
+  "confirmed": false,
+  "html_injection": false,
+  "browser_checked": true,
+  "node": "/home/asus/.nvm/versions/node/v20.20.2/bin/node",
+  "effect": {
+    "browser": "153.0.8010.12",
+    "executablePath": "/home/asus/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+    "status": 200,
+    "url": "http://127.0.0.1:43277/reviews/view",
+    "blockedRequests": [],
+    "marker": null,
+    "html": "<html><head></head><body><p>&lt;p id=\"audit-marker\"&gt;V-06 local marker&lt;/p&gt;&lt;script&gt;document.documentElement.dataset.auditXss=\"V-06\"&lt;/script&gt;</p></body></html>",
+    "visibleText": "<p id=\"audit-marker\">V-06 local marker</p><script>document.documentElement.dataset.auditXss=\"V-06\"</script>"
+  },
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

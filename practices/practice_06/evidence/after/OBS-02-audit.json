@@ -1,0 +1,269 @@
+{
+  "id": "OBS-02-audit",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 35039,
+    "pid": 14904,
+    "sandbox_root": "/tmp/itmo-practice-06-bmipx8xq"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: alice",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:35039",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"alice\", \"password\": \"learn-alice\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"b8a927aad33f42c5a8ffa315ff9c2de1\"}",
+        "json": {
+          "token": "b8a927aad33f42c5a8ffa315ff9c2de1"
+        }
+      }
+    },
+    {
+      "label": "legitimate login: staff",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:35039",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"staff\", \"password\": \"learn-staff\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"586c3d3130e44d96a92f05884afd8326\"}",
+        "json": {
+          "token": "586c3d3130e44d96a92f05884afd8326"
+        }
+      }
+    },
+    {
+      "label": "denied admin action",
+      "request": {
+        "method": "GET",
+        "target": "/admin/export",
+        "headers": {
+          "Host": "127.0.0.1:35039",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "b8a927aad33f42c5a8ffa315ff9c2de1"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "23"
+        },
+        "body_text": "{\"error\": \"staff only\"}",
+        "json": {
+          "error": "staff only"
+        }
+      }
+    },
+    {
+      "label": "same client with forged role",
+      "request": {
+        "method": "GET",
+        "target": "/admin/export",
+        "headers": {
+          "Host": "127.0.0.1:35039",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "b8a927aad33f42c5a8ffa315ff9c2de1",
+          "X-Role": "staff"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "23"
+        },
+        "body_text": "{\"error\": \"staff only\"}",
+        "json": {
+          "error": "staff only"
+        }
+      }
+    },
+    {
+      "label": "staff inspects stored log entries",
+      "request": {
+        "method": "GET",
+        "target": "/debug/logs",
+        "headers": {
+          "Host": "127.0.0.1:35039",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "586c3d3130e44d96a92f05884afd8326"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:10 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "1201"
+        },
+        "body_text": "[{\"method\": \"POST\", \"target\": \"/login\", \"body\": {\"username\": \"alice\", \"password\": \"[redacted]\"}, \"headers\": {\"Host\": \"127.0.0.1:35039\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"Content-Length\": \"48\"}, \"actor\": null, \"role\": null}, {\"method\": \"POST\", \"target\": \"/login\", \"body\": {\"username\": \"staff\", \"password\": \"[redacted]\"}, \"headers\": {\"Host\": \"127.0.0.1:35039\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"Content-Length\": \"48\"}, \"actor\": null, \"role\": null}, {\"method\": \"GET\", \"target\": \"/admin/export\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:35039\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\"}, \"actor\": 1, \"role\": \"customer\"}, {\"method\": \"GET\", \"target\": \"/admin/export\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:35039\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\", \"X-Role\": \"staff\"}, \"actor\": 1, \"role\": \"customer\"}, {\"method\": \"GET\", \"target\": \"/debug/logs\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:35039\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"[redacted]\"}, \"actor\": 0, \"role\": \"staff\"}]",
+        "json": [
+          {
+            "method": "POST",
+            "target": "/login",
+            "body": {
+              "username": "alice",
+              "password": "[redacted]"
+            },
+            "headers": {
+              "Host": "127.0.0.1:35039",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "Content-Type": "application/json",
+              "Content-Length": "48"
+            },
+            "actor": null,
+            "role": null
+          },
+          {
+            "method": "POST",
+            "target": "/login",
+            "body": {
+              "username": "staff",
+              "password": "[redacted]"
+            },
+            "headers": {
+              "Host": "127.0.0.1:35039",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "Content-Type": "application/json",
+              "Content-Length": "48"
+            },
+            "actor": null,
+            "role": null
+          },
+          {
+            "method": "GET",
+            "target": "/admin/export",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:35039",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]"
+            },
+            "actor": 1,
+            "role": "customer"
+          },
+          {
+            "method": "GET",
+            "target": "/admin/export",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:35039",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]",
+              "X-Role": "staff"
+            },
+            "actor": 1,
+            "role": "customer"
+          },
+          {
+            "method": "GET",
+            "target": "/debug/logs",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:35039",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "[redacted]"
+            },
+            "actor": 0,
+            "role": "staff"
+          }
+        ]
+      }
+    }
+  ],
+  "status": "audit_metadata_observed",
+  "effect": {
+    "event_fields": [
+      "actor",
+      "body",
+      "headers",
+      "method",
+      "role",
+      "target"
+    ],
+    "admin_events": [
+      {
+        "method": "GET",
+        "target": "/admin/export",
+        "body": {},
+        "headers": {
+          "Host": "127.0.0.1:35039",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "[redacted]"
+        },
+        "actor": 1,
+        "role": "customer"
+      },
+      {
+        "method": "GET",
+        "target": "/admin/export",
+        "body": {},
+        "headers": {
+          "Host": "127.0.0.1:35039",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "[redacted]",
+          "X-Role": "staff"
+        },
+        "actor": 1,
+        "role": "customer"
+      }
+    ]
+  },
+  "limitation": "No durable audit requirements specified; lack of attribution is an observation, not a reproduced log forgery.",
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

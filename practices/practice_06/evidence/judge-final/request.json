@@ -1,0 +1,1644 @@
+{
+  "status": "ok",
+  "agent": "threat-judge",
+  "model": "vsellm/openai/gpt-5",
+  "system_prompt": "judge-system-prompt.md",
+  "experiment_name": "H-09-final",
+  "material_count": 96,
+  "material_paths": [
+    "THREAT_MODEL.md",
+    "REPORT_01.md",
+    "REPORT_02.md",
+    "judge-system-prompt.md",
+    "planner-system.txt",
+    "opencode.json",
+    "README.md",
+    "lab/README.md",
+    "lab/audit_browser.cjs",
+    "lab/audit_before.py",
+    "lab/audit_support.py",
+    "lab/audit_unicode.py",
+    "lab/opencode_runner.py",
+    "lab/prompt_injection_opencode.py",
+    "lab/record_tests.py",
+    "lab/run_threat_judge.py",
+    "lab/sandbox.py",
+    "lab/service.py",
+    "lab/test_audit.py",
+    "lab/test_http.py",
+    "lab/test_prompt_injection_opencode.py",
+    "lab/test_security.py",
+    "lab/test_service.py",
+    "Makefile",
+    "lab/Makefile",
+    "evidence/after/make-results.json",
+    "evidence/after/make-step6.log",
+    "evidence/after/make-test.log",
+    "evidence/before/V-01.json",
+    "evidence/before/V-02.json",
+    "evidence/before/V-03.json",
+    "evidence/before/V-04.json",
+    "evidence/before/V-05.json",
+    "evidence/before/V-06.json",
+    "evidence/before/V-07.json",
+    "evidence/before/V-08.json",
+    "evidence/before/V-09.json",
+    "evidence/before/V-10.json",
+    "evidence/before/V-11.json",
+    "evidence/before/audit-summary.json",
+    "evidence/before/tests-summary.json",
+    "evidence/before/CONTROLS.json",
+    "evidence/before/H-09/H-09-attack-input.txt",
+    "evidence/before/H-09/H-09-attack-run.json",
+    "evidence/before/H-09/H-09-control-input.txt",
+    "evidence/before/H-09/H-09-control-run.json",
+    "evidence/before/H-09/H-09-direct-dangerous.json",
+    "evidence/before/H-09/H-09-experiment-summary.json",
+    "evidence/before/H-09-final/H-09-attack-input.txt",
+    "evidence/before/H-09-final/H-09-attack-run.json",
+    "evidence/before/H-09-final/H-09-control-input.txt",
+    "evidence/before/H-09-final/H-09-control-run.json",
+    "evidence/before/H-09-final/H-09-direct-dangerous.json",
+    "evidence/before/H-09-final/H-09-experiment-summary.json",
+    "evidence/before/source/sandbox.py.txt",
+    "evidence/before/source/service.py.txt",
+    "evidence/before/OBS-01-resources.json",
+    "evidence/before/OBS-02-audit.json",
+    "evidence/after/V-01.json",
+    "evidence/after/V-02.json",
+    "evidence/after/V-03.json",
+    "evidence/after/V-04.json",
+    "evidence/after/V-05.json",
+    "evidence/after/V-06.json",
+    "evidence/after/V-07.json",
+    "evidence/after/V-08.json",
+    "evidence/after/V-09.json",
+    "evidence/after/V-10.json",
+    "evidence/after/V-11.json",
+    "evidence/after/audit-summary.json",
+    "evidence/after/tests-summary.json",
+    "evidence/after/CONTROLS.json",
+    "evidence/after/H-09/H-09-attack-input.txt",
+    "evidence/after/H-09/H-09-attack-run.json",
+    "evidence/after/H-09/H-09-control-input.txt",
+    "evidence/after/H-09/H-09-control-run.json",
+    "evidence/after/H-09/H-09-direct-dangerous.json",
+    "evidence/after/H-09/H-09-experiment-summary.json",
+    "evidence/after/H-09-final/H-09-attack-input.txt",
+    "evidence/after/H-09-final/H-09-attack-run.json",
+    "evidence/after/H-09-final/H-09-control-input.txt",
+    "evidence/after/H-09-final/H-09-control-run.json",
+    "evidence/after/H-09-final/H-09-direct-dangerous.json",
+    "evidence/after/H-09-final/H-09-experiment-summary.json",
+    "evidence/after/source/sandbox.py.txt",
+    "evidence/after/source/service.py.txt",
+    "evidence/after/OBS-01-resources.json",
+    "evidence/after/OBS-02-audit.json",
+    "evidence/after/tests.log",
+    "evidence/after/input-matrix.json",
+    "evidence/unicode-before/result.json",
+    "evidence/unicode-before/source/sandbox.py.txt",
+    "evidence/unicode-before/source/service.py.txt",
+    "evidence/unicode-final/result.json",
+    "evidence/unicode-final/source/sandbox.py.txt",
+    "evidence/unicode-final/source/service.py.txt"
+  ],
+  "materials_sha256": {
+    "THREAT_MODEL.md": "fffc08358905db65b867d6478ebd2fa087681d8aa02c5e6e5068065f4bd3365f",
+    "REPORT_01.md": "e5ef03bd31608bbba85d4f2fcfed5daa0ea472541bf59803761f234c226f75c5",
+    "REPORT_02.md": "64f9421b251a0eafb105893b4ac4232a18ea89b6b4fa1f569a67947fa3c5711a",
+    "judge-system-prompt.md": "7651c186ae0bd43aa6207cccc5be253b29680e49fa6808499e34e781c0bc9813",
+    "planner-system.txt": "02dc52e77bc5327e9dd41a8d44a0d08feff3534b37e8e0d4a5526dbc67638693",
+    "opencode.json": "d1f28afc7e8de578bc90c6f01447477e52c8dc6c0a7d915e06dc76981745d26f",
+    "README.md": "ae9714bd5bb8d5c7162cd63b60673092302af17a03b3cb08ea798a6e80170991",
+    "lab/README.md": "075669cde4cdf2628acf63ecaf00db22c75500615168691935d08727343a8245",
+    "lab/audit_browser.cjs": "217adf22652087c02cd255ddce8f558298abaccf1ab8b29532ee97d819628477",
+    "lab/audit_before.py": "9526238e53e250e8972911e254b43ee330a983056805057985c3e492583a7e3b",
+    "lab/audit_support.py": "43b1ca6bbc5656192a943fadadaf553e40c7d9a47fddcbf839fcdaf785f4193d",
+    "lab/audit_unicode.py": "4f5d02cbc050e34a928e03dcef08109dc8e2ab8d76c62365c075bd0be9eac776",
+    "lab/opencode_runner.py": "415d9d17208269797426a2152281cee1797e299195c0e391706d826681ba03cd",
+    "lab/prompt_injection_opencode.py": "6fce814908f4a9a5dee184f9243f7ebad7c914d7df0cc2daf52b37d39d604ea5",
+    "lab/record_tests.py": "f034570acf1182b65ae569ccc15abfe441823bf46c4b426703fb9b3d808ef7dc",
+    "lab/run_threat_judge.py": "73db2fbfac9a0a24b9fb02c4738b4bb6eb4fb7bd9e70d5668e71102f9cbbb082",
+    "lab/sandbox.py": "dcd6b6630d3dec67e7185c1017e4999a3faa5998ff091419dade31b64132ddcf",
+    "lab/service.py": "580aa8e2b813db0b6138afe516185504e475a3ae4b1d1e83a7bedf437a7ae57f",
+    "lab/test_audit.py": "4f74513909ffb75e6597392c7b428db0d4d9f9a089dc437e3d7936ea65e6ad8c",
+    "lab/test_http.py": "85876d78b4cb1cd3a9172ecf60a50c7e0341528756baab1bc7895b343acd2eab",
+    "lab/test_prompt_injection_opencode.py": "c07731b757096efe2211df49d3b7dac46756aedf7eb8c9f2dba18f74332b229a",
+    "lab/test_security.py": "54f10fe80e3b477dbdcc3de8d913449aef274e5e4799296da8cb11c5f3faf185",
+    "lab/test_service.py": "27da797ec3020be95316044dc9a17e5e99929b9d539d891e661dfdc26d4cecd3",
+    "Makefile": "2ad6aa6ebaab2096d2c8e25e6e12dee6ddd6be41f511c65f84ce0285b5b40d59",
+    "lab/Makefile": "b4c923d0b5ba37cfd7a14a3015569dacb37cc88bf92a8a3ec4942f22e515e535",
+    "evidence/after/make-results.json": "3da46499100077ae562c6ba6c28d4bbaafb193b32c03455f116462e1e660c85c",
+    "evidence/after/make-step6.log": "887f5c722a97918b52e8ebf10c319481ed8435453d41c51d3b7a5be029863681",
+    "evidence/after/make-test.log": "42e7c931be0677326af013055f27278a90a8dadbf4834c7e47748a62e21a1b5a",
+    "evidence/before/V-01.json": "994baa16817613a145aba6ab31dc538c411b113a6efb59e21d9f677e15c86fe3",
+    "evidence/before/V-02.json": "3a075432a41a220fcf219f62993bb820f1f10946a934644ba2928ab2577446b2",
+    "evidence/before/V-03.json": "319cea380ab0dfae46fba0101cad6e89d29db62a00c48914a9ca2b9c15c96ec3",
+    "evidence/before/V-04.json": "e88f82de6ba5a2a54a2d01baac570a89b2695f1ae671396b15706d99ac15f7bc",
+    "evidence/before/V-05.json": "eb9163791f2c1c39e512476ddf16395e9d70b870a3159431f84e0d059b1aa10d",
+    "evidence/before/V-06.json": "e03d6399467ea19975771ec4f61d9d22d23eab479486685a3b0ff00302a184ad",
+    "evidence/before/V-07.json": "a4c07c644f7d636aaef9c50cbf6aa8f7a2bdeb13410cc07c26e25c03f042412c",
+    "evidence/before/V-08.json": "970b8e94a07dc6576ad7e8bd10848d5d8e6d85ec1e00f33f8c9f7ff547170b2c",
+    "evidence/before/V-09.json": "133556849248b070879b19604d64b6fa308bac10dde4af317a420568ace1f09f",
+    "evidence/before/V-10.json": "f07dfb7670ff079c4302c4a30241b83c079c015aab640b759443cc02a826af60",
+    "evidence/before/V-11.json": "f5fd28accf1dcffb2ce3523a15fbbe984895a67a2dabc7c3ba5f0350d6aa28ae",
+    "evidence/before/audit-summary.json": "8bc723fce24d7ff109dd37d2c51701f2e105e4853e69ba66c25825496b90f233",
+    "evidence/before/tests-summary.json": "d6e47c7b28d2cdd59702e2d1e9cdd5fee66d12bd76a52329ecdb25b9e1421acc",
+    "evidence/before/CONTROLS.json": "28786b1df477bf6a5cd6f10d93efc64b8a7caeccfb9ec1bae69f478494b3b2ff",
+    "evidence/before/H-09/H-09-attack-input.txt": "e372f35a7bb34a0c01a2ad072327c17292ddc13d274d9c49aa44125196eba24f",
+    "evidence/before/H-09/H-09-attack-run.json": "6947b936a16a30038d5b277b545b29b62ab1c0dff5c89b1890d72fac4620b5b9",
+    "evidence/before/H-09/H-09-control-input.txt": "d217b746dca50aae33e92958ec714f4facab3fe58f42f91e67e78b605d81dacc",
+    "evidence/before/H-09/H-09-control-run.json": "31c3c75a59f622575cee37f6c4cba42c2afa5facf1c92995403d4fd62e41d837",
+    "evidence/before/H-09/H-09-direct-dangerous.json": "e3dab4d5fef2a8faae941a17fecff20178fa59c0396151e9663fc42d64754556",
+    "evidence/before/H-09/H-09-experiment-summary.json": "a7a65cf49eca8e6d206830e4e5f40deb58d5e9f6ee79fbbbb0e9cef108a2a8ec",
+    "evidence/before/H-09-final/H-09-attack-input.txt": "e372f35a7bb34a0c01a2ad072327c17292ddc13d274d9c49aa44125196eba24f",
+    "evidence/before/H-09-final/H-09-attack-run.json": "b43224f3aa3e6780128b75779c837bf4b464e4f9373aed580fc03c32db621e4e",
+    "evidence/before/H-09-final/H-09-control-input.txt": "d217b746dca50aae33e92958ec714f4facab3fe58f42f91e67e78b605d81dacc",
+    "evidence/before/H-09-final/H-09-control-run.json": "cebf675c181dff233a4bb1460a7ac703ccfd45ee15138bb15c70eb923dc28bf5",
+    "evidence/before/H-09-final/H-09-direct-dangerous.json": "6d394a7e4b1765198403ea4d02e56c9b3fc6edd4f5af1fb14d665d1b719368f2",
+    "evidence/before/H-09-final/H-09-experiment-summary.json": "79a442c53855f270e7dff5f5c95709eb62836eccbf9c397c1c35f24ccc40d840",
+    "evidence/before/source/sandbox.py.txt": "dcd6b6630d3dec67e7185c1017e4999a3faa5998ff091419dade31b64132ddcf",
+    "evidence/before/source/service.py.txt": "8cb3abeaaf7bb647cbbd9d1c9a0ea50375c70c30110313f5015468ded24b7569",
+    "evidence/before/OBS-01-resources.json": "7b010fe259f9f1f597befaab63342ec6b44dfb31c267562b9c60b83afa1d0da1",
+    "evidence/before/OBS-02-audit.json": "e04b56f0ed5419a939097b3d35d60575ffc33a86513f2ec1f4332512a4e741aa",
+    "evidence/after/V-01.json": "9c2be00ac7ce003b6cb31282117e38672f3f4c5b5da466bce994c80affd46b4b",
+    "evidence/after/V-02.json": "d7111dcac2a3249d1e2b23d1c47538e9a4921948df4f0f6b22680bca49f6dab7",
+    "evidence/after/V-03.json": "ac7ad9b6f9deac1a641f7c50b58ffb389742296079efc23980eedf9e2a9f0681",
+    "evidence/after/V-04.json": "b710e2596800d548f582bb3228b1ffb052cfe0787956d8943217df5596bff7ff",
+    "evidence/after/V-05.json": "356055df715bcc56dabf9f5b381ceb2cd761d30718f635d6792143ddde56085f",
+    "evidence/after/V-06.json": "1dde843c81571d68910a355cbfff46007ba0f8632f3d27d78dedd257969c39a2",
+    "evidence/after/V-07.json": "54bc6e2418970d2a6a9fde5ea564eca841f993d7e8dbf9540f421693039dab83",
+    "evidence/after/V-08.json": "f579c47af944c57541728d9c6659402cce760f4260a4cc783527578b15cff262",
+    "evidence/after/V-09.json": "e1201ce7e206026cfaddad693874bbb559969320465596a8ada89d81c810d6c8",
+    "evidence/after/V-10.json": "d1e6f22909db267904f4a18bb274f7d136c0ea5643d176b2f9add536aa0e00a5",
+    "evidence/after/V-11.json": "1277574d6a06c3315f26411e0c0a9f6f60c16b8621670f0558dcd9f846a95c2f",
+    "evidence/after/audit-summary.json": "23df1a04cd81eb06b6a566a8a5ede964ad227020255aa9d2eed7f03d604292db",
+    "evidence/after/tests-summary.json": "844233373ca282e61a64c079b26bcad7ec333ea1b0a1942b98c07b7cfc1d6bb9",
+    "evidence/after/CONTROLS.json": "7416c0546c7fd53fb08e8cb73e780cf8f10dd959d78f0f18a7c7e30df348e950",
+    "evidence/after/H-09/H-09-attack-input.txt": "5806eec599a2ef1149aada4383eddc63211c1779653216ddadc5fa547a4512a8",
+    "evidence/after/H-09/H-09-attack-run.json": "98a913565b442867a0313f5fe9a7bf03fce6f574e30ebf5ff2b8422bc4702a01",
+    "evidence/after/H-09/H-09-control-input.txt": "2e8f3ba488dad330633776459365b60a049135be3d3f9effa7ff3e69335c0a35",
+    "evidence/after/H-09/H-09-control-run.json": "9e76e6ad78406aed34cf86dbab3ac22ffb375086b6224d81e9b3106e33deddf9",
+    "evidence/after/H-09/H-09-direct-dangerous.json": "1da468c41dab3f286e6ab87c871f5d1bc1b212aaf31882f4eb8af6c3b10bba31",
+    "evidence/after/H-09/H-09-experiment-summary.json": "3e562d24c78955236c6a5e0067e2156cf42957c99fa79719bd23d4684fe2f532",
+    "evidence/after/H-09-final/H-09-attack-input.txt": "d98ca4234c9f0660b8661471f97d4554b5fa295de009cb3b7bfd77bd72b27708",
+    "evidence/after/H-09-final/H-09-attack-run.json": "40a97503a529d60dc5a8f8e8d401bfbfceedfba472f9f4c2233dd7b7efd23224",
+    "evidence/after/H-09-final/H-09-control-input.txt": "6d984abd591127ac63f64a6c4f5db94b8a52cf478d682df8da8038a468f0c4e6",
+    "evidence/after/H-09-final/H-09-control-run.json": "b9620763ec8e6d2623470f7990344f9b0c2d44e30921126735346930f7a957da",
+    "evidence/after/H-09-final/H-09-direct-dangerous.json": "b3f12b1be4b7e4cdd5493c45a7033d0212c1e015bc0f4379c645c5c944fc77bb",
+    "evidence/after/H-09-final/H-09-experiment-summary.json": "53d718a1891995adaea60d11937b5dd2d0a79e8ee04bad44d37a435ec4c44634",
+    "evidence/after/source/sandbox.py.txt": "dcd6b6630d3dec67e7185c1017e4999a3faa5998ff091419dade31b64132ddcf",
+    "evidence/after/source/service.py.txt": "580aa8e2b813db0b6138afe516185504e475a3ae4b1d1e83a7bedf437a7ae57f",
+    "evidence/after/OBS-01-resources.json": "795dd92de316326687c9fbc57750ab94487d70cd862b92a2def35ac906842702",
+    "evidence/after/OBS-02-audit.json": "664f9fca24b6f533840b12655cd575c45f6ea20fa5286faaea2cde2f2236d577",
+    "evidence/after/tests.log": "06b65025920617c26e7d6da4f72ad77989b19353e5dd07c7fa29059605c5571f",
+    "evidence/after/input-matrix.json": "4153f68a5e67024352d56f247867c2c03ecbe6c67c82acce7b50a2eb7f7fadf4",
+    "evidence/unicode-before/result.json": "bd80a90491dc3155b4b132b6fd41ce9691359336029649df1a65a88e2dff6b6c",
+    "evidence/unicode-before/source/sandbox.py.txt": "dcd6b6630d3dec67e7185c1017e4999a3faa5998ff091419dade31b64132ddcf",
+    "evidence/unicode-before/source/service.py.txt": "da57bc8eef3f9de5e12b8afc2a636cccd30dd617f98363e2fa91b88905c8db7c",
+    "evidence/unicode-final/result.json": "009c2b131d23c781ea5d7536d150679046300052083810187d0530bc2333d62e",
+    "evidence/unicode-final/source/sandbox.py.txt": "dcd6b6630d3dec67e7185c1017e4999a3faa5998ff091419dade31b64132ddcf",
+    "evidence/unicode-final/source/service.py.txt": "580aa8e2b813db0b6138afe516185504e475a3ae4b1d1e83a7bedf437a7ae57f"
+  },
+  "attachments": [
+    {
+      "path": "materials/001.txt",
+      "sha256": "a17dc50e70ca671430d612eaa1fae617b33844e4398b5445eacf297256bfdf04",
+      "bytes": 878,
+      "max_line_characters": 456
+    },
+    {
+      "path": "materials/002.txt",
+      "sha256": "61bb8d123d39457322e9e18358faeb9503b0bf3b0546340fe86f9cd12da18d8e",
+      "bytes": 7988,
+      "max_line_characters": 393
+    },
+    {
+      "path": "materials/003.txt",
+      "sha256": "5d3cb857f7955a1e447392543bc8878bdde6b9d539291f12fa425b0865632ff7",
+      "bytes": 6398,
+      "max_line_characters": 843
+    },
+    {
+      "path": "materials/004.txt",
+      "sha256": "f83e6efdd7056039bc664b2a4642e6deb092a1dfc251a7275d71b5170259ef90",
+      "bytes": 7920,
+      "max_line_characters": 530
+    },
+    {
+      "path": "materials/005.txt",
+      "sha256": "1db6c471464949f5939ddc1f8a02ab6c5de9c8a6cb621fb31b007282df6aa2d1",
+      "bytes": 7820,
+      "max_line_characters": 339
+    },
+    {
+      "path": "materials/006.txt",
+      "sha256": "2637a517d6bec02d278cbf7987345be36a24ecec511555944caf691ab2fe1710",
+      "bytes": 7974,
+      "max_line_characters": 376
+    },
+    {
+      "path": "materials/007.txt",
+      "sha256": "946dfaf9e75ae986779d2dbf20b9093b8e9a98320bbd1631a408c715c4e1174b",
+      "bytes": 7637,
+      "max_line_characters": 368
+    },
+    {
+      "path": "materials/008.txt",
+      "sha256": "67812abd1d676e40827842281c62d2a99874b7ad96e400247b57af9bceba1980",
+      "bytes": 7792,
+      "max_line_characters": 502
+    },
+    {
+      "path": "materials/009.txt",
+      "sha256": "abb8387553b817dff45d3317df7077459597ddc72395dfe0edaace2ab4a7a4f6",
+      "bytes": 3663,
+      "max_line_characters": 536
+    },
+    {
+      "path": "materials/010.txt",
+      "sha256": "a113133c999e577048b234dbc6ed4903b99bf65523577c423ffe24484b58c516",
+      "bytes": 7093,
+      "max_line_characters": 504
+    },
+    {
+      "path": "materials/011.txt",
+      "sha256": "cd013eebc845565f781164ae5dc2265c6925b728ad2c0c72caacd24f7e403bdd",
+      "bytes": 7905,
+      "max_line_characters": 635
+    },
+    {
+      "path": "materials/012.txt",
+      "sha256": "933988bca53cedb9c11e44c207b033da7416db5a1daf1a07c677864e32a93169",
+      "bytes": 5267,
+      "max_line_characters": 528
+    },
+    {
+      "path": "materials/013.txt",
+      "sha256": "7ccf15552e92a0592349f77ea4aef9babd85d229859057eeab48555cb30f7384",
+      "bytes": 3470,
+      "max_line_characters": 66
+    },
+    {
+      "path": "materials/014.txt",
+      "sha256": "ef9c9e016c2e2c8d5d8c15e23189379b99b305be0daa2b3a7b3715eaa1b4b3e3",
+      "bytes": 744,
+      "max_line_characters": 81
+    },
+    {
+      "path": "materials/015.txt",
+      "sha256": "25755257723d13b2bf57cf35560e33de3a8338d62df30994037d20e9980f0bd4",
+      "bytes": 682,
+      "max_line_characters": 88
+    },
+    {
+      "path": "materials/016.txt",
+      "sha256": "bcb81fb282d8cb95e9df8f38cc169431ef06705f6970047acfdd0e291a936431",
+      "bytes": 3256,
+      "max_line_characters": 276
+    },
+    {
+      "path": "materials/017.txt",
+      "sha256": "88c8e37f7be45ee9bc59cf6963b75ab04307a875b28782e9cafe737865481dae",
+      "bytes": 7499,
+      "max_line_characters": 342
+    },
+    {
+      "path": "materials/018.txt",
+      "sha256": "c5e9469318c1e8516444f26371d9853bd99a0b91684ed1681c976e010a5c6808",
+      "bytes": 5578,
+      "max_line_characters": 809
+    },
+    {
+      "path": "materials/019.txt",
+      "sha256": "d83a2c79fc1857e731a977e44b0a60676109e5b4cbe9fcab56d7eb15d7c24f3b",
+      "bytes": 2299,
+      "max_line_characters": 113
+    },
+    {
+      "path": "materials/020.txt",
+      "sha256": "58c9b31761ccdd938ec883e0328f9c46bd80001a4924d4befab853ed00599962",
+      "bytes": 5065,
+      "max_line_characters": 123
+    },
+    {
+      "path": "materials/021.txt",
+      "sha256": "ccf2febf25ab46493246f68b8dff59ade4fe8c846547d11e3f10aefbf225a818",
+      "bytes": 5072,
+      "max_line_characters": 125
+    },
+    {
+      "path": "materials/022.txt",
+      "sha256": "3cd0a056dfb51f2416f848c09a6fe5f5b4993f5ff1ce12c39a5689b6e57c0249",
+      "bytes": 5095,
+      "max_line_characters": 125
+    },
+    {
+      "path": "materials/023.txt",
+      "sha256": "c7c36cdceb76f81792f00ec3196e3b803ca89ce5765b4eb7c08fcfcf46975c09",
+      "bytes": 5043,
+      "max_line_characters": 138
+    },
+    {
+      "path": "materials/024.txt",
+      "sha256": "a1b30dd19e68e7a6e85428e0b6c5d59674df89b1366e90fdcfce385e640fcd0f",
+      "bytes": 1079,
+      "max_line_characters": 122
+    },
+    {
+      "path": "materials/025.txt",
+      "sha256": "2d0941aee190a7077d5d3a88e7ea75de01739edc96aec532385ed7baeda11593",
+      "bytes": 5074,
+      "max_line_characters": 118
+    },
+    {
+      "path": "materials/026.txt",
+      "sha256": "a15dd214eaa687963c14126a5fd3243053b3a2d9bbe1a318ae27eb4a168a28bb",
+      "bytes": 996,
+      "max_line_characters": 99
+    },
+    {
+      "path": "materials/027.txt",
+      "sha256": "1084a6a38b4dc805013c06c8aaf628f1d251b746c6527b9c2afc1c3efa3bf34d",
+      "bytes": 3882,
+      "max_line_characters": 123
+    },
+    {
+      "path": "materials/028.txt",
+      "sha256": "1f460208882e7792ec8c823ff08d9d9f507645fb54593db11931da29a214e54b",
+      "bytes": 2597,
+      "max_line_characters": 100
+    },
+    {
+      "path": "materials/029.txt",
+      "sha256": "d9e9958fb4694f74f066b81427b3892cc7d19e623184c8536d5f6607162a7dcb",
+      "bytes": 5057,
+      "max_line_characters": 107
+    },
+    {
+      "path": "materials/030.txt",
+      "sha256": "d8a826a249efe319b1ac28dd0697de4aa222a0e4f76775dde6ca2245667f8e50",
+      "bytes": 5101,
+      "max_line_characters": 126
+    },
+    {
+      "path": "materials/031.txt",
+      "sha256": "eea3324a965e2786d5bc0c71c0a8ace571c612dcf447dc61e26a2dd14b3fe382",
+      "bytes": 4612,
+      "max_line_characters": 118
+    },
+    {
+      "path": "materials/032.txt",
+      "sha256": "2bd2048c1d48d610ad82fe5e59e60291820b07ab0f46e838a9d1fbe03c82fc93",
+      "bytes": 3299,
+      "max_line_characters": 127
+    },
+    {
+      "path": "materials/033.txt",
+      "sha256": "775e7054f6830402ff09da229f83cc68906ded543d51c6df475c30dd59a97450",
+      "bytes": 5420,
+      "max_line_characters": 129
+    },
+    {
+      "path": "materials/034.txt",
+      "sha256": "4390b6c6386cd64b8b590c2259dd3d103b33ac13c6e31ef1cd8e871822056a2a",
+      "bytes": 4737,
+      "max_line_characters": 126
+    },
+    {
+      "path": "materials/035.txt",
+      "sha256": "e78a057543ede403138ac79ecdda100a5f52d1935c3d95e45b6e5c8d90954532",
+      "bytes": 1361,
+      "max_line_characters": 84
+    },
+    {
+      "path": "materials/036.txt",
+      "sha256": "d4364f168304da65c2c2ad0bb60e331f2e4e0b6168222fe64ae6f108431e9d25",
+      "bytes": 5059,
+      "max_line_characters": 97
+    },
+    {
+      "path": "materials/037.txt",
+      "sha256": "0d08a0d32d5227b264f00f11ae0d79b69b272f772df1f9928cb85e6812dd7cdc",
+      "bytes": 5216,
+      "max_line_characters": 127
+    },
+    {
+      "path": "materials/038.txt",
+      "sha256": "fd1752dfef553416b163370f966cfdcbbe43c99b1c2c2660054c4690a232535a",
+      "bytes": 4818,
+      "max_line_characters": 119
+    },
+    {
+      "path": "materials/039.txt",
+      "sha256": "5a6e1ea8ce9772ed5a6829d43634cc48fac4cd861f241aeb306fe7cd7b335f72",
+      "bytes": 3994,
+      "max_line_characters": 127
+    },
+    {
+      "path": "materials/040.txt",
+      "sha256": "69c749da376bc20afcb558f2a363889e6424004a73fdcb0497850862a5ebb96d",
+      "bytes": 2383,
+      "max_line_characters": 105
+    },
+    {
+      "path": "materials/041.txt",
+      "sha256": "f71f5e1aa548f6123c935af71762e825f8965e0e5b80eacc7ac1309622e7a82f",
+      "bytes": 5085,
+      "max_line_characters": 121
+    },
+    {
+      "path": "materials/042.txt",
+      "sha256": "1fdfeb7798f252dc0a61fb976b682c60fcfaf261da578aa087004473f5fb70e6",
+      "bytes": 4313,
+      "max_line_characters": 118
+    },
+    {
+      "path": "materials/043.txt",
+      "sha256": "c719dc26e2236304ac7e4d57952a30c963f27ea5da86013f80d323bc435d5bf7",
+      "bytes": 5050,
+      "max_line_characters": 120
+    },
+    {
+      "path": "materials/044.txt",
+      "sha256": "d459699d0107c3e832bba784437d0e9d1fcbf8b6e700be738471e703d8845d52",
+      "bytes": 5095,
+      "max_line_characters": 108
+    },
+    {
+      "path": "materials/045.txt",
+      "sha256": "02be118c0fe1f8f2d79eef2af13d8f985cef428e9c9998383315954295faae45",
+      "bytes": 5076,
+      "max_line_characters": 126
+    },
+    {
+      "path": "materials/046.txt",
+      "sha256": "9a7bad7de9b5e718e2e8acaf4e2ad21f4cbe33ead0e216dabdd8069a08df0d84",
+      "bytes": 2519,
+      "max_line_characters": 126
+    },
+    {
+      "path": "materials/047.txt",
+      "sha256": "ef0ecca835bbbc61c4c5334865556e05720eec8e3385cf63f577f4d6f725ed66",
+      "bytes": 5079,
+      "max_line_characters": 117
+    },
+    {
+      "path": "materials/048.txt",
+      "sha256": "68f3f14443060dfae35c7e2c0e32763d3deb5de11bd1351cc2139ccaba6ec8ab",
+      "bytes": 301,
+      "max_line_characters": 64
+    },
+    {
+      "path": "materials/049.txt",
+      "sha256": "e70b521e1c023ab6a1123ad5c9d40d1c3bf040446a4928df509c7aac87906a1f",
+      "bytes": 229,
+      "max_line_characters": 64
+    },
+    {
+      "path": "materials/050.txt",
+      "sha256": "68d4a4b45858867e5e925e1289304f249344ea7fc3b005a8851ad0adde329c50",
+      "bytes": 376,
+      "max_line_characters": 148
+    },
+    {
+      "path": "materials/051.txt",
+      "sha256": "bc037e365cd9bf3dbc41e42b24606fa2516f8eaa96bd49879c888d26e4d6e8d2",
+      "bytes": 1057,
+      "max_line_characters": 85
+    },
+    {
+      "path": "materials/052.txt",
+      "sha256": "6cc1e3030a593448f7e4b93e314fd3939c89de4d9f793a9cc1dac7a6564ee6b3",
+      "bytes": 5027,
+      "max_line_characters": 179
+    },
+    {
+      "path": "materials/053.txt",
+      "sha256": "a160e7db556879abc7a5768de2727477f2509507f8def98fdfbe8e9e20a6ce1a",
+      "bytes": 5080,
+      "max_line_characters": 159
+    },
+    {
+      "path": "materials/054.txt",
+      "sha256": "2b457552ef16f4e62a9666efea10d28a6ea6af859fd0f3fc8e7bf497a6cf44bd",
+      "bytes": 2025,
+      "max_line_characters": 168
+    },
+    {
+      "path": "materials/055.txt",
+      "sha256": "e0d9b675eedc0618d0f0f31a0ddfe9064a3aa1053f2cf28f8ba8af92abfc6a01",
+      "bytes": 5071,
+      "max_line_characters": 179
+    },
+    {
+      "path": "materials/056.txt",
+      "sha256": "5c0872b43d96e581bdb6aea6bef6434af62b7d018732b1b7aae7227132dac958",
+      "bytes": 5089,
+      "max_line_characters": 159
+    },
+    {
+      "path": "materials/057.txt",
+      "sha256": "1b2c42ef85bbacb86c27f92fd56d5ccbcc97e9e3a1613129c3ae101d1f888eaf",
+      "bytes": 2336,
+      "max_line_characters": 168
+    },
+    {
+      "path": "materials/058.txt",
+      "sha256": "58fa5d879e8a93ec204fcccf265afffd7b7e7d101630157bb4b2a85b22e0c525",
+      "bytes": 5070,
+      "max_line_characters": 134
+    },
+    {
+      "path": "materials/059.txt",
+      "sha256": "d2c25f51030b4da539fe0e5581eff2aa6fa2cec7d24bc24077f6cf3407a10489",
+      "bytes": 2811,
+      "max_line_characters": 163
+    },
+    {
+      "path": "materials/060.txt",
+      "sha256": "3b0eed86b7eac1189d0084645539c25a1f843c615ce0728b941e31f1ed74632b",
+      "bytes": 5095,
+      "max_line_characters": 240
+    },
+    {
+      "path": "materials/061.txt",
+      "sha256": "99e7a9223174775c478a0e8f00cfaf657c80c1075d5b09979d23c5cf1f8622d5",
+      "bytes": 2419,
+      "max_line_characters": 482
+    },
+    {
+      "path": "materials/062.txt",
+      "sha256": "b2e384078b6653eea098d0e41df9d81d2dd25235d101563914684145d7d711f8",
+      "bytes": 5050,
+      "max_line_characters": 240
+    },
+    {
+      "path": "materials/063.txt",
+      "sha256": "3970cdbf2f5396fa0b099c2d80a965f612d28f9a9702e208b6b77394c8f75cab",
+      "bytes": 2837,
+      "max_line_characters": 240
+    },
+    {
+      "path": "materials/064.txt",
+      "sha256": "19751592fa64a45d4393c9ba12a524a5110fedb77b165adf0a45e4266a605c8e",
+      "bytes": 5098,
+      "max_line_characters": 94
+    },
+    {
+      "path": "materials/065.txt",
+      "sha256": "f437738ca1260ca2c4b9adb2f88ce9e5e7318df166a5e237175f18ef4d6b9b0a",
+      "bytes": 4584,
+      "max_line_characters": 508
+    },
+    {
+      "path": "materials/066.txt",
+      "sha256": "b2e360e619d66d0d7f910b75dc2694f6a3b2df2b34f80a32a163a41bcf9fa739",
+      "bytes": 4756,
+      "max_line_characters": 86
+    },
+    {
+      "path": "materials/067.txt",
+      "sha256": "cbe6e2840ae4e27bafb1c9ae48300e43f4ea447a795c0f34a71de2154390b3ac",
+      "bytes": 3564,
+      "max_line_characters": 203
+    },
+    {
+      "path": "materials/068.txt",
+      "sha256": "6d51ee4a76e457dd4a1927522f795bd074fd173635ace3e19d535ee51d0596b5",
+      "bytes": 5101,
+      "max_line_characters": 710
+    },
+    {
+      "path": "materials/069.txt",
+      "sha256": "5cc04034da2785fa19c5bac378a084e9bd92f7216ae2d140afe5ae05297c7904",
+      "bytes": 863,
+      "max_line_characters": 89
+    },
+    {
+      "path": "materials/070.txt",
+      "sha256": "575a0497b4a3d122c501e8edb62432ecdb570e22327d32b4a8d3de28cac4e0e2",
+      "bytes": 5737,
+      "max_line_characters": 393
+    },
+    {
+      "path": "materials/071.txt",
+      "sha256": "5fba5cba098d7a44a8b9b951bcd09f6945686e7bb057e8a7760c39db9733ca1c",
+      "bytes": 1814,
+      "max_line_characters": 347
+    },
+    {
+      "path": "materials/072.txt",
+      "sha256": "36c888b87fe2f9e0b9870153b491f54a3bc2efcd1db744583547ba84019dedcb",
+      "bytes": 5081,
+      "max_line_characters": 240
+    },
+    {
+      "path": "materials/073.txt",
+      "sha256": "b3f44a056fe412d5723b23fbd3b9785c37825346aa5b1a4b154ee702e0f31b67",
+      "bytes": 5095,
+      "max_line_characters": 240
+    },
+    {
+      "path": "materials/074.txt",
+      "sha256": "c31f81e0a4607cce74240498a57aa009061ba0f4e495efd5873f08fac35b322e",
+      "bytes": 2611,
+      "max_line_characters": 240
+    },
+    {
+      "path": "materials/075.txt",
+      "sha256": "c5b1c4af7e6538d7e9b5416fba073736236dae5ca8e58c409f3f03494ddcae0e",
+      "bytes": 4781,
+      "max_line_characters": 256
+    },
+    {
+      "path": "materials/076.txt",
+      "sha256": "de8c46a1b1aff66c2c52bc071a7e4c2dc6404506d2ba37c27bca13f187d6c136",
+      "bytes": 5048,
+      "max_line_characters": 147
+    },
+    {
+      "path": "materials/077.txt",
+      "sha256": "4c687ebc57b0c63700718ef7e1fff3d4c0d73365ff85a1a4975b13c1b8c23ec4",
+      "bytes": 3262,
+      "max_line_characters": 258
+    },
+    {
+      "path": "materials/078.txt",
+      "sha256": "d70cf628208fb4af6dd457c02d39c30867e6c5ac7bed0e47a6625425d1f2269f",
+      "bytes": 2898,
+      "max_line_characters": 95
+    },
+    {
+      "path": "materials/079.txt",
+      "sha256": "80d0a92267b8febc283eb8df44c772443962794ffad8501cb93e15cd6bd2c16b",
+      "bytes": 4130,
+      "max_line_characters": 95
+    },
+    {
+      "path": "materials/080.txt",
+      "sha256": "992ed808ebd68d2686ae119b707d157cc1a01c4d2df8d0cf6370c010671cdf4f",
+      "bytes": 5102,
+      "max_line_characters": 86
+    },
+    {
+      "path": "materials/081.txt",
+      "sha256": "fc8db34ad9595953d86623431f64f165176631b63226f9d483f6b2b5f8441ecc",
+      "bytes": 5009,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/082.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/083.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/084.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/085.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/086.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/087.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/088.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/089.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/090.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/091.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/092.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/093.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/094.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/095.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/096.txt",
+      "sha256": "c200f9526a385576cd87e07e9bb2bda7c6fbba318488e0d61ed1df0437d7e771",
+      "bytes": 4108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/097.txt",
+      "sha256": "f774c11e135abea7774fa31fc75f09f38ba66cf662eefefedcef8a8f5ff6dad4",
+      "bytes": 4974,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/098.txt",
+      "sha256": "33e3fcbad32fafb47c3457f66f23747e15021ea5ffe71758b05bfe23f9e8bd59",
+      "bytes": 2786,
+      "max_line_characters": 370
+    },
+    {
+      "path": "materials/099.txt",
+      "sha256": "a89b4d789b19739a0c952b73e9139978e00452a21d1b83ceda79efc7840fd9a1",
+      "bytes": 741,
+      "max_line_characters": 181
+    },
+    {
+      "path": "materials/100.txt",
+      "sha256": "75a9abacf30159f7edd7cbe52a058e9152b3ea8509f4dcf1868ace9432fcc3d6",
+      "bytes": 5980,
+      "max_line_characters": 878
+    },
+    {
+      "path": "materials/101.txt",
+      "sha256": "467b86c0d6977c65efcb765cbd4a4cb85ad776d038a7adeffde91be4cf4a9e2e",
+      "bytes": 2076,
+      "max_line_characters": 87
+    },
+    {
+      "path": "materials/102.txt",
+      "sha256": "ab22a0e6c74a0291d892c2490b7b5b5b1c596f4707096e0b9c6fcee70a683015",
+      "bytes": 571,
+      "max_line_characters": 84
+    },
+    {
+      "path": "materials/103.txt",
+      "sha256": "d81a88523385051a8ddcffc73f91e191bd2933da1475009b311b40a928f6315c",
+      "bytes": 5938,
+      "max_line_characters": 850
+    },
+    {
+      "path": "materials/104.txt",
+      "sha256": "6dcf1d73809bffe0da711f98530a8a4dcee0dbdc829eab9446d7087619ad373f",
+      "bytes": 1201,
+      "max_line_characters": 87
+    },
+    {
+      "path": "materials/105.txt",
+      "sha256": "f78dd760722fa23aed66a7e9222454ee9f687e88771e2324d75af490d1862cc6",
+      "bytes": 2737,
+      "max_line_characters": 236
+    },
+    {
+      "path": "materials/106.txt",
+      "sha256": "95bddfa05060032378ab55cd8c7c93502b2c89100874cb836a9e4a1ef47d4873",
+      "bytes": 1161,
+      "max_line_characters": 427
+    },
+    {
+      "path": "materials/107.txt",
+      "sha256": "a34e92753f1f193d7f510d7f56878c69a21e8a5ca448f1cb51824885d2b0abd2",
+      "bytes": 747,
+      "max_line_characters": 181
+    },
+    {
+      "path": "materials/108.txt",
+      "sha256": "f0c833cd0589e080dab55b75a3bbe2e7e3dc7f85a620ad6cce07a3af49cb5973",
+      "bytes": 5411,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/109.txt",
+      "sha256": "31fa5e4ec21df47d75087f4efcfaacde1a862d72a6082c6ec043471e596d2ed0",
+      "bytes": 1912,
+      "max_line_characters": 87
+    },
+    {
+      "path": "materials/110.txt",
+      "sha256": "dc1770b408930c479960970991618d0ef6469f92a06020f8c15c727976655fa8",
+      "bytes": 577,
+      "max_line_characters": 84
+    },
+    {
+      "path": "materials/111.txt",
+      "sha256": "bf647fa7eef8d8cc89729c130b2fdc87aec6fa1165d1babf7ab53d0a76e97173",
+      "bytes": 6164,
+      "max_line_characters": 905
+    },
+    {
+      "path": "materials/112.txt",
+      "sha256": "3ced436708767d26cb553dafabaa10feb4c241684ea6fd80b8a4f3fbc497ca3b",
+      "bytes": 1538,
+      "max_line_characters": 87
+    },
+    {
+      "path": "materials/113.txt",
+      "sha256": "6d0e3675f5e5a8d64a301aed77c95aea600a4481ae8d71fe36e4ac60a841b00a",
+      "bytes": 2743,
+      "max_line_characters": 236
+    },
+    {
+      "path": "materials/114.txt",
+      "sha256": "c9599a39ebc9901f7d732811b95c5eef532096c793f424ec777d6fb2d86bb0cc",
+      "bytes": 1428,
+      "max_line_characters": 427
+    },
+    {
+      "path": "materials/115.txt",
+      "sha256": "c7726dadf3672d88edc37ed2c6c8e27bc56e818abda781fe416f94aa671daad0",
+      "bytes": 1384,
+      "max_line_characters": 84
+    },
+    {
+      "path": "materials/116.txt",
+      "sha256": "91ef3938c5d396616171607d7d5169a809b9e9672596c6442adea241e365bc1c",
+      "bytes": 5248,
+      "max_line_characters": 112
+    },
+    {
+      "path": "materials/117.txt",
+      "sha256": "a5a531caf3ba952c3defddf24bb3e3f4a4a1e027e3f3b84b58a12186042fedd0",
+      "bytes": 2691,
+      "max_line_characters": 119
+    },
+    {
+      "path": "materials/118.txt",
+      "sha256": "b33c3a713a9db5a2d99268a22a1657f16c35c63a727e4cf7d3301bf81058324b",
+      "bytes": 5103,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/119.txt",
+      "sha256": "dae94e887ab7d0e9a1e715f4e50dd6eeb668bf6d04504e1d1fe80c119060d62f",
+      "bytes": 5112,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/120.txt",
+      "sha256": "fa687c0123015643036fbe296040a3ebf66287c5547105a50f0ab7541b00b5c9",
+      "bytes": 4626,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/121.txt",
+      "sha256": "3bb910d8a223753d700e8d9fc774376435e5e9f8322454c4ce4a1856cf93c584",
+      "bytes": 5086,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/122.txt",
+      "sha256": "f0c16f33b0dc3ff2f25dde1d05e770251e122eac6b40711440bfb28e7729c9e5",
+      "bytes": 4504,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/123.txt",
+      "sha256": "33c220989b48c34838062f90911c6ed58fbc9fb0ae59c331147a6ef7ad5d2252",
+      "bytes": 4154,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/124.txt",
+      "sha256": "ab3602790ed3a712123f46c2909b91f4d7b8ee7982ac44329798e6e95cc53657",
+      "bytes": 4116,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/125.txt",
+      "sha256": "a15f7c1fa422d315714bfffaa6dc8103c044b0dd4e825945945dc5f2573ba96f",
+      "bytes": 4116,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/126.txt",
+      "sha256": "33c6b75042a52919cc7975461d1e896f57d428aafe33e606945eb871d6573a44",
+      "bytes": 4319,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/127.txt",
+      "sha256": "4d3c87e12d8822ac19dc0dd2cf5a3ba798aeddda0c80124b14c52c0f1e4ad2b7",
+      "bytes": 5107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/128.txt",
+      "sha256": "85576860e1953c2f581eafa871e69ca772b857ec1ea9700eb8e6afb891cfdd60",
+      "bytes": 5094,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/129.txt",
+      "sha256": "d4952955402f17f36a90d8730e0a87e0c418df6a9f85f036e265d6405161bac4",
+      "bytes": 5108,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/130.txt",
+      "sha256": "a1e618e3ec8e745ce8f1364b19477c96afbd877e7d0ff6a3909b39914c0dac09",
+      "bytes": 5071,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/131.txt",
+      "sha256": "4aa51253c92c7d774c41607b24628624f9662c07185e5b9dad71c20c3fb3d84e",
+      "bytes": 5032,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/132.txt",
+      "sha256": "6b7285ceed3786b99e0c4bc203d64d3eb03526a23dc4a11329f4ded8151b635b",
+      "bytes": 4723,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/133.txt",
+      "sha256": "29177ad85fbceaa7780f84c8e67caab64787ce88b2e3070f314305d3b73af611",
+      "bytes": 4724,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/134.txt",
+      "sha256": "df303338ef48392b424776aab7cf7ce621661a84be28de9ecb4089841066b8bc",
+      "bytes": 2517,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/135.txt",
+      "sha256": "455c5eb3eb94f040101bf5728f1a3426924d897c5ca2fcb2fbfe7a9d38098135",
+      "bytes": 5082,
+      "max_line_characters": 963
+    },
+    {
+      "path": "materials/136.txt",
+      "sha256": "2ba8af604efd48db1a6803ecd9b2db1a3a1cd6bfbf8df1657043a498f086d678",
+      "bytes": 2290,
+      "max_line_characters": 128
+    },
+    {
+      "path": "materials/137.txt",
+      "sha256": "b3097a2754ff3eda0a30b56d8a6b3d0f2c0c58a96c9b459181f209f8058f1aa9",
+      "bytes": 5085,
+      "max_line_characters": 134
+    },
+    {
+      "path": "materials/138.txt",
+      "sha256": "1769c4c23b924cdd64da88c3e84cc76f3c911feeb3b91826237518e92bfeebdb",
+      "bytes": 1599,
+      "max_line_characters": 64
+    },
+    {
+      "path": "materials/139.txt",
+      "sha256": "d6fed33676886d4aca9d0361b133956bb4d44ecce322e00211872795b5064fb2",
+      "bytes": 5091,
+      "max_line_characters": 134
+    },
+    {
+      "path": "materials/140.txt",
+      "sha256": "404123c0cfeda1f010317862cc17e4a3a1e6dfe42b98d89852c9f24a14b22107",
+      "bytes": 1395,
+      "max_line_characters": 64
+    },
+    {
+      "path": "materials/141.txt",
+      "sha256": "793f2c7691364896e82a9d5977cfe47b27e519a976139c8cf2b13c5084c0724a",
+      "bytes": 4876,
+      "max_line_characters": 79
+    },
+    {
+      "path": "materials/142.txt",
+      "sha256": "1cf4e7144dfb4f23843ddbbee9ae02235aef47ef4bbc246873e5b94f60f4cc2f",
+      "bytes": 2355,
+      "max_line_characters": 240
+    },
+    {
+      "path": "materials/143.txt",
+      "sha256": "edbe1934367562f3d4dd2881def69bdff386673a4467035dfbf56625dc98e018",
+      "bytes": 5093,
+      "max_line_characters": 90
+    },
+    {
+      "path": "materials/144.txt",
+      "sha256": "13ae2d2e17d637150739337de1c7f6d85a8ca60d76cd0fc08d93fae2dff88bd1",
+      "bytes": 4392,
+      "max_line_characters": 444
+    },
+    {
+      "path": "materials/145.txt",
+      "sha256": "be61444cb7e94c3a30c33871e5ffd896aecd15385ac5094a0e43b6ac4912ead4",
+      "bytes": 4683,
+      "max_line_characters": 81
+    },
+    {
+      "path": "materials/146.txt",
+      "sha256": "f9950b3483f28650aa7a1c37fe65344fd402c1f94afb6dc94ce90e1b855998e2",
+      "bytes": 3789,
+      "max_line_characters": 208
+    },
+    {
+      "path": "materials/147.txt",
+      "sha256": "79145d2f6a9f4f8f05e8b0c7375742386cf2f69619f7225967ac5b92c032eac9",
+      "bytes": 4323,
+      "max_line_characters": 130
+    },
+    {
+      "path": "materials/148.txt",
+      "sha256": "5769df7c275a29ade5cac67fc7d6698cbf161284c2f9ea67a19d929e464096c3",
+      "bytes": 4830,
+      "max_line_characters": 989
+    },
+    {
+      "path": "materials/149.txt",
+      "sha256": "7cd10da4155fc0b7b7eb24758be3f546f994ca82d0b160e5f4bef89fb1d976a4",
+      "bytes": 5676,
+      "max_line_characters": 779
+    },
+    {
+      "path": "materials/150.txt",
+      "sha256": "4c81493fe012eb91725d7ac65f654a2256ef3500ca7508fcf9c92fc9fa2dc2e5",
+      "bytes": 1357,
+      "max_line_characters": 696
+    },
+    {
+      "path": "materials/151.txt",
+      "sha256": "536e693a465be0800796ad999de4a47c8171e0ca64c6793ea49f6def7264b927",
+      "bytes": 5070,
+      "max_line_characters": 122
+    },
+    {
+      "path": "materials/152.txt",
+      "sha256": "d933825831352382b45cb1ace386f5e6b3e879081ba0c7ecf117122c506637f0",
+      "bytes": 5078,
+      "max_line_characters": 122
+    },
+    {
+      "path": "materials/153.txt",
+      "sha256": "fe0be9c09986deb5cc61b54b40975e1f039fa4a545b93414e6e15e7826418185",
+      "bytes": 558,
+      "max_line_characters": 83
+    },
+    {
+      "path": "materials/154.txt",
+      "sha256": "d04d5ccd38143ee580cd4e18c089952f7792980be8c38424448a54f57a5c466d",
+      "bytes": 5002,
+      "max_line_characters": 100
+    },
+    {
+      "path": "materials/155.txt",
+      "sha256": "901f490f256897d37c3169911476e0290e1eeae89c2416127a661a8498ba3285",
+      "bytes": 5099,
+      "max_line_characters": 79
+    },
+    {
+      "path": "materials/156.txt",
+      "sha256": "d7ad9821c7969b94344b5b10fe0164e550aaf6c7d0e0de1f77aaee6bda94a814",
+      "bytes": 5094,
+      "max_line_characters": 70
+    },
+    {
+      "path": "materials/157.txt",
+      "sha256": "aa08a9bb895597a3dfcc60c81f43941576422478817f4407782f9ed530de39cc",
+      "bytes": 259,
+      "max_line_characters": 64
+    },
+    {
+      "path": "materials/158.txt",
+      "sha256": "14d2022b1c743b531ba2f0c69ca8c6cb02649dc4539adad6a3304bffd469c794",
+      "bytes": 2930,
+      "max_line_characters": 85
+    },
+    {
+      "path": "materials/159.txt",
+      "sha256": "05633ba017d28f9098f76de5db5a5973dfb40608043ae4313fe66a9552155f34",
+      "bytes": 1418,
+      "max_line_characters": 86
+    },
+    {
+      "path": "materials/160.txt",
+      "sha256": "fdf710704e232aea763106a507419b886aec73de4553b33bb71f652ef638b970",
+      "bytes": 5075,
+      "max_line_characters": 79
+    },
+    {
+      "path": "materials/161.txt",
+      "sha256": "b9a44f4f4d5d6ff0aa4c2ec996ef4159753ca1d3040d86bd83166a182002135a",
+      "bytes": 4982,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/162.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/163.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/164.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/165.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/166.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/167.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/168.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/169.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/170.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/171.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/172.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/173.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/174.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/175.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/176.txt",
+      "sha256": "0a1480dbd5c1cac6290dde9cd0c064d7373d4f9e85d0f6a28c3069ff5e7cb5aa",
+      "bytes": 4107,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/177.txt",
+      "sha256": "1977049bce0c1318eb60aa43f1b3ea8459e9e19727fbba7acbc830c59fdfc7a6",
+      "bytes": 4973,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/178.txt",
+      "sha256": "fc452051f50c0e57bbc394be91dcc14f07cab249f0f798b3fad2ae053dff6d12",
+      "bytes": 2884,
+      "max_line_characters": 502
+    },
+    {
+      "path": "materials/179.txt",
+      "sha256": "1e9b108cebba6741ecfa346060db84d9e9d092b45c0d9249e9dc514b05ab7a60",
+      "bytes": 807,
+      "max_line_characters": 218
+    },
+    {
+      "path": "materials/180.txt",
+      "sha256": "5d25727b4b16371ad497d0576b47288341db858d31bb2e8f0da502ea3aa1a19a",
+      "bytes": 6203,
+      "max_line_characters": 914
+    },
+    {
+      "path": "materials/181.txt",
+      "sha256": "5598ff1e22eba981524b0bb51bc74ab85cf72104c17adc7fed3feea52bc01f97",
+      "bytes": 2860,
+      "max_line_characters": 288
+    },
+    {
+      "path": "materials/182.txt",
+      "sha256": "cb3aa1b4926fb4d1b37baea782376782c0c79a159bc37c40bc6d716bd8b5d4b3",
+      "bytes": 637,
+      "max_line_characters": 84
+    },
+    {
+      "path": "materials/183.txt",
+      "sha256": "e4970e19e6e011df27d81b6f899e916c75bcd3eb6b9a47d43a1da2ee750f86fe",
+      "bytes": 6274,
+      "max_line_characters": 850
+    },
+    {
+      "path": "materials/184.txt",
+      "sha256": "daa606413cd91e3a78791f46ba13b16df877ce347274c8b41e4b1b7ca3982bf6",
+      "bytes": 1414,
+      "max_line_characters": 87
+    },
+    {
+      "path": "materials/185.txt",
+      "sha256": "ab2da7159e31597a4c6fdf6ee497f7fe0f18f43ee8ef26b63bda1fdd4593f88b",
+      "bytes": 2085,
+      "max_line_characters": 93
+    },
+    {
+      "path": "materials/186.txt",
+      "sha256": "03734a65c1d07b1896b0c3a6f9924886f9270de243a0427f8dc2a7028928bec0",
+      "bytes": 1159,
+      "max_line_characters": 427
+    },
+    {
+      "path": "materials/187.txt",
+      "sha256": "7585ad6fd96427aea58053744fb0302ecfded868c94a322b72d816c98522b7a5",
+      "bytes": 1304,
+      "max_line_characters": 218
+    },
+    {
+      "path": "materials/188.txt",
+      "sha256": "fada5d0ddb8db6d04fda774afd994c094a30438c01c37618611f69568bbaa2d3",
+      "bytes": 5880,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/189.txt",
+      "sha256": "94b4ff8d85d11abc9242513f426ffb7c0feb3ed21a25bfd0d1bbfe4737c4228b",
+      "bytes": 2034,
+      "max_line_characters": 87
+    },
+    {
+      "path": "materials/190.txt",
+      "sha256": "cc7604ae9f6c02d1670a66a225700741902f3c6f832a7cf8a302f06544ce7c42",
+      "bytes": 1134,
+      "max_line_characters": 152
+    },
+    {
+      "path": "materials/191.txt",
+      "sha256": "70ef9d82aad65e0c2fa43c2c6235799422b4502f22dce42e6699312a08032041",
+      "bytes": 5836,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/192.txt",
+      "sha256": "857d460148abc12189e69325b5213663aac6c76c06513e483432d46ccd2d2d5f",
+      "bytes": 1332,
+      "max_line_characters": 87
+    },
+    {
+      "path": "materials/193.txt",
+      "sha256": "0b33be83a13fb8f21b1552e661ca0474e9ca76b21d64cb5b4fb4a2149953fba4",
+      "bytes": 2091,
+      "max_line_characters": 93
+    },
+    {
+      "path": "materials/194.txt",
+      "sha256": "9a3245490dab7b1e17dd929730bd6230d879f02f60709c559b1c36e5ceab5bbf",
+      "bytes": 1426,
+      "max_line_characters": 427
+    },
+    {
+      "path": "materials/195.txt",
+      "sha256": "b0b1d0a00195a7eccfa90395a607ec74b5d9f1a9afc35077df246790a2168fa0",
+      "bytes": 1383,
+      "max_line_characters": 84
+    },
+    {
+      "path": "materials/196.txt",
+      "sha256": "6d5ccb3179762c29f345d98a397309a6ddae1aaaca1d60b57dbce1b541770941",
+      "bytes": 5081,
+      "max_line_characters": 97
+    },
+    {
+      "path": "materials/197.txt",
+      "sha256": "152fb9554f7d54da11b0b878fd73a97bbc74f319350337dbb610974bde01f1d2",
+      "bytes": 5238,
+      "max_line_characters": 127
+    },
+    {
+      "path": "materials/198.txt",
+      "sha256": "22eb9200d88c5fc306894fc68d7bed48a0472cef3092ca9a83f2c560c9271af1",
+      "bytes": 4840,
+      "max_line_characters": 119
+    },
+    {
+      "path": "materials/199.txt",
+      "sha256": "ae351dc2333ecab3fb3e7f8bcd79ba776004ea33099022d8b6d46dbfbbfbf566",
+      "bytes": 5098,
+      "max_line_characters": 910
+    },
+    {
+      "path": "materials/200.txt",
+      "sha256": "1025aeaa444c86ff49c454fbb37df60c2574991f2147dd182b00dfee40d6dac8",
+      "bytes": 4140,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/201.txt",
+      "sha256": "6f9a047441848023a7e3acd747ba3ea937e2d4512397b2864334aaa08f8fa68b",
+      "bytes": 5087,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/202.txt",
+      "sha256": "bfe865edbf60983f8bec131a3a74b74e404896049d6cb80578bf12ccc803298f",
+      "bytes": 4505,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/203.txt",
+      "sha256": "fd359060282c9e6723451a2b87ffebf1f0eedf076e41d1c1e64478c85069ed69",
+      "bytes": 5087,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/204.txt",
+      "sha256": "2e81b2580156c773ea4be6675bf2df24bde6e17675d805589e2997e002843c6e",
+      "bytes": 4673,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/205.txt",
+      "sha256": "e56ebccba67cbb2c65e1eeb76eeda81a38effd32cafd431b14fb78c9a3e4af9e",
+      "bytes": 4115,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/206.txt",
+      "sha256": "7284d2568e171aabcdc829dac3be0667a70ed9bb35b5eda79d92b89e5962012b",
+      "bytes": 4115,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/207.txt",
+      "sha256": "a3f52b6ff23aaec91473580cab58382621e4056559a5d140e17392ce988c3979",
+      "bytes": 5102,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/208.txt",
+      "sha256": "c9d6405a3d488aff8a1fbcae82d04b4af4c42ca3d4b0c7538f931795cac0cf88",
+      "bytes": 4416,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/209.txt",
+      "sha256": "1c49d3709abc9d5c2a89ac5aac557953ee3346d65c7f832e154bf84dd24926ca",
+      "bytes": 5101,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/210.txt",
+      "sha256": "0ddc89332f58008f88d3841e0123fbb1284e55c877cad68d2cd8ce28d02bb0ef",
+      "bytes": 4114,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/211.txt",
+      "sha256": "7e72bfe4088e38834d5254ff51ac1d52203d73aaf803c8fea3e0130a359c351d",
+      "bytes": 5105,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/212.txt",
+      "sha256": "76439cb5612a1f28ffbe9936377876695d57e7c432e327677dfb858b5097e450",
+      "bytes": 4811,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/213.txt",
+      "sha256": "bf92ffd4266900d0ed93797a5091d05ee500d9c38145b2bedecd7190a9c0cca4",
+      "bytes": 4827,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/214.txt",
+      "sha256": "d768f82f99d8712f1c278cea77eacb3495dad8656b49f1a2a4185af5ff0ad9f0",
+      "bytes": 4827,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/215.txt",
+      "sha256": "3899b800812b1ef84642cebc9956b32b408f6271c222c6fc5e50cca2796dc882",
+      "bytes": 4828,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/216.txt",
+      "sha256": "02edbc1a4c45fd537ab396db8c7c93312b5d5212f8755c45b597e854a19e2973",
+      "bytes": 2698,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/217.txt",
+      "sha256": "6149ebb26b60f6c6cb89f3e9c93769b75dd45ee02ed76711012094cdc851c036",
+      "bytes": 4216,
+      "max_line_characters": 79
+    },
+    {
+      "path": "materials/218.txt",
+      "sha256": "322fc0cbbf99ddc66ea4cdc5fb4b489a015fbd0d4877ec2c946fb69b065c895f",
+      "bytes": 4852,
+      "max_line_characters": 994
+    },
+    {
+      "path": "materials/219.txt",
+      "sha256": "a307d533e59b0f01c237f5f35ef3d6d0c8f3882e5282d248b27879bcceacba34",
+      "bytes": 4976,
+      "max_line_characters": 147
+    },
+    {
+      "path": "materials/220.txt",
+      "sha256": "02daf711a1aa8e45ccb7a757294e074f996cd27a8ae7beb8287164b9730c600b",
+      "bytes": 5021,
+      "max_line_characters": 177
+    },
+    {
+      "path": "materials/221.txt",
+      "sha256": "de3aa3d81a65ba3e8f8f548470d2852c1854b0ed2c45ad6a49eeffb4c931b0d3",
+      "bytes": 2091,
+      "max_line_characters": 179
+    },
+    {
+      "path": "materials/222.txt",
+      "sha256": "48afd03e388fb24cf4e07d176b55dd7ebb667527ed03bf5570c93de6af3257cd",
+      "bytes": 5108,
+      "max_line_characters": 85
+    },
+    {
+      "path": "materials/223.txt",
+      "sha256": "c4e33be8a970d210ee14ea337ef8cc6ff89653be5de38024ffb368f31228fa8d",
+      "bytes": 5057,
+      "max_line_characters": 84
+    },
+    {
+      "path": "materials/224.txt",
+      "sha256": "f30c42a5d5f226335afe6728c042d947b542eb6f76e302d17b3538eda93cec96",
+      "bytes": 3502,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/225.txt",
+      "sha256": "17fcb09a9eb4af09929a8636f33a85a018308dc12de6c9b8eab73fa4a8397057",
+      "bytes": 4425,
+      "max_line_characters": 138
+    },
+    {
+      "path": "materials/226.txt",
+      "sha256": "bbfd2f8f9439188d78017b02394e1702af8d4eca30d28fffe9c916d90fe22c12",
+      "bytes": 5097,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/227.txt",
+      "sha256": "7474100b76c1b138de5b63c504d83fc9aaf9c03f4d84fb66cf043c7f66b2a637",
+      "bytes": 2728,
+      "max_line_characters": 1000
+    },
+    {
+      "path": "materials/228.txt",
+      "sha256": "ee99e64e38cc0e52fc404729b7e8340f4784453ce17c5da38d8cd3cd38788d4d",
+      "bytes": 1392,
+      "max_line_characters": 84
+    },
+    {
+      "path": "materials/229.txt",
+      "sha256": "186241c41b0281f7f24bbe1c83861ca0477851a2c5eb2e06d58766b687f7f9cb",
+      "bytes": 5091,
+      "max_line_characters": 107
+    },
+    {
+      "path": "materials/230.txt",
+      "sha256": "0ec367b9a1504ef47ad3c319131f56dc9e0710873e1f29b9ca10a0ab9e0f7a87",
+      "bytes": 5403,
+      "max_line_characters": 127
+    },
+    {
+      "path": "materials/231.txt",
+      "sha256": "98b3a592f7ce686aebad79dcdcfa88250ca0b4a312c0211670a24ec80b88d23d",
+      "bytes": 3743,
+      "max_line_characters": 119
+    },
+    {
+      "path": "materials/232.txt",
+      "sha256": "39e5db3687fba604bd01873b9e49f3f4cdf5f2b42c9dff41bff7fedc6502d059",
+      "bytes": 4793,
+      "max_line_characters": 997
+    },
+    {
+      "path": "materials/233.txt",
+      "sha256": "e1a71259a7d0432a16c54c3872030f2fcccbeb4d4869ecbec334fa2d4247a1de",
+      "bytes": 4872,
+      "max_line_characters": 996
+    },
+    {
+      "path": "materials/234.txt",
+      "sha256": "a48151e0fcfcd812118da2a8ac83c5bbf23003ac7c8ff9b7f2984018bf9aacd9",
+      "bytes": 5090,
+      "max_line_characters": 595
+    },
+    {
+      "path": "materials/235.txt",
+      "sha256": "a62ea340625f6db6e2875100c7a6358e051fec6efd2697d2f4718b18dd5f80d0",
+      "bytes": 4538,
+      "max_line_characters": 590
+    },
+    {
+      "path": "materials/236.txt",
+      "sha256": "cdf017f94392fbd649ef59d2302ca5fefea732a74ce2ed297d8e1cfe1ca9c3cf",
+      "bytes": 1391,
+      "max_line_characters": 84
+    },
+    {
+      "path": "materials/237.txt",
+      "sha256": "2e6ac6b3d947ddb2e393d0f69cfbadec151c2f18ea8c1f6bfad11d911b2e6135",
+      "bytes": 5089,
+      "max_line_characters": 97
+    },
+    {
+      "path": "materials/238.txt",
+      "sha256": "553e2d1d36a8833dc4615936ae5e3acd4000f35f740f0c8d52fb4f1c04ba0736",
+      "bytes": 5246,
+      "max_line_characters": 127
+    },
+    {
+      "path": "materials/239.txt",
+      "sha256": "d9becee96432eaf07f06bb3d7addd9986089f421842ef3c55f1a58988f8b499c",
+      "bytes": 4848,
+      "max_line_characters": 119
+    }
+  ],
+  "started_at_moscow": "2026-11-02T02:22:34.355638+03:00",
+  "submitted_at_moscow": "2026-11-02T02:23:16.925880+03:00",
+  "finished_at_moscow": "2026-11-02T02:25:37.653923+03:00",
+  "result": "result.json"
+}

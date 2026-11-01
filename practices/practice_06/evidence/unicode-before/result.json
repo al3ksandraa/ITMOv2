@@ -1,0 +1,241 @@
+{
+  "fixed": false,
+  "vulnerable": true,
+  "cases": [
+    {
+      "id": "review",
+      "server": {
+        "host": "127.0.0.1",
+        "port": 33153,
+        "pid": 13400,
+        "sandbox_root": "/tmp/itmo-practice-06-z76_2991"
+      },
+      "probes": [
+        {
+          "request": {
+            "method": "GET",
+            "target": "/reviews/view",
+            "headers": {},
+            "body_text": null
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Server": "BaseHTTP/0.6 Python/3.14.4",
+              "Date": "Sun, 01 Nov 2026 23:13:37 GMT",
+              "Content-Type": "text/html; charset=utf-8",
+              "Content-Length": "26"
+            },
+            "body_text": "<html><body></body></html>",
+            "json": null
+          }
+        },
+        {
+          "request": {
+            "method": "POST",
+            "target": "/reviews",
+            "headers": {
+              "X-Token": "6a47a0f48d59420eafec00d06c14bf01"
+            },
+            "body_text": "{\"product\":\"chair\",\"text\":\"\\ud800\"}"
+          },
+          "response": {
+            "status": 201,
+            "headers": {
+              "Server": "BaseHTTP/0.6 Python/3.14.4",
+              "Date": "Sun, 01 Nov 2026 23:13:37 GMT",
+              "Content-Type": "application/json; charset=utf-8",
+              "Content-Length": "15"
+            },
+            "body_text": "{\"saved\": true}",
+            "json": {
+              "saved": true
+            }
+          }
+        },
+        {
+          "request": {
+            "method": "GET",
+            "target": "/reviews/view",
+            "headers": {},
+            "body_text": null
+          },
+          "transport_error": {
+            "type": "RemoteDisconnected",
+            "message": "Remote end closed connection without response"
+          }
+        },
+        {
+          "request": {
+            "method": "GET",
+            "target": "/assistant/context?order_id=1",
+            "headers": {
+              "X-Token": "6a47a0f48d59420eafec00d06c14bf01"
+            },
+            "body_text": null
+          },
+          "transport_error": {
+            "type": "RemoteDisconnected",
+            "message": "Remote end closed connection without response"
+          }
+        },
+        {
+          "request": {
+            "method": "GET",
+            "target": "/debug/logs",
+            "headers": {
+              "X-Token": "7824fd055d68483da78c6de016abd737"
+            },
+            "body_text": null
+          },
+          "transport_error": {
+            "type": "RemoteDisconnected",
+            "message": "Remote end closed connection without response"
+          }
+        },
+        {
+          "request": {
+            "method": "GET",
+            "target": "/health",
+            "headers": {},
+            "body_text": null
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Server": "BaseHTTP/0.6 Python/3.14.4",
+              "Date": "Sun, 01 Nov 2026 23:13:37 GMT",
+              "Content-Type": "application/json; charset=utf-8",
+              "Content-Length": "16"
+            },
+            "body_text": "{\"status\": \"ok\"}",
+            "json": {
+              "status": "ok"
+            }
+          }
+        },
+        {
+          "request": {
+            "method": "GET",
+            "target": "/profile?id=1",
+            "headers": {
+              "X-Token": "6a47a0f48d59420eafec00d06c14bf01"
+            },
+            "body_text": null
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Server": "BaseHTTP/0.6 Python/3.14.4",
+              "Date": "Sun, 01 Nov 2026 23:13:37 GMT",
+              "Content-Type": "application/json; charset=utf-8",
+              "Content-Length": "96"
+            },
+            "body_text": "[{\"id\": 1, \"name\": \"TEST_ALICE\", \"email\": \"alice@example.invalid\", \"address\": \"TEST_ADDRESS_A\"}]",
+            "json": [
+              {
+                "id": 1,
+                "name": "TEST_ALICE",
+                "email": "alice@example.invalid",
+                "address": "TEST_ADDRESS_A"
+              }
+            ]
+          }
+        }
+      ],
+      "server_shutdown": {
+        "exit_code": 0,
+        "stderr": "----------------------------------------\nException occurred during processing of request from ('127.0.0.1', 48926)\nTraceback (most recent call last):\n  File \"/usr/lib/python3.14/socketserver.py\", line 697, in process_request_thread\n    self.finish_request(request, client_address)\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/socketserver.py\", line 362, in finish_request\n    self.RequestHandlerClass(request, client_address, self)\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/socketserver.py\", line 766, in __init__\n    self.handle()\n    ~~~~~~~~~~~^^\n  File \"/usr/lib/python3.14/http/server.py\", line 496, in handle\n    self.handle_one_request()\n    ~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/usr/lib/python3.14/http/server.py\", line 484, in handle_one_request\n    method()\n    ~~~~~~^^\n  File \"/mnt/d/Documents/Vibecoding/ITMOv2/practices/practice_06/lab/service.py\", line 246, in handle_request\n    data = (result if html else json.dumps(result, ensure_ascii=False)).encode(\"utf-8\")\nUnicodeEncodeError: 'utf-8' codec can't encode character '\\ud800' in position 15: surrogates not allowed\n----------------------------------------\n----------------------------------------\nException occurred during processing of request from ('127.0.0.1', 48938)\nTraceback (most recent call last):\n  File \"/usr/lib/python3.14/socketserver.py\", line 697, in process_request_thread\n    self.finish_request(request, client_address)\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/socketserver.py\", line 362, in finish_request\n    self.RequestHandlerClass(request, client_address, self)\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/socketserver.py\", line 766, in __init__\n    self.handle()\n    ~~~~~~~~~~~^^\n  File \"/usr/lib/python3.14/http/server.py\", line 496, in handle\n    self.handle_one_request()\n    ~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/usr/lib/python3.14/http/server.py\", line 484, in handle_one_request\n    method()\n    ~~~~~~^^\n  File \"/mnt/d/Documents/Vibecoding/ITMOv2/practices/practice_06/lab/service.py\", line 246, in handle_request\n    data = (result if html else json.dumps(result, ensure_ascii=False)).encode(\"utf-8\")\nUnicodeEncodeError: 'utf-8' codec can't encode character '\\ud800' in position 683: surrogates not allowed\n----------------------------------------\n----------------------------------------\nException occurred during processing of request from ('127.0.0.1', 48954)\nTraceback (most recent call last):\n  File \"/usr/lib/python3.14/socketserver.py\", line 697, in process_request_thread\n    self.finish_request(request, client_address)\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/socketserver.py\", line 362, in finish_request\n    self.RequestHandlerClass(request, client_address, self)\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/socketserver.py\", line 766, in __init__\n    self.handle()\n    ~~~~~~~~~~~^^\n  File \"/usr/lib/python3.14/http/server.py\", line 496, in handle\n    self.handle_one_request()\n    ~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/usr/lib/python3.14/http/server.py\", line 484, in handle_one_request\n    method()\n    ~~~~~~^^\n  File \"/mnt/d/Documents/Vibecoding/ITMOv2/practices/practice_06/lab/service.py\", line 246, in handle_request\n    data = (result if html else json.dumps(result, ensure_ascii=False)).encode(\"utf-8\")\nUnicodeEncodeError: 'utf-8' codec can't encode character '\\ud800' in position 821: surrogates not allowed\n----------------------------------------\n",
+        "extra_stdout": "",
+        "temporary_root_removed": true
+      }
+    },
+    {
+      "id": "anonymous_log",
+      "server": {
+        "host": "127.0.0.1",
+        "port": 40001,
+        "pid": 13412,
+        "sandbox_root": "/tmp/itmo-practice-06-x5ssq1ld"
+      },
+      "probes": [
+        {
+          "request": {
+            "method": "POST",
+            "target": "/login",
+            "headers": {},
+            "body_text": "{\"username\":\"\\ud800\",\"password\":\"wrong\"}"
+          },
+          "response": {
+            "status": 401,
+            "headers": {
+              "Server": "BaseHTTP/0.6 Python/3.14.4",
+              "Date": "Sun, 01 Nov 2026 23:13:37 GMT",
+              "Content-Type": "application/json; charset=utf-8",
+              "Content-Length": "32"
+            },
+            "body_text": "{\"error\": \"invalid credentials\"}",
+            "json": {
+              "error": "invalid credentials"
+            }
+          }
+        },
+        {
+          "request": {
+            "method": "GET",
+            "target": "/debug/logs",
+            "headers": {
+              "X-Token": "48ed97ec512543feba878019cc1efd4d"
+            },
+            "body_text": null
+          },
+          "transport_error": {
+            "type": "RemoteDisconnected",
+            "message": "Remote end closed connection without response"
+          }
+        },
+        {
+          "request": {
+            "method": "GET",
+            "target": "/health",
+            "headers": {},
+            "body_text": null
+          },
+          "response": {
+            "status": 200,
+            "headers": {
+              "Server": "BaseHTTP/0.6 Python/3.14.4",
+              "Date": "Sun, 01 Nov 2026 23:13:38 GMT",
+              "Content-Type": "application/json; charset=utf-8",
+              "Content-Length": "16"
+            },
+            "body_text": "{\"status\": \"ok\"}",
+            "json": {
+              "status": "ok"
+            }
+          }
+        }
+      ],
+      "server_shutdown": {
+        "exit_code": 0,
+        "stderr": "----------------------------------------\nException occurred during processing of request from ('127.0.0.1', 57332)\nTraceback (most recent call last):\n  File \"/usr/lib/python3.14/socketserver.py\", line 697, in process_request_thread\n    self.finish_request(request, client_address)\n    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/socketserver.py\", line 362, in finish_request\n    self.RequestHandlerClass(request, client_address, self)\n    ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.14/socketserver.py\", line 766, in __init__\n    self.handle()\n    ~~~~~~~~~~~^^\n  File \"/usr/lib/python3.14/http/server.py\", line 496, in handle\n    self.handle_one_request()\n    ~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/usr/lib/python3.14/http/server.py\", line 484, in handle_one_request\n    method()\n    ~~~~~~^^\n  File \"/mnt/d/Documents/Vibecoding/ITMOv2/practices/practice_06/lab/service.py\", line 246, in handle_request\n    data = (result if html else json.dumps(result, ensure_ascii=False)).encode(\"utf-8\")\nUnicodeEncodeError: 'utf-8' codec can't encode character '\\ud800' in position 342: surrogates not allowed\n----------------------------------------\n",
+        "extra_stdout": "",
+        "temporary_root_removed": true
+      }
+    }
+  ],
+  "command": [
+    "audit_unicode.py",
+    "--expect",
+    "vulnerable",
+    "--output",
+    "../evidence/unicode-before"
+  ],
+  "started_at_moscow": "2026-11-02T02:13:37.379701+03:00",
+  "finished_at_moscow": "2026-11-02T02:13:38.088819+03:00",
+  "source_sha256": {
+    "service.py": "651ef11742207a8e1c422bb84b2cf7deb7385408097b2cd105f6fc1a16d5420d",
+    "sandbox.py": "221135fb67bc72c90e8d533409f89e8282004313656fa9ae838d04f575a1ac4a"
+  },
+  "source_unchanged": true
+}
