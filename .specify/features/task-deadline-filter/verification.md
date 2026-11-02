@@ -1,7 +1,7 @@
 # Сквозная проверка task-deadline-filter
 
-Запуск: 2026-10-27T13:08:20.670Z. Команда: `node tests/task_deadline_filter.e2e.cjs`.
-Окружение: win32, Node v24.21.0, Playwright 1.64.1, Chrome/Chromium 156.0.8078.48.
+Запуск: 2026-11-02T14:07:03.248Z. Команда: `node tests/task_deadline_filter.e2e.cjs`.
+Окружение: win32, Node v24.21.0, Playwright 1.64.1, Chrome/Chromium 156.0.8078.74.
 Фиксированное время: 2026-10-26T09:00:00.000Z; зоны Europe/Moscow и America/New_York.
 
 Проверка выполняется библиотекой Playwright напрямую, без MCP. Реальные HTTP API и браузер; временная копия server.js/public, отдельный data/tasks.json. Пользовательские данные не изменяются.
@@ -20,8 +20,8 @@
 | 08-today-new-york (America/New_York) | Same UTC fixtures classify by New York local day, not UTC or Moscow. | PASS: {"titles":["tomorrow","today-future","today-done","today-past","end-of-day","exact-now"],"apiRequests":[],"screenshot":"08-today-new-york.png"} |
 | 09-clock-refresh (Europe/Moscow) | Each render uses a fresh now; an exact-now task becomes overdue after time advances. | PASS: {"titles":["tomorrow"],"apiRequests":[]} |
 | 10-invalid-deadline (Europe/Moscow) | Invalid non-null deadline matches all, but neither today, overdue nor no-deadline. | PASS: {"invalidExcludedFrom":["today","overdue","no-deadline"],"apiRequests":["GET /api/tasks"]} |
-| 11-crud-local-time (Europe/Moscow) | UI create/edit/delete preserves entered local deadline as the correct UTC instant. | PASS: {"createdDeadline":"2026-10-26T09:30:00.000Z","editedDeadline":"2026-10-26T10:45:00.000Z","deleted":true,"apiRequests":["POST /api/tasks","PUT /api/tasks/1793106522636-p24if2","DELETE /api/tasks/1793106522636-p24if2"]} |
-| 12-complete-and-bulk (Europe/Moscow) | Completion rerenders overdue; bulk completion and deletion use the existing sequential API. | PASS: {"singleComplete":true,"bulkComplete":2,"bulkDelete":2,"apiRequests":["GET /api/tasks","PUT /api/tasks/1793106524218-elvfl0","PUT /api/tasks/1793106524218-elvfl0","PUT /api/tasks/1793106524223-jwbtqw","DELETE /api/tasks/1793106524218-elvfl0","DELETE /api/tasks/1793106524223-jwbtqw"]} |
+| 11-crud-local-time (Europe/Moscow) | UI create/edit/delete preserves entered local deadline as the correct UTC instant. | PASS: {"createdDeadline":"2026-10-26T09:30:00.000Z","editedDeadline":"2026-10-26T10:45:00.000Z","deleted":true,"apiRequests":["POST /api/tasks","PUT /api/tasks/1793628437524-9stww6","DELETE /api/tasks/1793628437524-9stww6"]} |
+| 12-complete-and-bulk (Europe/Moscow) | Completion rerenders overdue; bulk completion and deletion use the existing sequential API. | PASS: {"singleComplete":true,"bulkComplete":2,"bulkDelete":2,"apiRequests":["GET /api/tasks","PUT /api/tasks/1793628438612-vs5ntn","PUT /api/tasks/1793628438612-vs5ntn","PUT /api/tasks/1793628438615-1664dm","DELETE /api/tasks/1793628438612-vs5ntn","DELETE /api/tasks/1793628438615-1664dm"]} |
 | 13-loading-state (Europe/Moscow) | Empty message stays hidden during initial loading and user filter changes. | PASS: {"hiddenWhileLoading":true,"apiRequests":["GET /api/tasks"]} |
 | 14-load-error (Europe/Moscow) | Failed initial GET is not displayed as an empty successful result, including after filter/reset. | PASS: {"hiddenAfterLoadFailure":true,"apiRequests":["GET /api/tasks"]} |
 | 16-keyboard-filter (Europe/Moscow) | The labelled deadline control is reachable by Tab; arrow/Home/End keys filter tasks without losing focus or calling the API. | PASS: {"titles":["tomorrow","yesterday-active","yesterday-done","today-future","today-done","today-past","without-deadline","start-of-day","end-of-day","exact-now"],"accessibleName":"Срок","keyboardModes":["overdue","today","no-deadline","all"],"focusPreserved":true,"tabToResetAndBack":true,"apiRequests":[],"screenshot":"16-keyboard-filter.png"} |

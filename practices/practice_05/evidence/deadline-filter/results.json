@@ -1,11 +1,11 @@
 {
-  "startedAt": "2026-10-27T13:08:20.670Z",
-  "finishedAt": "2026-10-27T13:08:52.215Z",
+  "startedAt": "2026-11-02T14:07:03.248Z",
+  "finishedAt": "2026-11-02T14:07:22.991Z",
   "command": "node tests/task_deadline_filter.e2e.cjs",
   "platform": "win32",
   "node": "v24.21.0",
   "playwright": "1.64.1",
-  "browser": "156.0.8078.48",
+  "browser": "156.0.8078.74",
   "fixedNow": "2026-10-26T09:00:00.000Z",
   "isolatedData": true,
   "userDataUnchanged": true,
@@ -182,8 +182,8 @@
         "deleted": true,
         "apiRequests": [
           "POST /api/tasks",
-          "PUT /api/tasks/1793106522636-p24if2",
-          "DELETE /api/tasks/1793106522636-p24if2"
+          "PUT /api/tasks/1793628437524-9stww6",
+          "DELETE /api/tasks/1793628437524-9stww6"
         ]
       }
     },
@@ -198,11 +198,11 @@
         "bulkDelete": 2,
         "apiRequests": [
           "GET /api/tasks",
-          "PUT /api/tasks/1793106524218-elvfl0",
-          "PUT /api/tasks/1793106524218-elvfl0",
-          "PUT /api/tasks/1793106524223-jwbtqw",
-          "DELETE /api/tasks/1793106524218-elvfl0",
-          "DELETE /api/tasks/1793106524223-jwbtqw"
+          "PUT /api/tasks/1793628438612-vs5ntn",
+          "PUT /api/tasks/1793628438612-vs5ntn",
+          "PUT /api/tasks/1793628438615-1664dm",
+          "DELETE /api/tasks/1793628438612-vs5ntn",
+          "DELETE /api/tasks/1793628438615-1664dm"
         ]
       }
     },
