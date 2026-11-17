@@ -1,0 +1,712 @@
+{
+  "name": "Practice 7.1 - AI Review",
+  "nodes": [
+    {
+      "parameters": {
+        "url": "=https://api.github.com/repos/{{ $('PR Context').first().json.owner }}/{{ $('PR Context').first().json.repo }}/pulls/{{ $('PR Context').first().json.pr_number }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github.v3.diff"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text",
+              "outputPropertyName": "diff"
+            }
+          }
+        }
+      },
+      "id": "1c6f8946-6333-4315-a110-43a9ca76c2ca",
+      "name": "Get file's PR info",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1024,
+        16
+      ],
+      "typeVersion": 4.2,
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "OyRZyi3TwmTCdNku",
+          "name": "Bearer Auth account 29"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "={{   $('PR Context').first().json.review_kind === 'other'     ? 'anthropic/claude-sonnet-4'     : 'openai/gpt-5' }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "af255fe4-c3c0-4f81-9f9f-f9cc702fb716",
+      "name": "OpenAI Chat Model1",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "position": [
+        1200,
+        224
+      ],
+      "typeVersion": 1.2,
+      "credentials": {
+        "openAiApi": {
+          "id": "8PChnGU2TkqhaHrK",
+          "name": "OpenAI account 35"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "review",
+        "owner": {
+          "__rl": true,
+          "value": "al3ksandraa",
+          "mode": "list",
+          "cachedResultName": "al3ksandraa",
+          "cachedResultUrl": "https://github.com/al3ksandraa"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "n8n-review-practice",
+          "mode": "list",
+          "cachedResultName": "n8n-review-practice",
+          "cachedResultUrl": "https://github.com/al3ksandraa/n8n-review-practice"
+        },
+        "pullRequestNumber": "={{ $('PR Context').first().json.pr_number }}",
+        "event": "comment",
+        "body": "={{\n  '## AI Review — '\n  + $('PR Context').first().json.review_kind\n  + '\\n\\n'\n  + $json.output\n}}",
+        "additionalFields": {}
+      },
+      "id": "b871ffbf-d357-4c28-af3d-f5223dfc5d36",
+      "name": "GitHub Robot1",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        1488,
+        16
+      ],
+      "webhookId": "4392c85d-31e9-4ebd-8f4d-d556cbb8f3e0",
+      "typeVersion": 1.1,
+      "credentials": {
+        "githubApi": {
+          "id": "5A6bNYhhzPUJPaSp",
+          "name": "GitHub practice"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "al3ksandraa",
+          "mode": "list",
+          "cachedResultName": "al3ksandraa",
+          "cachedResultUrl": "https://github.com/al3ksandraa"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "n8n-review-practice",
+          "mode": "list",
+          "cachedResultName": "n8n-review-practice",
+          "cachedResultUrl": "https://github.com/al3ksandraa/n8n-review-practice"
+        },
+        "issueNumber": "={{ $('PR Context').first().json.pr_number }}",
+        "editFields": {
+          "labels": [
+            {
+              "label": "ReviewedByAI"
+            }
+          ]
+        }
+      },
+      "id": "a52aee8d-6da1-42f7-a105-14887dd74367",
+      "name": "Add Label to PR1",
+      "type": "n8n-nodes-base.github",
+      "position": [
+        1840,
+        16
+      ],
+      "webhookId": "70d2db56-965b-4f1f-817c-1fbb311320c0",
+      "typeVersion": 1,
+      "credentials": {
+        "githubApi": {
+          "id": "5A6bNYhhzPUJPaSp",
+          "name": "GitHub practice"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are a senior Python developer.\n\nСделай code review ТОЛЬКО изменённых строк в diff.\nНайди:\n\t•\tбаги\n\t•\tпроблемы безопасности\n\t•\tрегрессии\n\t•\tпроблемы производительности\n\t•\tнарушения best practices\n\nДай конкретные рекомендации и примеры исправлений.\n\n{{ $json.diff }}",
+        "options": {
+          "systemMessage": ""
+        }
+      },
+      "id": "aabc19a7-7bd4-48b8-8f76-a02ed80de253",
+      "name": "Code Review Agent1",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        1200,
+        16
+      ],
+      "typeVersion": 1.9
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "931f5234-b3af-46cb-846f-4eea9854aa47",
+              "leftValue": "={{ $json.body.action }}",
+              "rightValue": "opened",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        176,
+        16
+      ],
+      "id": "c20d39c2-be9b-420e-8cc0-14647423aaad",
+      "name": "Only opened"
+    },
+    {
+      "parameters": {
+        "owner": {
+          "__rl": true,
+          "value": "al3ksandraa",
+          "mode": "list",
+          "cachedResultName": "al3ksandraa",
+          "cachedResultUrl": "https://github.com/al3ksandraa"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "n8n-review-practice",
+          "mode": "list",
+          "cachedResultName": "n8n-review-practice",
+          "cachedResultUrl": "https://github.com/al3ksandraa/n8n-review-practice"
+        },
+        "events": [
+          "issue_comment"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.githubTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        208
+      ],
+      "id": "cf6c2677-923d-4090-9681-2c1a7c95a2e3",
+      "name": "Comment Events",
+      "webhookId": "2f21108c-888c-4dbf-b1e9-985c65afa907",
+      "credentials": {
+        "githubApi": {
+          "id": "5A6bNYhhzPUJPaSp",
+          "name": "GitHub practice"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "10b9e9e7-acf9-4d83-abf7-014f9333a6f3",
+              "leftValue": "={{\n  $json.body.action === 'created'\n  && Boolean($json.body.issue?.pull_request)\n  && ['/make_ai_review', '/make_other_ai_review']\n    .includes(($json.body.comment?.body ?? '').trim())\n}}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        176,
+        208
+      ],
+      "id": "0ed51706-1b33-4f51-815d-7ffbae3a32dd",
+      "name": "Review Command"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4e31dbcd-b3b1-4603-9094-2e8c8a2172a6",
+              "name": "owner",
+              "value": "={{ $json.body.repository.owner.login }}",
+              "type": "string"
+            },
+            {
+              "id": "ceadf7ef-ee57-4e47-ab11-84ef0ff6b7a1",
+              "name": "repo",
+              "value": "={{ $json.body.repository.name }}",
+              "type": "string"
+            },
+            {
+              "id": "1b706672-4bfc-472d-a133-244ac7c53cfb",
+              "name": "pr_number",
+              "value": "={{ $json.body.pull_request?.number ?? $json.body.issue?.number }}",
+              "type": "number"
+            },
+            {
+              "id": "5df8a918-d22f-4a4e-9e67-35c0bbe5c503",
+              "name": "pr_title",
+              "value": "={{ $json.body.pull_request?.title ?? $json.body.issue?.title }}",
+              "type": "string"
+            },
+            {
+              "id": "58e78cab-fcc6-4b20-9f72-8e4b48606468",
+              "name": "review_kind",
+              "value": "={{   ($json.body.comment?.body ?? '').trim() === '/make_other_ai_review'     ? 'other'     : 'main' }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        432,
+        16
+      ],
+      "id": "78736e42-573f-4785-ab2d-8d809486e2b5",
+      "name": "PR Context"
+    },
+    {
+      "parameters": {
+        "owner": {
+          "__rl": true,
+          "value": "al3ksandraa",
+          "mode": "list",
+          "cachedResultName": "al3ksandraa",
+          "cachedResultUrl": "https://github.com/al3ksandraa"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "n8n-review-practice",
+          "mode": "list",
+          "cachedResultName": "n8n-review-practice",
+          "cachedResultUrl": "https://github.com/al3ksandraa/n8n-review-practice"
+        },
+        "events": [
+          "pull_request"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.githubTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        16
+      ],
+      "id": "db123e02-268f-45ba-aa38-c7eb7a2e2ab3",
+      "name": "PR Events",
+      "webhookId": "c3d64f33-f5a3-4cd8-8e3e-db01a8f1cf7a",
+      "credentials": {
+        "githubApi": {
+          "id": "5A6bNYhhzPUJPaSp",
+          "name": "GitHub practice"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "=https://api.github.com/repos/{{ $('PR Context').first().json.owner }}/{{ $('PR Context').first().json.repo }}/pulls/{{ $('PR Context').first().json.pr_number }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBearerAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        592,
+        16
+      ],
+      "id": "f14fe283-9090-4fe6-ac1e-c1110a1338d1",
+      "name": "Get PR Metadata",
+      "credentials": {
+        "httpBearerAuth": {
+          "id": "OyRZyi3TwmTCdNku",
+          "name": "Bearer Auth account 29"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "dataTableId": {
+          "__rl": true,
+          "value": "yr8axz0Tqyi9LYMs",
+          "mode": "list",
+          "cachedResultName": "reviewed_prs",
+          "cachedResultUrl": "/projects/vl2ispo1OuXPsGet/datatables/yr8axz0Tqyi9LYMs"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "pr_id",
+              "keyValue": "={{ $('Get PR Metadata').first().json.id }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "pr_id": "={{ $('Get PR Metadata').first().json.id }}",
+            "repository": "=\t{{ $('PR Context').first().json.owner + '/' + $('PR Context').first().json.repo }}",
+            "pr_number": "={{ $('PR Context').first().json.pr_number }}",
+            "review_kind": "=\t{{ $('PR Context').first().json.review_kind }}",
+            "reviewed_at": "={{ $now.toISO() }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "pr_id",
+              "displayName": "pr_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "repository",
+              "displayName": "repository",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "pr_number",
+              "displayName": "pr_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "review_kind",
+              "displayName": "review_kind",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "reviewed_at",
+              "displayName": "reviewed_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        1664,
+        16
+      ],
+      "id": "1d42fdde-9507-47ca-b5a1-a8e584cde738",
+      "name": "Save Reviewed PR"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "73b7f7af-cebc-48d2-899b-7af7f6820eda",
+              "leftValue": "={{ $('PR Context').first().json.review_kind }}",
+              "rightValue": "other",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        720,
+        16
+      ],
+      "id": "4924839c-516c-4df6-9514-ec5314624416",
+      "name": "Other model?"
+    },
+    {
+      "parameters": {
+        "operation": "rowNotExists",
+        "dataTableId": {
+          "__rl": true,
+          "value": "yr8axz0Tqyi9LYMs",
+          "mode": "list",
+          "cachedResultName": "reviewed_prs",
+          "cachedResultUrl": "/projects/vl2ispo1OuXPsGet/datatables/yr8axz0Tqyi9LYMs"
+        },
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "pr_id",
+              "keyValue": "={{ $('Get PR Metadata').first().json.id }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        880,
+        160
+      ],
+      "id": "d49b64e1-3a8c-42af-b6a2-fac947ff7801",
+      "name": "Not Reviewed Yet"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Get file's PR info": {
+      "main": [
+        [
+          {
+            "node": "Code Review Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Code Review Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GitHub Robot1": {
+      "main": [
+        [
+          {
+            "node": "Save Reviewed PR",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code Review Agent1": {
+      "main": [
+        [
+          {
+            "node": "GitHub Robot1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Only opened": {
+      "main": [
+        [
+          {
+            "node": "PR Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Comment Events": {
+      "main": [
+        [
+          {
+            "node": "Review Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Review Command": {
+      "main": [
+        [
+          {
+            "node": "PR Context",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PR Context": {
+      "main": [
+        [
+          {
+            "node": "Get PR Metadata",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PR Events": {
+      "main": [
+        [
+          {
+            "node": "Only opened",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get PR Metadata": {
+      "main": [
+        [
+          {
+            "node": "Other model?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Reviewed PR": {
+      "main": [
+        [
+          {
+            "node": "Add Label to PR1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Other model?": {
+      "main": [
+        [
+          {
+            "node": "Get file's PR info",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Not Reviewed Yet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Not Reviewed Yet": {
+      "main": [
+        [
+          {
+            "node": "Get file's PR info",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "373feae4-f879-4e32-8670-b5ebcdcff1f4",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "68dbbb4e8fa686c3fd4e9982ade6836edb66976f207553e7ac22df961581c78c"
+  },
+  "nodeGroups": [],
+  "id": "2tgLJrCB8pC9KvHO",
+  "tags": []
+}

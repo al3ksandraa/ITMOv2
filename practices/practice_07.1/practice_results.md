@@ -9,17 +9,17 @@
 Материалы:
 
 - [Тестовый PR №1](https://github.com/al3ksandraa/n8n-review-practice/pull/1).
-- [Экспорт workflow в JSON](<Practice 7.1 - AI Review.json>).
+- [Экспорт workflow в JSON](workflows/practice_ai_review.json).
 
 Схема сценария:
 
-![Workflow с запуском при открытии PR и по команде](image.png)
+![Workflow с запуском при открытии PR и по команде](screenshots/image.png)
 
 Успешный запуск при открытии PR — Execution #1963:
 
-![Успешное выполнение ветки PR Events](image-1.png)
+![Успешное выполнение ветки PR Events](screenshots/image-1.png)
 
 Успешный запуск по команде `/make_ai_review` — Execution #1975:
 
-![Успешное выполнение ветки Comment Events](image-2.png)
+![Успешное выполнение ветки Comment Events](screenshots/image-2.png)
 
