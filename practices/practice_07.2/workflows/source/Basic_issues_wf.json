@@ -1,0 +1,405 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "content": "# Задача:\n- у нас есть поток issues и нам нужно сделать категоризацию их по типам bug | feature | task",
+        "height": 192,
+        "width": 304
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -80,
+        -256
+      ],
+      "typeVersion": 1,
+      "id": "b963d10d-8eba-4ab8-a089-e06c87a357b3",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "# Trigger on issue"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -368,
+        -32
+      ],
+      "typeVersion": 1,
+      "id": "719cc609-e9ba-4038-9df3-a7b730934a69",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "# Request data"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -48,
+        -48
+      ],
+      "typeVersion": 1,
+      "id": "39db85e8-b8cb-431a-bb03-db5058e7d1c0",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "# AI"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        256,
+        -32
+      ],
+      "typeVersion": 1,
+      "id": "4ddb2bec-4bb8-4954-90b6-b96d51b8b677",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "# Switch label"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        560,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "d12c053f-f301-4c8b-9d15-9669743f31d2",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "# Update issue"
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        880,
+        -32
+      ],
+      "typeVersion": 1,
+      "id": "de7de4ce-4fea-4efa-82e2-673bc01b8465",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "owner": {
+          "__rl": true,
+          "value": "ai-course-avito",
+          "mode": "list",
+          "cachedResultName": "ai-course-avito",
+          "cachedResultUrl": "https://github.com/ai-course-avito"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "sample-python-project",
+          "mode": "list",
+          "cachedResultName": "sample-python-project",
+          "cachedResultUrl": "https://github.com/ai-course-avito/sample-python-project"
+        },
+        "events": [
+          "issues"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.githubTrigger",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        224
+      ],
+      "id": "d0c88e0a-37eb-4663-b03f-276caf569b7a",
+      "name": "Github Trigger",
+      "webhookId": "7c5b0cb9-a325-44ab-8cbf-2329ec15698a",
+      "credentials": {
+        "githubApi": {
+          "id": "m4bH8KpPvEKECwJK",
+          "name": "My GitHub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Классифицируй Github Issue на основе следующих данных:\n\nTitle: {{ $json.body.issue.title }}  \nBody: {{ $json.body.issue.body }}\n\nДопустимые классы: bug, feature, task.",
+        "hasOutputParser": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        256,
+        224
+      ],
+      "id": "caf2481d-3793-4c82-8a15-c61e7ea2da36",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "ai-course-avito",
+          "mode": "list",
+          "cachedResultName": "ai-course-avito",
+          "cachedResultUrl": "https://github.com/ai-course-avito"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "sample-python-project",
+          "mode": "list",
+          "cachedResultName": "sample-python-project",
+          "cachedResultUrl": "https://github.com/ai-course-avito/sample-python-project"
+        },
+        "issueNumber": "={{ $('Github Trigger').item.json.body.issue.number }}",
+        "editFields": {
+          "labels": [
+            {
+              "label": "={{ $json.output.type }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        912,
+        336
+      ],
+      "id": "c2056c8a-686e-452a-bee1-6782a399f2ff",
+      "name": "Edit an issue",
+      "webhookId": "ac355be5-ec8f-4bfd-9b3e-f15227aeb1a6",
+      "credentials": {
+        "githubApi": {
+          "id": "m4bH8KpPvEKECwJK",
+          "name": "My GitHub"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        128,
+        432
+      ],
+      "id": "a8588e81-05a1-4210-9567-e1a3b577bb80",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "HRWW8dHI5ZqcvHv9",
+          "name": "OpenAi vsellm.ru"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a9ab23d9-3648-42e4-b4d6-85f5ffcb42fc",
+              "leftValue": "={{ $json.body.action }}",
+              "rightValue": "opened",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -64,
+        224
+      ],
+      "id": "c2d9f38c-136d-4e91-b634-ec9083f38819",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"type\": \"bug|feature|task\",\n    \"confidience\": 1\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        432,
+        432
+      ],
+      "id": "79a6b50f-48fc-42f9-bc74-6a0057574863",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "9ed10759-7cea-4249-bc92-98a51d43cee7",
+              "leftValue": "={{ $json.output.confidience }}",
+              "rightValue": 0.6,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        608,
+        224
+      ],
+      "id": "e8eaa1f8-e039-47f8-bed3-555a8816886f",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "operation": "edit",
+        "owner": {
+          "__rl": true,
+          "value": "ai-course-avito",
+          "mode": "list",
+          "cachedResultName": "ai-course-avito",
+          "cachedResultUrl": "https://github.com/ai-course-avito"
+        },
+        "repository": {
+          "__rl": true,
+          "value": "sample-python-project",
+          "mode": "list",
+          "cachedResultName": "sample-python-project",
+          "cachedResultUrl": "https://github.com/ai-course-avito/sample-python-project"
+        },
+        "issueNumber": "={{ $('Github Trigger').item.json.body.issue.number }}",
+        "editFields": {
+          "labels": [
+            {
+              "label": "=need-triage"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1.1,
+      "position": [
+        912,
+        160
+      ],
+      "id": "c5b9817f-e1b7-4aed-9b5a-7c58d4277b18",
+      "name": "Edit an issue1",
+      "webhookId": "ac355be5-ec8f-4bfd-9b3e-f15227aeb1a6",
+      "credentials": {
+        "githubApi": {
+          "id": "m4bH8KpPvEKECwJK",
+          "name": "My GitHub"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Github Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Edit an issue1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Edit an issue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f4300700b5a89163b88ad6a908ff9e3076c705e8b03a3f40f03ff2f29f7e4289"
+  }
+}
