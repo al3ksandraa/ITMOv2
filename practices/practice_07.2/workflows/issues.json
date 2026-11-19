@@ -74,8 +74,8 @@
       },
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        2000,
-        0
+        2064,
+        -112
       ],
       "typeVersion": 1,
       "id": "1ac63d55-27c6-4b70-975d-b65dc8107f86",
@@ -439,8 +439,8 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        2400,
-        384
+        2832,
+        464
       ],
       "id": "2649ce9a-823d-490c-a6dc-7b8cd095fbaa",
       "name": "Issue Response",
@@ -507,8 +507,8 @@
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.5,
       "position": [
-        1984,
-        224
+        2416,
+        144
       ],
       "id": "2a545d9f-938b-480c-a3eb-94775f2484d5",
       "name": "Add Newcomer Label",
@@ -538,8 +538,8 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        2208,
-        224
+        2608,
+        144
       ],
       "id": "f647de32-5509-4a04-ae8b-9d1354110ca4",
       "name": "Create a comment on an issue",
@@ -743,11 +743,167 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        2656,
-        560
+        3008,
+        576
       ],
       "id": "f38b8acf-3ffa-476b-b98e-88fb0026fa32",
       "name": "Save processed issue"
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "dataTableId": {
+          "__rl": true,
+          "value": "6KTl3ZuYhh5zfVSg",
+          "mode": "list",
+          "cachedResultName": "welcomed_contributors",
+          "cachedResultUrl": "/projects/vl2ispo1OuXPsGet/datatables/6KTl3ZuYhh5zfVSg"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "author_id",
+              "keyValue": "={{ $('Github Trigger').first().json.body.issue.user.id }}"
+            },
+            {
+              "keyName": "repository",
+              "keyValue": "={{ $('Github Trigger').first().json.body.repository.full_name }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        2016,
+        208
+      ],
+      "id": "27adbd3d-00c3-4451-9ca5-07d8e1564e2b",
+      "name": "Find welcomed contributor",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "622e6dc2-bc8f-4adf-90f0-e3d40dac135f",
+              "leftValue": "={{ $json.author_id != null }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        2208,
+        256
+      ],
+      "id": "cfaaf270-16e1-4a70-a133-5d1a96e2cdc8",
+      "name": "Already welcomed?"
+    },
+    {
+      "parameters": {
+        "operation": "upsert",
+        "dataTableId": {
+          "__rl": true,
+          "value": "6KTl3ZuYhh5zfVSg",
+          "mode": "list",
+          "cachedResultName": "welcomed_contributors",
+          "cachedResultUrl": "/projects/vl2ispo1OuXPsGet/datatables/6KTl3ZuYhh5zfVSg"
+        },
+        "matchType": "allConditions",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "author_id",
+              "keyValue": "={{ $('Github Trigger').first().json.body.issue.user.id }}"
+            },
+            {
+              "keyName": "repository",
+              "keyValue": "={{ $('Github Trigger').first().json.body.repository.full_name }}"
+            }
+          ]
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "author_id": "={{ $('Github Trigger').first().json.body.issue.user.id }}",
+            "author": "={{ $('Github Trigger').first().json.body.issue.user.login }}",
+            "repository": "={{ $('Github Trigger').first().json.body.repository.full_name }}",
+            "welcomed_at": "={{ $now.toISO() }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "author_id",
+              "displayName": "author_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "author",
+              "displayName": "author",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "repository",
+              "displayName": "repository",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "welcomed_at",
+              "displayName": "welcomed_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.dataTable",
+      "typeVersion": 1.1,
+      "position": [
+        2800,
+        144
+      ],
+      "id": "3f01145f-b32a-45f4-b457-b3b2f397d392",
+      "name": "Save welcomed contributor"
     }
   ],
   "pinData": {},
@@ -843,7 +999,7 @@
       "main": [
         [
           {
-            "node": "Add Newcomer Label",
+            "node": "Find welcomed contributor",
             "type": "main",
             "index": 0
           }
@@ -872,7 +1028,7 @@
       "main": [
         [
           {
-            "node": "Issue Response",
+            "node": "Save welcomed contributor",
             "type": "main",
             "index": 0
           }
@@ -933,6 +1089,46 @@
           }
         ]
       ]
+    },
+    "Find welcomed contributor": {
+      "main": [
+        [
+          {
+            "node": "Already welcomed?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Already welcomed?": {
+      "main": [
+        [
+          {
+            "node": "Issue Response",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Add Newcomer Label",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save welcomed contributor": {
+      "main": [
+        [
+          {
+            "node": "Issue Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
@@ -940,7 +1136,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "619d223d-24b1-4ccd-afbf-6be9858a691a",
+  "versionId": "f55ba45f-61a4-4b1b-b45d-ef81309dbe27",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "68dbbb4e8fa686c3fd4e9982ade6836edb66976f207553e7ac22df961581c78c"
