@@ -439,8 +439,8 @@
       "type": "n8n-nodes-base.github",
       "typeVersion": 1.1,
       "position": [
-        2832,
-        464
+        3008,
+        480
       ],
       "id": "2649ce9a-823d-490c-a6dc-7b8cd095fbaa",
       "name": "Issue Response",
@@ -743,11 +743,12 @@
       "type": "n8n-nodes-base.dataTable",
       "typeVersion": 1.1,
       "position": [
-        3008,
-        576
+        3184,
+        592
       ],
       "id": "f38b8acf-3ffa-476b-b98e-88fb0026fa32",
-      "name": "Save processed issue"
+      "name": "Save processed issue",
+      "alwaysOutputData": false
     },
     {
       "parameters": {
@@ -904,6 +905,116 @@
       ],
       "id": "3f01145f-b32a-45f4-b457-b3b2f397d392",
       "name": "Save welcomed contributor"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 4
+          },
+          "conditions": [
+            {
+              "id": "c0e4d335-19e8-4635-b7fd-2bc404a38350",
+              "leftValue": "={{ $('Classification').first().json.route }}",
+              "rightValue": "bug",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.4,
+      "position": [
+        3424,
+        592
+      ],
+      "id": "358cc7b4-cd0a-4c78-bb28-211082b9d40a",
+      "name": "Is Bug"
+    },
+    {
+      "parameters": {
+        "workflowId": {
+          "__rl": true,
+          "value": "PyctTVHFIlUrSLs0",
+          "mode": "list",
+          "cachedResultUrl": "/workflow/PyctTVHFIlUrSLs0",
+          "cachedResultName": "Auto-fix Bug"
+        },
+        "workflowInputs": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "repository": "={{ $('Github Trigger').first().json.body.repository.full_name }}",
+            "issueNumber": "={{ $('Github Trigger').first().json.body.issue.number }}",
+            "title": "={{ $('Github Trigger').first().json.body.issue.title }}",
+            "body": "={{ $('Github Trigger').first().json.body.issue.body ?? '' }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "repository",
+              "displayName": "repository",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "issueNumber",
+              "displayName": "issueNumber",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "number",
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            },
+            {
+              "id": "body",
+              "displayName": "body",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "canBeUsedToMatch": true,
+              "type": "string",
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": true
+        },
+        "options": {
+          "waitForSubWorkflow": false
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.4,
+      "position": [
+        3680,
+        576
+      ],
+      "id": "9d21cd88-684c-4354-8d31-72041d8a9c35",
+      "name": "Call 'Auto-fix Bug'"
     }
   ],
   "pinData": {},
@@ -1129,6 +1240,28 @@
           }
         ]
       ]
+    },
+    "Save processed issue": {
+      "main": [
+        [
+          {
+            "node": "Is Bug",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Bug": {
+      "main": [
+        [
+          {
+            "node": "Call 'Auto-fix Bug'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
@@ -1136,7 +1269,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "f55ba45f-61a4-4b1b-b45d-ef81309dbe27",
+  "versionId": "bdf59084-7f83-414a-a6c9-461e180f2d6b",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "68dbbb4e8fa686c3fd4e9982ade6836edb66976f207553e7ac22df961581c78c"

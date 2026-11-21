@@ -25,7 +25,8 @@ GitHub Trigger принимает события `issues`; фильтр проп
 В таблице сохранён автор `EgorikTomatoes` для тестового репозитория:
 
 ![Таблица welcomed_contributors с ID автора, логином, репозиторием и временем приветствия](screenshots/practice/03-welcomed-contributors-table.png)
-![alt text](screenshots/practice/image.png)
+
+![Два обращения одного автора. Метка first-time-contributor появилась только у первого](screenshots/practice/07-two-issues.png)
 
 ## 3. Отдельный классификатор
 
