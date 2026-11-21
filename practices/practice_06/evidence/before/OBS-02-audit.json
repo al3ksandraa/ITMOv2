@@ -1,0 +1,219 @@
+{
+  "id": "OBS-02-audit",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 6234,
+    "pid": 13472,
+    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-ncw_b5uo"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: alice",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:6234",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"alice\", \"password\": \"learn-alice\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:27 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"ae82df20c8db4b77af4727262ead2c19\"}",
+        "json": {
+          "token": "ae82df20c8db4b77af4727262ead2c19"
+        }
+      }
+    },
+    {
+      "label": "denied admin action",
+      "request": {
+        "method": "GET",
+        "target": "/admin/export",
+        "headers": {
+          "Host": "127.0.0.1:6234",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "ae82df20c8db4b77af4727262ead2c19"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:27 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "23"
+        },
+        "body_text": "{\"error\": \"staff only\"}",
+        "json": {
+          "error": "staff only"
+        }
+      }
+    },
+    {
+      "label": "same client with forged role",
+      "request": {
+        "method": "GET",
+        "target": "/admin/export",
+        "headers": {
+          "Host": "127.0.0.1:6234",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "ae82df20c8db4b77af4727262ead2c19",
+          "X-Role": "staff"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:27 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "188"
+        },
+        "body_text": "[{\"id\": 1, \"name\": \"TEST_ALICE\", \"email\": \"alice@example.invalid\", \"address\": \"TEST_ADDRESS_A\"}, {\"id\": 2, \"name\": \"TEST_BOB\", \"email\": \"bob@example.invalid\", \"address\": \"TEST_ADDRESS_B\"}]",
+        "json": [
+          {
+            "id": 1,
+            "name": "TEST_ALICE",
+            "email": "alice@example.invalid",
+            "address": "TEST_ADDRESS_A"
+          },
+          {
+            "id": 2,
+            "name": "TEST_BOB",
+            "email": "bob@example.invalid",
+            "address": "TEST_ADDRESS_B"
+          }
+        ]
+      }
+    },
+    {
+      "label": "",
+      "request": {
+        "method": "GET",
+        "target": "/debug/logs",
+        "headers": {
+          "Host": "127.0.0.1:6234",
+          "Accept-Encoding": "identity",
+          "Connection": "close"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:27 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "815"
+        },
+        "body_text": "[{\"method\": \"POST\", \"target\": \"/login\", \"body\": {\"username\": \"alice\", \"password\": \"learn-alice\"}, \"headers\": {\"Host\": \"127.0.0.1:6234\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"Content-Length\": \"48\"}}, {\"method\": \"GET\", \"target\": \"/admin/export\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:6234\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"ae82df20c8db4b77af4727262ead2c19\"}}, {\"method\": \"GET\", \"target\": \"/admin/export\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:6234\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"ae82df20c8db4b77af4727262ead2c19\", \"X-Role\": \"staff\"}}, {\"method\": \"GET\", \"target\": \"/debug/logs\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:6234\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\"}}]",
+        "json": [
+          {
+            "method": "POST",
+            "target": "/login",
+            "body": {
+              "username": "alice",
+              "password": "learn-alice"
+            },
+            "headers": {
+              "Host": "127.0.0.1:6234",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "Content-Type": "application/json",
+              "Content-Length": "48"
+            }
+          },
+          {
+            "method": "GET",
+            "target": "/admin/export",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:6234",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "ae82df20c8db4b77af4727262ead2c19"
+            }
+          },
+          {
+            "method": "GET",
+            "target": "/admin/export",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:6234",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "ae82df20c8db4b77af4727262ead2c19",
+              "X-Role": "staff"
+            }
+          },
+          {
+            "method": "GET",
+            "target": "/debug/logs",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:6234",
+              "Accept-Encoding": "identity",
+              "Connection": "close"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "status": "audit_metadata_absence_observed",
+  "effect": {
+    "event_fields": [
+      "body",
+      "headers",
+      "method",
+      "target"
+    ],
+    "admin_events": [
+      {
+        "method": "GET",
+        "target": "/admin/export",
+        "body": {},
+        "headers": {
+          "Host": "127.0.0.1:6234",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "ae82df20c8db4b77af4727262ead2c19"
+        }
+      },
+      {
+        "method": "GET",
+        "target": "/admin/export",
+        "body": {},
+        "headers": {
+          "Host": "127.0.0.1:6234",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "ae82df20c8db4b77af4727262ead2c19",
+          "X-Role": "staff"
+        }
+      }
+    ]
+  },
+  "limitation": "No durable audit requirements specified; lack of attribution is an observation, not a reproduced log forgery.",
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

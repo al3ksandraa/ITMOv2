@@ -1,0 +1,126 @@
+{
+  "started_at_moscow": "2026-11-02T02:18:04.595180+03:00",
+  "command": [
+    "audit_before.py",
+    "--output",
+    "../evidence/after"
+  ],
+  "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]",
+  "source_sha256": {
+    "service.py": "068774100d9633bc2acff10f358b00716d6fa59acce537b662b07c196a7bb890",
+    "sandbox.py": "221135fb67bc72c90e8d533409f89e8282004313656fa9ae838d04f575a1ac4a"
+  },
+  "transport": "http.client direct loopback; no proxy",
+  "llm_used": false,
+  "cases": [
+    {
+      "id": "V-01",
+      "confirmed": false,
+      "status": null,
+      "evidence": "V-01.json"
+    },
+    {
+      "id": "V-02",
+      "confirmed": false,
+      "status": null,
+      "evidence": "V-02.json"
+    },
+    {
+      "id": "V-03",
+      "confirmed": false,
+      "status": null,
+      "evidence": "V-03.json"
+    },
+    {
+      "id": "V-04",
+      "confirmed": false,
+      "status": null,
+      "evidence": "V-04.json"
+    },
+    {
+      "id": "V-05",
+      "confirmed": false,
+      "status": null,
+      "evidence": "V-05.json"
+    },
+    {
+      "id": "V-06",
+      "confirmed": false,
+      "status": null,
+      "evidence": "V-06.json"
+    },
+    {
+      "id": "V-07",
+      "confirmed": false,
+      "status": "log_disclosure_blocked",
+      "evidence": "V-07.json"
+    },
+    {
+      "id": "V-08",
+      "confirmed": false,
+      "status": null,
+      "evidence": "V-08.json"
+    },
+    {
+      "id": "V-09",
+      "confirmed": false,
+      "status": null,
+      "evidence": "V-09.json"
+    },
+    {
+      "id": "V-10",
+      "confirmed": false,
+      "status": null,
+      "evidence": "V-10.json"
+    },
+    {
+      "id": "V-11",
+      "confirmed": false,
+      "status": null,
+      "evidence": "V-11.json"
+    },
+    {
+      "id": "H-09-context",
+      "confirmed": null,
+      "status": "input_contamination_confirmed; model_behavior_not_tested",
+      "evidence": "H-09-context.json"
+    },
+    {
+      "id": "OBS-01-resources",
+      "confirmed": null,
+      "status": "bounded_growth_observed; denial_of_service_not_tested",
+      "evidence": "OBS-01-resources.json"
+    },
+    {
+      "id": "OBS-02-audit",
+      "confirmed": null,
+      "status": "audit_metadata_observed",
+      "evidence": "OBS-02-audit.json"
+    },
+    {
+      "id": "CONTROLS",
+      "confirmed": null,
+      "status": "controls_checked",
+      "evidence": "CONTROLS.json"
+    }
+  ],
+  "routes": [
+    "GET /admin/export",
+    "GET /assistant/context",
+    "GET /debug/logs",
+    "GET /files",
+    "GET /health",
+    "GET /missing",
+    "GET /orders",
+    "GET /products",
+    "GET /profile",
+    "GET /reviews/view",
+    "GET /search",
+    "POST /assistant/execute",
+    "POST /login",
+    "POST /orders",
+    "POST /reviews"
+  ],
+  "finished_at_moscow": "2026-11-02T02:18:10.352883+03:00",
+  "source_unchanged": true
+}

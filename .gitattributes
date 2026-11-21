@@ -1,0 +1,4 @@
+# Evidence and source snapshots are verified by SHA-256; preserve their exact bytes.
+practices/practice_06/evidence/** -text
+# These Python sources must match the byte hashes recorded in the evidence.
+practices/practice_06/lab/*.py -text

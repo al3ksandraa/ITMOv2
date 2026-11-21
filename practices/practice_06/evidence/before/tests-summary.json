@@ -1,0 +1,77 @@
+{
+  "started_at_moscow": "2026-10-28T10:44:19.935520+03:00",
+  "finished_at_moscow": "2026-10-28T10:44:34.407897+03:00",
+  "python": "3.13.9 (tags/v3.13.9:8183fa5, Oct 14 2025, 14:09:13) [MSC v.1944 64 bit (AMD64)]",
+  "command": [
+    "record_tests.py"
+  ],
+  "working_directory": "D:\\Documents\\Vibecoding\\ITMOv2\\practices\\practice_06\\lab",
+  "NO_PROXY": "127.0.0.1,localhost",
+  "tests_run": 59,
+  "failures": 38,
+  "errors": 0,
+  "skipped": 0,
+  "expected_failures": 0,
+  "exit_code": 1,
+  "groups": {
+    "baseline": {
+      "tests": 16,
+      "passed": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "security": {
+      "tests": 43,
+      "passed": 5,
+      "failures": 38,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "failed_test_ids": [
+    "test_security.SecurityHttpTest.test_v01_invalid_token_does_not_read_profile",
+    "test_security.SecurityHttpTest.test_v01_orders_only_show_owner",
+    "test_security.SecurityHttpTest.test_v01_orders_require_session",
+    "test_security.SecurityHttpTest.test_v01_other_profile_not_disclosed",
+    "test_security.SecurityHttpTest.test_v01_profile_requires_session",
+    "test_security.SecurityHttpTest.test_v01_search_does_not_disclose_other_profile",
+    "test_security.SecurityHttpTest.test_v02_context_id_cannot_select_other_orders",
+    "test_security.SecurityHttpTest.test_v02_profile_input_cannot_expand_selection",
+    "test_security.SecurityHttpTest.test_v02_search_input_is_literal",
+    "test_security.SecurityHttpTest.test_v03_client_cannot_claim_staff",
+    "test_security.SecurityHttpTest.test_v03_role_header_without_session_is_not_authority",
+    "test_security.SecurityHttpTest.test_v03_staff_session_does_not_need_role_header",
+    "test_security.SecurityHttpTest.test_v04_customer_cannot_reduce_price",
+    "test_security.SecurityHttpTest.test_v04_negative_price_not_persisted",
+    "test_security.SecurityHttpTest.test_v04_null_price_not_persisted",
+    "test_security.SecurityHttpTest.test_v04_text_price_not_persisted",
+    "test_security.SecurityHttpTest.test_v05_other_users_receipt_denied",
+    "test_security.SecurityHttpTest.test_v05_receipt_requires_session",
+    "test_security.SecurityHttpTest.test_v05_traversal_to_operator_note_denied",
+    "test_security.SecurityHttpTest.test_v06_review_is_not_executable_html",
+    "test_security.SecurityHttpTest.test_v07_anonymous_cannot_read_request_logs",
+    "test_security.SecurityHttpTest.test_v07_customer_cannot_read_request_logs",
+    "test_security.SecurityHttpTest.test_v08_context_requires_session",
+    "test_security.SecurityHttpTest.test_v08_other_order_context_denied",
+    "test_security.SecurityHttpTest.test_v09_anonymous_cannot_export_via_tool",
+    "test_security.SecurityHttpTest.test_v09_anonymous_cannot_read_file_via_tool",
+    "test_security.SecurityHttpTest.test_v09_customer_cannot_export_via_tool",
+    "test_security.SecurityHttpTest.test_v09_customer_cannot_read_operator_note_via_tool",
+    "test_security.SecurityHttpTest.test_v09_customer_cannot_read_other_receipt_via_tool",
+    "test_security.SecurityHttpTest.test_v10_anonymous_cannot_destroy_fixture",
+    "test_security.SecurityHttpTest.test_v10_customer_cannot_destroy_fixture",
+    "test_security.SecurityHttpTest.test_v11_json_array_is_client_error",
+    "test_security.SecurityHttpTest.test_v11_malformed_json_is_client_error",
+    "test_security.SecurityHttpTest.test_v11_missing_file_does_not_disclose_internal_path",
+    "test_security.SecurityHttpTest.test_v11_missing_product_is_client_error",
+    "test_security.SecurityHttpTest.test_v11_missing_review_text_is_client_error",
+    "test_security.SecurityHttpTest.test_v11_missing_tool_is_client_error",
+    "test_security.SecurityLoggingTest.test_v07_password_and_token_not_stored_in_logs"
+  ],
+  "error_test_ids": [],
+  "source_sha256": {
+    "service.py": "883308725f08ede5c3284b35208e54ce20a335caaa9a4e6c8ad170c702c92ddf",
+    "sandbox.py": "221135fb67bc72c90e8d533409f89e8282004313656fa9ae838d04f575a1ac4a"
+  }
+}

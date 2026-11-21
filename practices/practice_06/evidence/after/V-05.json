@@ -1,0 +1,166 @@
+{
+  "id": "V-05",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 41739,
+    "pid": 14617,
+    "sandbox_root": "/tmp/itmo-practice-06-5kemrf9o"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: alice",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:41739",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"alice\", \"password\": \"learn-alice\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"3a49fd74243b43c08a1e951915cf266e\"}",
+        "json": {
+          "token": "3a49fd74243b43c08a1e951915cf266e"
+        }
+      }
+    },
+    {
+      "label": "own receipt control",
+      "request": {
+        "method": "GET",
+        "target": "/files?user=alice&path=receipt.txt",
+        "headers": {
+          "Host": "127.0.0.1:41739",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "3a49fd74243b43c08a1e951915cf266e"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "50"
+        },
+        "body_text": "{\"content\": \"TEST_ALICE receipt: chair, 5000 RUB\"}",
+        "json": {
+          "content": "TEST_ALICE receipt: chair, 5000 RUB"
+        }
+      }
+    },
+    {
+      "label": "anonymous Bob receipt",
+      "request": {
+        "method": "GET",
+        "target": "/files?user=bob&path=receipt.txt",
+        "headers": {
+          "Host": "127.0.0.1:41739",
+          "Accept-Encoding": "identity",
+          "Connection": "close"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 401,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "27"
+        },
+        "body_text": "{\"error\": \"login required\"}",
+        "json": {
+          "error": "login required"
+        }
+      }
+    },
+    {
+      "label": "Alice reads Bob receipt",
+      "request": {
+        "method": "GET",
+        "target": "/files?user=bob&path=receipt.txt",
+        "headers": {
+          "Host": "127.0.0.1:41739",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "3a49fd74243b43c08a1e951915cf266e"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 403,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "22"
+        },
+        "body_text": "{\"error\": \"forbidden\"}",
+        "json": {
+          "error": "forbidden"
+        }
+      }
+    },
+    {
+      "label": "traversal within sandbox",
+      "request": {
+        "method": "GET",
+        "target": "/files?user=alice&path=..%2F..%2Fprivate%2Foperator-note.txt",
+        "headers": {
+          "Host": "127.0.0.1:41739",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "3a49fd74243b43c08a1e951915cf266e"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 404,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.14.4",
+          "Date": "Sun, 01 Nov 2026 23:18:06 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "27"
+        },
+        "body_text": "{\"error\": \"file not found\"}",
+        "json": {
+          "error": "file not found"
+        }
+      }
+    }
+  ],
+  "confirmed": false,
+  "probes": {
+    "anonymous_receipt": false,
+    "foreign_receipt": false,
+    "operator_note": false
+  },
+  "effect": {
+    "foreign_receipt": {
+      "error": "forbidden"
+    },
+    "operator_note": {
+      "error": "file not found"
+    }
+  },
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}

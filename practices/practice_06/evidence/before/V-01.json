@@ -1,0 +1,277 @@
+{
+  "id": "V-01",
+  "server": {
+    "host": "127.0.0.1",
+    "port": 9006,
+    "pid": 9628,
+    "sandbox_root": "C:\\Users\\ASUS\\AppData\\Local\\Temp\\itmo-practice-06-3o33p2se"
+  },
+  "requests": [
+    {
+      "label": "legitimate login: alice",
+      "request": {
+        "method": "POST",
+        "target": "/login",
+        "headers": {
+          "Host": "127.0.0.1:9006",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "Content-Type": "application/json",
+          "Content-Length": "48"
+        },
+        "body_text": "{\"username\": \"alice\", \"password\": \"learn-alice\"}"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:21 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "45"
+        },
+        "body_text": "{\"token\": \"d45f5b3998dd4328a24929cac95b3562\"}",
+        "json": {
+          "token": "d45f5b3998dd4328a24929cac95b3562"
+        }
+      }
+    },
+    {
+      "label": "control: own profile",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=1",
+        "headers": {
+          "Host": "127.0.0.1:9006",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "d45f5b3998dd4328a24929cac95b3562"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:21 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "96"
+        },
+        "body_text": "[{\"id\": 1, \"name\": \"TEST_ALICE\", \"email\": \"alice@example.invalid\", \"address\": \"TEST_ADDRESS_A\"}]",
+        "json": [
+          {
+            "id": 1,
+            "name": "TEST_ALICE",
+            "email": "alice@example.invalid",
+            "address": "TEST_ADDRESS_A"
+          }
+        ]
+      }
+    },
+    {
+      "label": "anonymous reads Bob",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=2",
+        "headers": {
+          "Host": "127.0.0.1:9006",
+          "Accept-Encoding": "identity",
+          "Connection": "close"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:21 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "92"
+        },
+        "body_text": "[{\"id\": 2, \"name\": \"TEST_BOB\", \"email\": \"bob@example.invalid\", \"address\": \"TEST_ADDRESS_B\"}]",
+        "json": [
+          {
+            "id": 2,
+            "name": "TEST_BOB",
+            "email": "bob@example.invalid",
+            "address": "TEST_ADDRESS_B"
+          }
+        ]
+      }
+    },
+    {
+      "label": "invalid token",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=2",
+        "headers": {
+          "Host": "127.0.0.1:9006",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "invalid"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:21 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "92"
+        },
+        "body_text": "[{\"id\": 2, \"name\": \"TEST_BOB\", \"email\": \"bob@example.invalid\", \"address\": \"TEST_ADDRESS_B\"}]",
+        "json": [
+          {
+            "id": 2,
+            "name": "TEST_BOB",
+            "email": "bob@example.invalid",
+            "address": "TEST_ADDRESS_B"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Alice reads Bob",
+      "request": {
+        "method": "GET",
+        "target": "/profile?id=2",
+        "headers": {
+          "Host": "127.0.0.1:9006",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "d45f5b3998dd4328a24929cac95b3562"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:21 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "92"
+        },
+        "body_text": "[{\"id\": 2, \"name\": \"TEST_BOB\", \"email\": \"bob@example.invalid\", \"address\": \"TEST_ADDRESS_B\"}]",
+        "json": [
+          {
+            "id": 2,
+            "name": "TEST_BOB",
+            "email": "bob@example.invalid",
+            "address": "TEST_ADDRESS_B"
+          }
+        ]
+      }
+    },
+    {
+      "label": "Alice lists orders",
+      "request": {
+        "method": "GET",
+        "target": "/orders",
+        "headers": {
+          "Host": "127.0.0.1:9006",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "d45f5b3998dd4328a24929cac95b3562"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:21 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "119"
+        },
+        "body_text": "[{\"id\": 1, \"owner\": 1, \"product\": \"chair\", \"price\": 5000.0}, {\"id\": 2, \"owner\": 2, \"product\": \"lamp\", \"price\": 1500.0}]",
+        "json": [
+          {
+            "id": 1,
+            "owner": 1,
+            "product": "chair",
+            "price": 5000.0
+          },
+          {
+            "id": 2,
+            "owner": 2,
+            "product": "lamp",
+            "price": 1500.0
+          }
+        ]
+      }
+    },
+    {
+      "label": "Alice searches Bob",
+      "request": {
+        "method": "GET",
+        "target": "/search?q=TEST_BOB",
+        "headers": {
+          "Host": "127.0.0.1:9006",
+          "Accept-Encoding": "identity",
+          "Connection": "close",
+          "X-Token": "d45f5b3998dd4328a24929cac95b3562"
+        },
+        "body_text": null
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Server": "BaseHTTP/0.6 Python/3.13.9",
+          "Date": "Wed, 28 Oct 2026 07:44:21 GMT",
+          "Content-Type": "application/json; charset=utf-8",
+          "Content-Length": "92"
+        },
+        "body_text": "[{\"id\": 2, \"name\": \"TEST_BOB\", \"email\": \"bob@example.invalid\", \"address\": \"TEST_ADDRESS_B\"}]",
+        "json": [
+          {
+            "id": 2,
+            "name": "TEST_BOB",
+            "email": "bob@example.invalid",
+            "address": "TEST_ADDRESS_B"
+          }
+        ]
+      }
+    }
+  ],
+  "confirmed": true,
+  "effect": {
+    "control": [
+      {
+        "id": 1,
+        "name": "TEST_ALICE",
+        "email": "alice@example.invalid",
+        "address": "TEST_ADDRESS_A"
+      }
+    ],
+    "foreign_profile": [
+      {
+        "id": 2,
+        "name": "TEST_BOB",
+        "email": "bob@example.invalid",
+        "address": "TEST_ADDRESS_B"
+      }
+    ],
+    "foreign_orders": [
+      {
+        "id": 2,
+        "owner": 2,
+        "product": "lamp",
+        "price": 1500.0
+      }
+    ],
+    "search": [
+      {
+        "id": 2,
+        "name": "TEST_BOB",
+        "email": "bob@example.invalid",
+        "address": "TEST_ADDRESS_B"
+      }
+    ]
+  },
+  "server_shutdown": {
+    "exit_code": 0,
+    "stderr": "",
+    "extra_stdout": "",
+    "temporary_root_removed": true
+  }
+}
