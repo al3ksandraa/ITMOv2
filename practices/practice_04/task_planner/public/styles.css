@@ -1,47 +1,215 @@
 :root {
-  --bg: #0f172a;
-  --panel: #111827;
-  --text: #e5e7eb;
-  --muted: #9ca3af;
-  --accent: #60a5fa;
-  --danger: #ef4444;
-  --ok: #22c55e;
+  --bs-body-bg: #f1f3f7;
+  --bs-body-color: #182230;
+  --bs-secondary-color: #4b596c;
+  --planner-border: #dce2eb;
+  --planner-surface: #fff;
+  --planner-accent: #0d6efd;
+  --planner-gap: clamp(1rem, 3vw, 1.5rem);
+  --planner-padding: clamp(1rem, 3vw, 1.5rem);
+  --planner-radius: 0.85rem;
 }
 
-* { box-sizing: border-box; }
-html, body { margin: 0; height: 100%; }
-body {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+.planner {
+  padding-block: 1.25rem 3rem;
 }
-header { padding: 16px; text-align: center; }
-main { max-width: 900px; margin: 0 auto; padding: 0 16px 48px; }
-.panel { background: var(--panel); border-radius: 10px; padding: 16px; margin-bottom: 16px; border: 1px solid #1f2937; }
-.row { margin-bottom: 12px; }
-.row.grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
-label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: var(--muted); }
-input[type="text"], input[type="datetime-local"], select, textarea {
-  background: #0b1220; color: var(--text); border: 1px solid #1f2937; border-radius: 8px; padding: 10px 12px;
+
+.planner-title {
+  margin-block: 0 var(--planner-gap);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 650;
 }
-textarea { resize: vertical; }
-.actions { display: flex; gap: 8px; flex-wrap: wrap; }
-button { background: #1f2937; color: var(--text); border: 1px solid #374151; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
-button:hover { border-color: var(--accent); }
-button.danger { border-color: var(--danger); color: #fecaca; }
 
-#task-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-.task { display: grid; grid-template-columns: 28px 1fr auto; gap: 12px; align-items: start; padding: 12px; border: 1px solid #1f2937; border-radius: 10px; background: #0b1220; }
-.task .title-row { display: flex; align-items: center; gap: 8px; }
-.task .title { font-weight: 600; }
-.task .priority-badge { font-size: 12px; padding: 2px 6px; border-radius: 999px; border: 1px solid #374151; color: var(--muted); }
-.task .priority-high { border-color: var(--danger); color: #fecaca; }
-.task .priority-low { border-color: var(--ok); color: #bbf7d0; }
-.task .meta { font-size: 12px; color: var(--muted); display: flex; gap: 12px; margin-top: 4px; }
-.task .description { margin-top: 6px; white-space: pre-wrap; color: #d1d5db; }
-.task.done { opacity: 0.7; }
-.task.overdue { border-color: var(--danger); }
+.planner-layout, .planner-sidebar {
+  display: grid;
+  align-items: start;
+  gap: var(--planner-gap);
+}
 
-@media (max-width: 640px) {
-  .row.grid { grid-template-columns: 1fr; }
+.planner-layout > *, .planner-sidebar > *, .form-columns > * {
+  min-width: 0;
+}
+
+.planner-panel {
+  padding: var(--planner-padding);
+  border-color: var(--planner-border);
+  border-radius: var(--planner-radius);
+  background-color: var(--planner-surface);
+}
+
+h2 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  font-weight: 650;
+}
+
+.form-label {
+  margin-bottom: 0.4rem;
+}
+
+.form-control, .form-select {
+  min-width: 0;
+  min-height: 2.4rem;
+  background-color: var(--planner-surface);
+}
+
+.form-columns {
+  display: grid;
+  gap: 0.85rem 1rem;
+}
+
+.add-task {
+  padding-inline: 1.3rem;
+}
+
+.planner :is(button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--planner-accent);
+  outline-offset: 2px;
+}
+
+.tasks-header, .bulk-toolbar, .bulk-buttons, .task-header, .task-footer, .task-actions, .task-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+}
+
+.tasks-header, .bulk-toolbar, .task-header, .task-footer {
+  justify-content: space-between;
+}
+
+.tasks-header {
+  margin-bottom: 1rem;
+}
+
+.tasks-header h2 {
+  margin: 0;
+}
+
+.bulk-toolbar {
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--planner-border);
+}
+
+.check-label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.check-label .form-check-input {
+  margin-top: 0;
+  flex-shrink: 0;
+  align-self: start;
+  translate: 0 0.2em;
+  cursor: inherit;
+}
+
+.check-label:has(:disabled) {
+  color: var(--bs-secondary-color);
+  cursor: default;
+}
+
+.list-message {
+  padding: 3.5rem 0.5rem;
+  text-align: center;
+}
+
+.empty-heading {
+  padding-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+#empty-actions, #empty-help {
+  padding-bottom: 3.5rem;
+}
+
+.list-error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.task-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.task {
+  padding: 1rem;
+  gap: 0.6rem;
+  border-color: var(--planner-border);
+  border-radius: var(--planner-radius);
+  background-color: var(--planner-surface);
+  overflow-wrap: anywhere;
+}
+
+.task-heading {
+  flex: 1 1 12rem;
+  font-weight: 650;
+}
+
+.task-select, .task-meta {
+  font-size: 0.875rem;
+  color: var(--bs-secondary-color);
+}
+
+.task .badge {
+  font-weight: 600;
+}
+
+.priority-badge {
+  border: 1px solid var(--planner-border);
+  color: var(--bs-secondary-color);
+  background-color: #f5f7fa;
+}
+
+.priority-high {
+  border-color: #f1aeb5;
+  color: #842029;
+  background-color: #f8d7da;
+}
+
+.priority-low {
+  border-color: #a3cfbb;
+  color: #0a3622;
+  background-color: #d1e7dd;
+}
+
+.task-meta {
+  margin-top: 0.35rem;
+}
+
+.task .description {
+  margin-top: 0.4rem;
+  white-space: pre-wrap;
+}
+
+.task .description:empty {
+  display: none;
+}
+
+.task.done .title {
+  color: var(--bs-secondary-color);
+  text-decoration: line-through;
+}
+
+.task.overdue {
+  border-color: #f1aeb5;
+}
+
+@media (min-width: 576px) {
+  .form-columns {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .planner-layout {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  }
 }

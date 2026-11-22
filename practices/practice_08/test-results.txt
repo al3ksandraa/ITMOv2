@@ -1,0 +1,93 @@
+Практика 8. Проверка клиентских тестов
+
+Проверки охватывают валидацию пустого названия и пробелов, отправку формы с клавиатуры,
+видимую карточку после создания, защиту от повторной отправки, загрузку списка, пустой ответ,
+ошибки и восстановление. Отдельно проверены активные фильтры, поздний ответ списка,
+чекбоксы на мобильном экране и массовый выбор.
+
+Playwright подменяет HTTP-ответы, используя массив для пустого списка, объект Task
+для успешного создания с кодом 201 и объект с полем error для сбоя. Отдельный сценарий
+создаёт задачу через настоящий API и проверяет её после перезагрузки страницы.
+У каждого теста отдельная временная копия сервера с собственным хранилищем.
+
+Контрольные поломки
+
+В отдельной копии скрыл сообщение об ошибке сохранения. Тест завершился с кодом 1.
+Expected substring: "Не удалось сохранить задачу"
+После восстановления сообщения целевой тест прошёл с кодом 0.
+
+В отдельной копии убрал блокировку повторной отправки. Тест обнаружил две карточки и завершился с кодом 1.
+Expected: 1
+Received: 2
+После восстановления блокировки целевой тест прошёл с кодом 0.
+
+Итоговый вывод команд
+
+$ npm run test:planner -- --workers=1 --reporter=list --output .cache/task-planner-tests-verified
+> test:planner
+> node node_modules/@playwright/test/cli.js test tests/task_planner_form.spec.cjs --output .cache/task-planner-test-results --workers=1 --reporter=list --output .cache/task-planner-tests-verified
+
+
+Running 9 tests using 1 worker
+
+  ok 1 tests\task_planner_form.spec.cjs:56:1 › пустое название и пробелы показывают ошибку поля без создания задачи (1.9s)
+  ok 2 tests\task_planner_form.spec.cjs:78:1 › форма отправляется с клавиатуры и показывает карточку из ответа 201 (1.6s)
+  ok 3 tests\task_planner_form.spec.cjs:115:1 › повторная отправка во время ожидания создаёт одну задачу в реальном API (1.8s)
+  ok 4 tests\task_planner_form.spec.cjs:158:1 › ошибка сохранения оставляет заполненную форму и даёт повторить отправку (752ms)
+  ok 5 tests\task_planner_form.spec.cjs:188:1 › загрузка, сбой списка и пустой ответ видны при повторной попытке (1.5s)
+  ok 6 tests\task_planner_form.spec.cjs:216:1 › успешное создание за активным фильтром подсказывает сброс (1.6s)
+  ok 7 tests\task_planner_form.spec.cjs:229:1 › поздний ответ загрузки сохраняет только что добавленную задачу (1.6s)
+  ok 8 tests\task_planner_form.spec.cjs:261:1 › мобильная карточка различает выбор и выполнение с клавиатуры (1.5s)
+  ok 9 tests\task_planner_form.spec.cjs:282:1 › панель массового выбора учитывает видимые задачи и отображает счётчик (795ms)
+
+  9 passed (17.4s)
+
+$ node tests/task_deadline_filter.e2e.cjs (запуск из отдельной копии проекта)
+PASS 01-initial-load
+PASS 02-overdue
+PASS 03-today-moscow
+PASS 04-without-deadline
+PASS 05-filter-intersections
+PASS 06-empty-result
+PASS 07-reset-and-sort
+PASS 08-today-new-york
+PASS 09-clock-refresh
+PASS 10-invalid-deadline
+PASS 11-crud-local-time
+PASS 12-complete-and-bulk
+PASS 13-loading-state
+PASS 14-load-error
+PASS 16-keyboard-filter
+PASS 15-empty-storage
+{"ok":true,"passed":16,"total":16,"report":".specify\\features\\task-deadline-filter\\verification.md"}
+
+$ npm run test:deadline
+> test:deadline
+> node --test tests/task_deadline_filter.test.cjs
+
+✔ boundariesOfToday returns local day [start, next) with start at 00:00 (1.8784ms)
+✔ includeByDeadline: overdue excludes done, strictly < now; now equals is not overdue (0.5735ms)
+✔ includeByDeadline: today includes startOfToday, excludes startOfTomorrow (local TZ) (0.2505ms)
+✔ includeByDeadline: no-deadline only when deadline === null; invalid ISO is treated as not matching (0.1969ms)
+✔ an empty non-null deadline is invalid, not a task without a deadline (1.1528ms)
+✔ filterTasks: modes all|overdue|today|no-deadline and intersections with search/priority/status (1.4535ms)
+✔ UTC date belonging to a different local day classifies by local boundaries (0.332ms)
+✔ local today spans 25 hours on the New York daylight-saving transition (0.6331ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 119.7348
+
+$ sh scripts/check.sh (Git Bash и переносимый Python 3.13.9)
+[check] Running UI tests
+OK: required UI elements present
+OK: bulk UI elements present
+[check] Node detected, starting server quick check
+Task planner running at http://localhost:3100
+[check] Server ready on :3100
+[check] MCP: tasks-lint-fix sanity
+[check] PASS

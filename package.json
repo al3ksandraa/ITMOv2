@@ -5,6 +5,7 @@
   },
   "scripts": {
     "test:deadline": "node --test tests/task_deadline_filter.test.cjs",
-    "test:e2e": "node tests/task_deadline_filter.e2e.cjs"
+    "test:e2e": "node tests/task_deadline_filter.e2e.cjs",
+    "test:planner": "node node_modules/@playwright/test/cli.js test tests/task_planner_form.spec.cjs --output .cache/task-planner-test-results"
   }
 }

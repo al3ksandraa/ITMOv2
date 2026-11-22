@@ -4,106 +4,159 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Планировщик задач</title>
+    <link rel="stylesheet" href="vendor/bootstrap.min.css" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- hook test: trivial edit to trigger check-after-edit plugin -->
-    <header>
-      <h1>Планировщик задач</h1>
-    </header>
-    <main>
-      <section class="panel">
-        <form id="task-form">
-          <div class="row">
-            <label>Название
-              <input type="text" id="title" required maxlength="200" placeholder="Например: Сдать отчёт" />
-            </label>
-          </div>
-          <div class="row">
-            <label>Описание
-              <textarea id="description" rows="3" placeholder="Краткие детали"></textarea>
-            </label>
-          </div>
-          <div class="row grid">
-            <label>Дедлайн
-              <input type="datetime-local" id="deadline" />
-            </label>
-            <label>Приоритет
-              <select id="priority">
-                <option value="low">Низкий</option>
-                <option value="normal" selected>Обычный</option>
-                <option value="high">Высокий</option>
-              </select>
-            </label>
-          </div>
-          <div class="row actions">
-            <button type="submit">Добавить задачу</button>
-            <button type="button" id="sort-deadline">Сортировать по дедлайну</button>
-            <button type="button" id="show-all">Все</button>
-            <button type="button" id="show-active">Активные</button>
-            <button type="button" id="show-done">Выполненные</button>
-          </div>
-        </form>
-      </section>
+    <main class="container-xl planner">
+      <h1 class="planner-title">Планировщик задач</h1>
+      <div class="planner-layout">
+        <section class="card planner-panel" aria-labelledby="form-heading">
+          <h2 id="form-heading">Новая задача</h2>
+          <form id="task-form">
+            <fieldset id="task-fields" aria-labelledby="form-heading">
+              <div class="mb-3">
+                <label class="form-label" for="title">Название <span class="text-danger" aria-hidden="true">*</span></label>
+                <input class="form-control" type="text" id="title" required maxlength="200"
+                  aria-describedby="title-help" placeholder="Например: Сдать лабораторную" />
+                <div id="title-error" class="invalid-feedback">Введите название задачи</div>
+                <div id="title-help" class="form-text">Обязательное поле, до 200 символов. <span id="title-count">0</span>/200</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="description">Описание</label>
+                <textarea class="form-control" id="description" rows="3" placeholder="Необязательно"></textarea>
+              </div>
+              <div class="form-columns mb-3">
+                <div>
+                  <label class="form-label" for="deadline">Дедлайн</label>
+                  <input class="form-control" type="datetime-local" id="deadline" aria-describedby="deadline-help" />
+                  <div id="deadline-help" class="form-text">Необязательно, ваше местное время</div>
+                </div>
+                <div>
+                  <label class="form-label" for="priority">Приоритет</label>
+                  <select class="form-select" id="priority">
+                    <option value="low">Низкий</option>
+                    <option value="normal" selected>Обычный</option>
+                    <option value="high">Высокий</option>
+                  </select>
+                </div>
+              </div>
+            </fieldset>
+            <button class="btn btn-primary add-task" type="submit" id="add-task">
+              <span id="save-spinner" class="spinner-border spinner-border-sm me-2" aria-hidden="true" hidden></span><span id="submit-label">Добавить задачу</span>
+            </button>
+            <div id="saving-status" class="visually-hidden" role="status"></div>
+            <div id="save-status" role="status">
+              <div class="alert alert-success mb-0 mt-3" id="save-success" hidden></div>
+            </div>
+            <div aria-live="assertive">
+              <div id="save-error" class="alert alert-danger mb-0 mt-3" role="alert" hidden></div>
+            </div>
+          </form>
+        </section>
 
-      <section class="panel">
-        <div class="row grid">
-          <label>Поиск
-            <input type="text" id="search" placeholder="Поиск по названию и описанию" />
-          </label>
-          <label>Приоритет
-            <select id="priority-filter">
-              <option value="all" selected>Все</option>
-              <option value="low">Низкий</option>
-              <option value="normal">Обычный</option>
-              <option value="high">Высокий</option>
-            </select>
-          </label>
-          <label>Срок
-            <select id="deadline-filter">
-              <option value="all" selected>Все</option>
-              <option value="overdue">Просроченные</option>
-              <option value="today">Сегодня</option>
-              <option value="no-deadline">Без дедлайна</option>
-            </select>
-          </label>
-        </div>
-        <div class="row actions">
-          <button type="button" id="reset-filters">Сбросить фильтры</button>
-        </div>
-      </section>
+        <div class="planner-sidebar">
+          <section class="card planner-panel" aria-labelledby="filters-heading">
+            <h2 id="filters-heading">Фильтры</h2>
+            <div class="mb-3">
+              <label class="form-label" for="search">Поиск</label>
+              <input class="form-control" type="search" id="search" placeholder="По названию и описанию" />
+            </div>
+            <div class="mb-3">
+              <div id="status-heading" class="form-label">Статус</div>
+              <div class="btn-group status-filters" role="group" aria-labelledby="status-heading">
+                <button class="btn btn-outline-primary active" type="button" id="show-all" aria-pressed="true">Все</button>
+                <button class="btn btn-outline-primary" type="button" id="show-active" aria-pressed="false">Активные</button>
+                <button class="btn btn-outline-primary" type="button" id="show-done" aria-pressed="false">Выполненные</button>
+              </div>
+            </div>
+            <div class="form-columns mb-3">
+              <div>
+                <label class="form-label" for="priority-filter">Приоритет</label>
+                <select class="form-select" id="priority-filter">
+                  <option value="all">Все</option>
+                  <option value="low">Низкий</option>
+                  <option value="normal">Обычный</option>
+                  <option value="high">Высокий</option>
+                </select>
+              </div>
+              <div>
+                <label class="form-label" for="deadline-filter">Срок</label>
+                <select class="form-select" id="deadline-filter">
+                  <option value="all">Все</option>
+                  <option value="overdue">Просроченные</option>
+                  <option value="today">Сегодня</option>
+                  <option value="no-deadline">Без дедлайна</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-outline-secondary align-self-start" type="button" id="reset-filters">Сбросить фильтры</button>
+          </section>
 
-      <section class="panel">
-        <div class="row actions">
-          <button type="button" id="bulk-complete">Отметить выполненными</button>
-          <button type="button" id="bulk-delete" class="danger">Удалить выбранные</button>
+          <section class="card planner-panel" aria-labelledby="tasks-heading">
+            <div class="tasks-header">
+              <h2 id="tasks-heading" tabindex="-1">Задачи</h2>
+              <button class="btn btn-outline-secondary btn-sm" type="button" id="sort-deadline" aria-pressed="false">Сортировать по дедлайну</button>
+            </div>
+            <div class="bulk-toolbar">
+              <label class="check-label" for="select-visible">
+                <input class="form-check-input" type="checkbox" id="select-visible" disabled />
+                <span>Выбрать все видимые</span>
+              </label>
+              <div class="bulk-buttons">
+                <span id="selected-count" class="small text-body-secondary" role="status">Выбрано: 0</span>
+                <button class="btn btn-outline-primary btn-sm" type="button" id="bulk-complete" disabled>Отметить выполненными</button>
+                <button class="btn btn-outline-danger btn-sm" type="button" id="bulk-delete" disabled>Удалить выбранные</button>
+              </div>
+            </div>
+            <p id="list-summary" class="small text-body-secondary mb-3" hidden></p>
+            <div role="status">
+              <div id="list-loading" class="list-message">
+                <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>Загружаем задачи…
+              </div>
+            </div>
+            <div id="list-error" class="alert alert-danger list-error mb-0" hidden>
+              <span role="alert">Не удалось загрузить задачи</span>
+              <button class="btn btn-danger btn-sm" type="button" id="retry-load">Повторить</button>
+            </div>
+            <ul id="task-list" class="list-unstyled task-list mb-0" aria-busy="true"></ul>
+            <div id="empty-state" class="list-message empty-heading" role="status" hidden></div>
+            <div id="empty-actions" class="text-center" hidden>
+              <button class="btn btn-outline-secondary btn-sm" type="button" id="empty-reset">Сбросить фильтры</button>
+            </div>
+            <p id="empty-help" class="small text-body-secondary text-center mb-0" hidden>Добавьте первую задачу с помощью формы.</p>
+          </section>
         </div>
-        <ul id="task-list"></ul>
-        <div id="empty-state" role="status" hidden>Нет задач по выбранным критериям</div>
-      </section>
+      </div>
     </main>
 
     <template id="task-item-template">
-      <li class="task">
-        <div class="left">
-          <!-- selection checkbox for bulk actions -->
-          <input type="checkbox" class="select-task" />
-          <input type="checkbox" class="done-toggle" />
+      <li class="task card">
+        <div class="task-header">
+          <label class="check-label task-heading">
+            <input class="form-check-input done-toggle" type="checkbox" />
+            <span><span class="visually-hidden">Отметить выполненной задачу </span><span class="title"></span></span>
+          </label>
+          <label class="check-label task-select">
+            <input class="form-check-input select-task" type="checkbox" />
+            <span>Выбрать</span>
+          </label>
         </div>
-        <div class="content">
-          <div class="title-row">
-            <span class="title"></span>
-            <span class="priority-badge"></span>
-          </div>
-          <div class="meta">
+        <div class="task-content">
+          <span class="badge rounded-pill priority-badge"></span>
+          <div class="task-meta">
             <span class="deadline"></span>
-            <span class="created"></span>
+            <span class="badge text-bg-warning today-badge" hidden>Сегодня</span>
+            <span class="badge text-bg-danger overdue-badge" hidden>Просрочена</span>
           </div>
           <div class="description"></div>
         </div>
-        <div class="right">
-          <button class="edit">Изменить</button>
-          <button class="delete danger">Удалить</button>
+        <div class="task-footer">
+          <small class="created text-body-secondary"></small>
+          <div class="task-actions">
+            <button class="btn btn-outline-secondary btn-sm edit" type="button">Изменить</button>
+            <button class="btn btn-outline-danger btn-sm delete" type="button">Удалить</button>
+          </div>
         </div>
       </li>
     </template>
@@ -111,4 +164,4 @@
     <script src="filter.js"></script>
     <script src="app.js"></script>
   </body>
-  </html>
+</html>
