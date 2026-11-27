@@ -1,0 +1,4 @@
+# Keep the three verification logs in the submission despite the root *.log rule.
+!unit.log
+!e2e.log
+!check.log
