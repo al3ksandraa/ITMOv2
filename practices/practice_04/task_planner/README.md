@@ -52,6 +52,22 @@ sh scripts/check.sh
 
 `test:planner` проверяет форму и список задач в браузере. Проверки используют временную копию сервера с отдельными данными. Для `sh scripts/check.sh` нужны Bash, Python 3 и curl.
 
+### Скриншотные тесты
+
+После `npm ci` установите браузер из той же версии Playwright и запустите сравнение из корня репозитория.
+
+```sh
+node node_modules/@playwright/test/cli.js install chromium --only-shell
+npm run test:visual
+node node_modules/@playwright/test/cli.js show-report .cache/task-planner-visual-report
+```
+
+Пять тестов сравнивают семь PNG. Они охватывают десктопный и мобильный список задач, загрузку, пустой список, ожидание сохранения, успешное создание и ошибку сохранения. Данные, время, локаль, часовой пояс и размеры окна зафиксированы. Playwright отключает анимации и скрывает текстовый курсор на снимках. [Сценарии](../../../tests/task_planner_visual.spec.cjs) · [Эталоны](../../../tests/task_planner_visual.spec.cjs-snapshots/)
+
+Эталоны сняты на Windows x64 в Chromium Headless Shell `153.0.8010.12` из Playwright `1.63.0`. Для одинаковой отрисовки используйте ту же ОС, браузер и системные шрифты. Имя файла включает платформу, поэтому у другой ОС свой набор эталонов.
+
+При расхождении откройте HTML-отчёт и сравните вкладки **Expected**, **Actual** и **Diff**. Если изменение внешнего вида ожидаемо, после просмотра обновите эталоны командой `npm run test:visual -- --update-snapshots` и снова запустите `npm run test:visual`.
+
 ## Материалы для сдачи практики 8
 
 Ветка для сдачи — `practice_8`. Исходники находятся в `public/`, браузерные сценарии — в `tests/task_planner_form.spec.cjs`. [Репозиторий GitHub](https://github.com/al3ksandraa/ITMOv2) · [Код фронтенда](public/) · [Тесты Playwright](../../../tests/task_planner_form.spec.cjs)

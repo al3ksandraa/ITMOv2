@@ -1,13 +1,8 @@
-const { spawn } = require('node:child_process');
-const { once } = require('node:events');
-const fs = require('node:fs/promises');
 const { existsSync } = require('node:fs');
-const net = require('node:net');
-const os = require('node:os');
 const path = require('node:path');
-const { chromium, expect, test } = require('@playwright/test');
+const { chromium } = require('@playwright/test');
+const { expect, test } = require('./support/task-planner.cjs');
 
-const app = path.resolve(__dirname, '../practices/practice_04/task_planner');
 const chrome = [process.env.PROGRAMFILES, process.env['PROGRAMFILES(X86)'], process.env.LOCALAPPDATA]
   .filter(Boolean).some(root => existsSync(path.join(root, 'Google/Chrome/Application/chrome.exe')));
 const channel = process.env.PLAYWRIGHT_CHANNEL || (
@@ -20,40 +15,7 @@ test.use({
   timezoneId: 'Europe/Moscow',
 });
 
-let directory;
-let server;
-let url;
-
-test.beforeEach(async () => {
-  directory = await fs.mkdtemp(path.join(os.tmpdir(), 'task-planner-form-'));
-  await fs.copyFile(path.join(app, 'server.js'), path.join(directory, 'server.js'));
-  await fs.cp(path.join(app, 'public'), path.join(directory, 'public'), { recursive: true });
-
-  const probe = net.createServer();
-  probe.listen(0, '127.0.0.1');
-  await once(probe, 'listening');
-  const port = probe.address().port;
-  await new Promise((resolve, reject) => probe.close(error => error ? reject(error) : resolve()));
-  url = `http://127.0.0.1:${port}`;
-  server = spawn(process.execPath, ['server.js'], { cwd: directory, env: { ...process.env, PORT: String(port) } });
-  await expect.poll(async () => {
-    const response = await fetch(`${url}/api/tasks`).catch(() => null);
-    return response?.status;
-  }).toBe(200);
-});
-
-test.afterEach(async () => {
-  if (server?.exitCode === null && server.signalCode === null) {
-    const closed = once(server, 'close');
-    server.kill();
-    await closed;
-  }
-  if (directory) await fs.rm(directory, { recursive: true, force: true, maxRetries: 3 });
-  directory = undefined;
-  server = undefined;
-});
-
-test('пустое название и пробелы показывают ошибку поля без создания задачи', async ({ page }) => {
+test('пустое название и пробелы показывают ошибку поля без создания задачи', async ({ page, plannerUrl: url }) => {
   const postRequests = [];
   page.on('request', request => {
     if (request.url() === `${url}/api/tasks` && request.method() === 'POST') postRequests.push(request);
@@ -75,7 +37,7 @@ test('пустое название и пробелы показывают ош�
   await expect(page.getByText('Обязательное поле, до 200 символов. 18/200')).toBeVisible();
 });
 
-test('форма отправляется с клавиатуры и показывает карточку из ответа 201', async ({ page }) => {
+test('форма отправляется с клавиатуры и показывает карточку из ответа 201', async ({ page, plannerUrl: url }) => {
   await page.route('**/api/tasks', async route => {
     if (route.request().method() === 'GET') return route.fulfill({ json: [] });
     if (route.request().method() !== 'POST') return route.continue();
@@ -112,7 +74,7 @@ test('форма отправляется с клавиатуры и показ�
   await expect(title).toHaveValue('');
 });
 
-test('повторная отправка во время ожидания создаёт одну задачу в реальном API', async ({ page }) => {
+test('повторная отправка во время ожидания создаёт одну задачу в реальном API', async ({ page, plannerUrl: url }) => {
   let postCount = 0;
   let releasePost;
   const pending = new Promise(resolve => { releasePost = resolve; });
@@ -155,7 +117,7 @@ test('повторная отправка во время ожидания со�
   expect(stored.deadline).toBe('2030-12-01T15:00:00.000Z');
 });
 
-test('ошибка сохранения оставляет заполненную форму и даёт повторить отправку', async ({ page }) => {
+test('ошибка сохранения оставляет заполненную форму и даёт повторить отправку', async ({ page, plannerUrl: url }) => {
   let failNextPost = true;
   await page.route('**/api/tasks', async route => {
     if (route.request().method() === 'POST' && failNextPost) {
@@ -185,7 +147,7 @@ test('ошибка сохранения оставляет заполненну�
   await expect(page.locator('#task-list').getByText('Доделать конспект', { exact: true })).toBeVisible();
 });
 
-test('загрузка, сбой списка и пустой ответ видны при повторной попытке', async ({ page }) => {
+test('загрузка, сбой списка и пустой ответ видны при повторной попытке', async ({ page, plannerUrl: url }) => {
   let attempts = 0;
   let releaseLoad;
   const pending = new Promise(resolve => { releaseLoad = resolve; });
@@ -213,7 +175,7 @@ test('загрузка, сбой списка и пустой ответ вид�
   expect(attempts).toBe(2);
 });
 
-test('успешное создание за активным фильтром подсказывает сброс', async ({ page }) => {
+test('успешное создание за активным фильтром подсказывает сброс', async ({ page, plannerUrl: url }) => {
   await page.goto(url);
   const search = page.getByLabel('Поиск');
   await search.fill('несуществующий заголовок');
@@ -226,7 +188,7 @@ test('успешное создание за активным фильтром �
   await expect(page.locator('#task-list').getByText('Повторить теорию', { exact: true })).toBeVisible();
 });
 
-test('поздний ответ загрузки сохраняет только что добавленную задачу', async ({ page }) => {
+test('поздний ответ загрузки сохраняет только что добавленную задачу', async ({ page, plannerUrl: url }) => {
   let releaseLoad;
   let snapshotReceived;
   const pending = new Promise(resolve => { releaseLoad = resolve; });
@@ -258,7 +220,7 @@ test('поздний ответ загрузки сохраняет только
   await expect(card).toHaveCount(1);
 });
 
-test('мобильная карточка различает выбор и выполнение с клавиатуры', async ({ page }) => {
+test('мобильная карточка различает выбор и выполнение с клавиатуры', async ({ page, plannerUrl: url }) => {
   await fetch(`${url}/api/tasks`, {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ title: 'Подготовить презентацию по курсовой' }),
@@ -279,7 +241,7 @@ test('мобильная карточка различает выбор и вы�
   expect(widths.page).toBe(widths.viewport);
 });
 
-test('панель массового выбора учитывает видимые задачи и отображает счётчик', async ({ page }) => {
+test('панель массового выбора учитывает видимые задачи и отображает счётчик', async ({ page, plannerUrl: url }) => {
   for (const title of ['Проверить черновик', 'Согласовать план']) {
     await fetch(`${url}/api/tasks`, {
       method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ title }),

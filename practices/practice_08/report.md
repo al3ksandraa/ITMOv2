@@ -15,7 +15,10 @@ v0 сгенерировал светлый макет с формой, филь�
 - **Фронтенд.** Разметка формы и списка, общие стили, состояния и вызовы API. [index.html](../practice_04/task_planner/public/index.html) · [styles.css](../practice_04/task_planner/public/styles.css) · [app.js](../practice_04/task_planner/public/app.js)
 - **Компоненты.** Локальный CSS Bootstrap и лицензия. [bootstrap.min.css](../practice_04/task_planner/public/vendor/bootstrap.min.css) · [Лицензия](../practice_04/task_planner/public/vendor/bootstrap.LICENSE.txt)
 - **Проверки и запуск.** Клиентские тесты, команда `npm run test:planner` и инструкция для ревьювера. [Тесты Playwright](../../tests/task_planner_form.spec.cjs) · [package.json](../../package.json) · [README проекта](../practice_04/task_planner/README.md)
+- **Скриншотные тесты.** Визуальные сравнения, настройки Playwright и эталонные PNG для Windows. [Сценарии](../../tests/task_planner_visual.spec.cjs) · [Конфигурация](../../tests/playwright.visual.config.cjs) · [Эталоны](../../tests/task_planner_visual.spec.cjs-snapshots/)
 
 ## Проверки
 
 Прошли 9 клиентских тестов, 16 сквозных проверок и 8 тестов фильтра по сроку. `sh scripts/check.sh` завершился с `PASS`. В отдельной копии тесты обнаружили две контрольные поломки — исчезновение сообщения об ошибке и появление дублирующей карточки. После восстановления кода оба теста снова прошли. [Вывод команд](test-results.txt) · [Все скриншоты](evidence/)
+
+Пять скриншотных тестов сравнивают семь состояний. Контрольная правка цвета фона в отдельной копии вызвала падение десктопного теста и сформировала изображение различий. После восстановления цвета тест прошёл. [Команды и HTML-отчёт](../practice_04/task_planner/README.md#скриншотные-тесты) · [Вывод прогона](test-results.txt)

@@ -91,3 +91,27 @@ Task planner running at http://localhost:3100
 [check] Server ready on :3100
 [check] MCP: tasks-lint-fix sanity
 [check] PASS
+
+
+Скриншотные тесты
+Windows x64, Chromium Headless Shell 153.0.8010.12, Playwright 1.63.0
+
+$ npm run test:visual
+> test:visual
+> node node_modules/@playwright/test/cli.js test --config tests/playwright.visual.config.cjs
+
+
+Running 5 tests using 1 worker
+
+  ok 1 [chromium] › tests\task_planner_visual.spec.cjs:42:3 › список задач на широком экране (549ms)
+  ok 2 [chromium] › tests\task_planner_visual.spec.cjs:42:3 › список задач на узком экране (423ms)
+  ok 3 [chromium] › tests\task_planner_visual.spec.cjs:55:1 › загрузка списка и пустой ответ (544ms)
+  ok 4 [chromium] › tests\task_planner_visual.spec.cjs:82:1 › сохранение и появление новой карточки (636ms)
+  ok 5 [chromium] › tests\task_planner_visual.spec.cjs:107:1 › ошибка сохранения рядом с заполненной формой (523ms)
+
+  5 passed (3.5s)
+
+Контрольное изменение CSS выполнено в отдельной копии.
+При замене фона с #f1f3f7 на #ffd6a5 десктопный тест упал с кодом 1.
+626389 pixels (ratio 0.40 of all image pixels) are different.
+После восстановления фона целевой прогон завершился с кодом 0.
